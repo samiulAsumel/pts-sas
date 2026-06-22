@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Port Tech Specialist — 220 Lesson Tracker</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;padding:24px 20px}
+
+  header{margin-bottom:24px}
+  header h1{font-size:20px;font-weight:700;color:#f8fafc;letter-spacing:-.02em}
+  header p{font-size:12px;color:#475569;margin-top:4px}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+  .stat{background:#1e293b;border:1px solid #1e3a5f;border-radius:10px;padding:12px 14px}
+  .stat-label{font-size:11px;color:#475569;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+  .stat-val{font-size:22px;font-weight:700;color:#f8fafc}
+
+  .pbar-wrap{height:4px;background:#1e293b;border-radius:2px;margin-bottom:20px}
+  .pbar-fill{height:4px;width:0;border-radius:2px;background:#3b82f6;transition:width .4s}
+
+  .action-box{background:#1e293b;border:1px solid #1e3a5f;border-radius:10px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:54px}
+  .sel-info{font-size:13px;color:#64748b;flex:1;min-width:160px}
+  .sel-info strong{color:#f8fafc;font-weight:600}
+  .sel-info .done-tag{color:#34d399;font-size:11px}
+
+  .btn{padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer;border:none;border-radius:8px;white-space:nowrap;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-start{background:#3b82f6;color:#fff}
+  .btn-complete{background:#059669;color:#fff}
+  .btn-undo{background:transparent;border:1px solid #334155;color:#94a3b8;font-weight:400}
+  .btn-undo:hover{background:#1e293b;opacity:1}
+
+  .filters{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  .filter-btn{padding:5px 14px;font-size:12px;cursor:pointer;border:1px solid #334155;border-radius:20px;background:transparent;color:#64748b;transition:all .15s}
+  .filter-btn:hover{border-color:#3b82f6;color:#93c5fd}
+  .filter-btn.active{border-color:#3b82f6;background:#172554;color:#93c5fd}
+
+  .phase-label{font-size:11px;font-weight:700;color:#334155;letter-spacing:.07em;text-transform:uppercase;margin:20px 0 8px;padding-bottom:6px;border-bottom:1px solid #1e293b}
+  .phase-label span{float:right;font-weight:400;color:#1e3a5f}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(50px,1fr));gap:5px;margin-bottom:4px}
+
+  .lbtn{background:#1e293b;border:1px solid #1e3a5f;border-radius:8px;padding:7px 3px;text-align:center;cursor:pointer;transition:all .12s}
+  .lbtn:hover{border-color:#3b82f6;background:#172554}
+  .lbtn.sel{border:2px solid #3b82f6;background:#172554}
+  .lbtn.done{background:#064e3b;border-color:#065f46}
+  .lbtn.done:hover{background:#065f46}
+  .lbtn.hidden{display:none}
+
+  .lnum{font-size:12px;font-weight:700;color:#cbd5e1;display:block;line-height:1.3}
+  .ltag{font-size:9px;color:#334155;display:block;margin-top:1px;text-transform:uppercase;letter-spacing:.03em}
+  .lbtn.sel .lnum{color:#93c5fd}
+  .lbtn.sel .ltag{color:#3b82f6}
+  .lbtn.done .lnum{color:#6ee7b7}
+  .lbtn.done .ltag{color:#059669}
+
+  .legend{display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+  .leg{display:flex;align-items:center;gap:6px;font-size:11px;color:#475569}
+  .leg-box{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+  .leg-box.leg-sel{background:#172554;border:2px solid #3b82f6}
+  .leg-box.leg-done{background:#064e3b;border:1px solid #065f46}
+  .leg-box.leg-todo{background:#1e293b;border:1px solid #1e3a5f}
+
+  .copy-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#059669;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
+  .copy-toast.show{opacity:1}
+
+  .reset-row{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:24px;padding-top:16px;border-top:1px solid #1e293b}
+  .reset-confirm{display:none;align-items:center;gap:8px}
+  .reset-confirm.show{display:flex}
+  .reset-q{font-size:12px;color:#64748b}
+  .btn-sm{padding:5px 12px;font-size:12px;cursor:pointer;border-radius:6px;background:transparent}
+  .btn-sm-cancel{border:1px solid #334155;color:#64748b}
+  .btn-sm-cancel:hover{background:#1e293b;color:#94a3b8}
+  .btn-sm-danger{border:1px solid #991b1b;color:#f87171}
+  .btn-sm-danger:hover{background:#450a0a}
+  .btn-trigger{padding:6px 14px;font-size:12px;cursor:pointer;border:1px solid #1e293b;border-radius:6px;background:transparent;color:#334155}
+  .btn-trigger:hover{border-color:#334155;color:#64748b}
+
+  .how-to{background:#1e293b;border:1px solid #1e3a5f;border-radius:10px;padding:14px 16px;margin-bottom:20px}
+  .how-to-title{font-size:11px;font-weight:700;color:#334155;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+  .how-to-step{display:flex;gap:10px;font-size:12px;color:#64748b;line-height:1.6;margin-bottom:2px}
+  .how-to-step .n{color:#3b82f6;font-weight:700;min-width:16px}
+  .how-to-step strong{color:#94a3b8}
+
+  @media(max-width:480px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .stat-val{font-size:18px}
+    body{padding:16px 14px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Port Tech Specialist</h1>
+  <p>220-Lesson Global Roadmap &mdash; RHCSA &bull; RHCE/Ansible &bull; Full Stack Web Dev</p>
+</header>
+
+<div class="how-to">
+  <div class="how-to-title">How to use</div>
+  <div class="how-to-step"><span class="n">1</span><span>Click a lesson number to select it</span></div>
+  <div class="how-to-step"><span class="n">2</span><span>Click <strong>"Start lesson"</strong> — the prompt copies to clipboard automatically</span></div>
+  <div class="how-to-step"><span class="n">3</span><span>Paste in your Claude project → lesson begins</span></div>
+  <div class="how-to-step"><span class="n">4</span><span>Come back here and click <strong>"Mark complete"</strong> — progress saves in browser</span></div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-label">Completed</div><div class="stat-val" id="s-done">0 / 220</div></div>
+  <div class="stat"><div class="stat-label">Linux / RHCE</div><div class="stat-val" id="s-linux">0 / 120</div></div>
+  <div class="stat"><div class="stat-label">Web Dev</div><div class="stat-val" id="s-web">0 / 100</div></div>
+  <div class="stat"><div class="stat-label">Progress</div><div class="stat-val" id="s-pct">0%</div></div>
+</div>
+
+<div class="pbar-wrap"><div class="pbar-fill" id="pbar"></div></div>
+
+<div class="action-box">
+  <div class="sel-info" id="sel-info">Select a lesson below to begin</div>
+  <button type="button" class="btn btn-start" id="btn-start" style="display:none" onclick="startLesson()">Start lesson</button>
+  <button type="button" class="btn btn-complete" id="btn-complete" style="display:none" onclick="markDone()">&#10003; Mark complete</button>
+  <button type="button" class="btn btn-undo" id="btn-undo" style="display:none" onclick="undoDone()">Undo</button>
+</div>
+
+<div class="legend">
+  <div class="leg"><div class="leg-box leg-sel"></div>Selected</div>
+  <div class="leg"><div class="leg-box leg-done"></div>Completed</div>
+  <div class="leg"><div class="leg-box leg-todo"></div>Not started</div>
+</div>
+
+<div class="filters">
+  <button type="button" class="filter-btn active" onclick="setFilter('all',this)">All (220)</button>
+  <button type="button" class="filter-btn" onclick="setFilter('R',this)">RHCSA — R lessons (60)</button>
+  <button type="button" class="filter-btn" onclick="setFilter('A',this)">Ansible/RHCE — A lessons (60)</button>
+  <button type="button" class="filter-btn" onclick="setFilter('W',this)">Web Dev — W lessons (100)</button>
+  <button type="button" class="filter-btn" onclick="setFilter('done',this)">Completed</button>
+  <button type="button" class="filter-btn" onclick="setFilter('todo',this)">Not started</button>
+</div>
+
+<div class="phase-label">Phase 1 &mdash; RHCSA + Web Dev <span>Lessons 1&ndash;120</span></div>
+<div class="grid" id="g1"></div>
+
+<div class="phase-label">Phase 2 &mdash; RHCE + Advanced Web Dev <span>Lessons 121&ndash;200</span></div>
+<div class="grid" id="g2"></div>
+
+<div class="phase-label">Phase 3 &mdash; RHCE Completion <span>Lessons 201&ndash;220</span></div>
+<div class="grid" id="g3"></div>
+
+<div class="reset-row">
+  <button type="button" class="btn-trigger" id="btn-trigger" onclick="showReset()">Reset all progress</button>
+  <div class="reset-confirm" id="reset-confirm">
+    <span class="reset-q">Reset all progress?</span>
+    <button type="button" class="btn-sm btn-sm-danger" onclick="doReset()">Yes, reset</button>
+    <button type="button" class="btn-sm btn-sm-cancel" onclick="hideReset()">Cancel</button>
+  </div>
+</div>
+
+<div class="copy-toast" id="toast">Prompt copied to clipboard!</div>
+
+<script>
+const LESSONS={
+  1:['R1','Linux basics'],2:['W1','VS Code setup'],3:['R2','Filesystem + Vim'],4:['W2','Git workflow'],
+  5:['R3','Grep, pipes, redirection'],6:['W3','AI developer mindset'],7:['R4','Links + wildcards'],8:['W4','Prompt engineering'],
+  9:['R5','Users + groups + sudo'],10:['W5','Developer tools'],11:['R6','Permissions + ACL'],12:['W6','HTML structure'],
+  13:['R7','Week 1 review lab'],14:['W7','HTML text + formatting'],15:['R8','Process management'],16:['W8','HTML lists + links + images'],
+  17:['R9','Job control'],18:['W9','HTML forms'],19:['R10','systemd + services'],20:['W10','HTML5 semantic elements'],
+  21:['R11','SSH setup + key auth'],22:['W11','HTML tables'],23:['R12','SSH hardening'],24:['W12','CSS basics + box model'],
+  25:['R13','SSH troubleshooting'],26:['W13','CSS selectors'],27:['R14','Week 2 review lab'],28:['W14','CSS styling + fonts'],
+  29:['R15','Logging architecture'],30:['W15','Flexbox fundamentals'],31:['R16','journalctl mastery'],32:['W16','Flexbox in practice'],
+  33:['R17','NTP + chrony'],34:['W17','CSS grid'],35:['R18','Networking concepts'],36:['W18','CSS advanced + animations'],
+  37:['R19','nmcli static IP'],38:['W19','Responsive design'],39:['R20','Hostname + DNS'],40:['W20','PROJECT 1: Port Cargo Website'],
+  41:['R21','Week 3 review lab'],42:['W21','JavaScript introduction'],43:['R22','RPM management'],44:['W22','Operators + math'],
+  45:['R23','DNF full management'],46:['W23','Conditionals'],47:['R24','DNF repositories'],48:['W24','Loops'],
+  49:['R25','tar archives'],50:['W25','Arrays part 1'],51:['R26','rsync + scp + sftp'],52:['W26','Arrays part 2'],
+  53:['R27','find mastery'],54:['W27','Strings'],55:['R28','Week 4 review lab'],56:['W28','Objects'],
+  57:['R29','Block devices + mount'],58:['W29','Functions'],59:['R30','Partitioning'],60:['W30','JS problem solving basics'],
+  61:['R31','Filesystem creation'],62:['W31','ES6 modern syntax'],63:['R32','/etc/fstab mounts'],64:['W32','Arrow + destructuring + spread'],
+  65:['R33','Swap space'],66:['W33','ES6 advanced'],67:['R34','LVM create'],68:['W34','Array power methods'],
+  69:['R35','LVM operations'],70:['W35','ES6 problem solving'],71:['R36','SELinux basics'],72:['W36','TypeScript introduction'],
+  73:['R37','SELinux contexts'],74:['W37','TypeScript types'],75:['R38','SELinux booleans + ports'],76:['W38','Interfaces + objects'],
+  77:['R39','firewalld mastery'],78:['W39','Functions in TypeScript'],79:['R40','SELinux + firewall combined'],80:['W40','Generics + utility types'],
+  81:['R41','Boot process + targets'],82:['W41','OOP in TypeScript'],83:['R42','Root password reset'],84:['W42','TypeScript problem solving'],
+  85:['R43','Cron jobs'],86:['W43','React introduction'],87:['R44','at + systemd timers'],88:['W44','Components + JSX'],
+  89:['R45','NFS'],90:['W45','Props + conditional rendering'],91:['R46','Autofs'],92:['W46','useState hook'],
+  93:['R47','tuned profiles'],94:['W47','Event handling'],95:['R48','Bash scripting foundation'],96:['W48','API calls + async'],
+  97:['R49','Bash real scripts'],98:['W49','React + Tailwind CSS'],99:['R50','Text processing'],100:['W50','State lifting'],
+  101:['R51','Podman basics'],102:['W51','Axios'],103:['R52','Podman volumes'],104:['W52','DOM + BOM'],
+  105:['R53','Podman systemd'],106:['W53','React Router'],107:['R54','Container lab'],108:['W54','Data visualization + AIS'],
+  109:['R55','RHCSA practice exam 1'],110:['W55','PROJECT 2: Port Cargo Tracker'],111:['R56','RHCSA practice exam 2'],112:['W56','React performance'],
+  113:['R57','Weak topics review'],114:['W57','React interview prep'],115:['R58','Speed drills'],116:['W58','Next.js introduction'],
+  117:['R59','Full mock exam'],118:['W59','Pages + routing'],119:['R60','RHCSA wrap-up + CIS hardening'],120:['W60','Layouts + navigation'],
+  121:['A1','Ansible architecture'],122:['W61','Rendering: CSR vs SSR'],123:['A2','ansible.cfg + config'],124:['W62','Data fetching server'],
+  125:['A3','Inventory INI format'],126:['W63','Caching + ISR'],127:['A4','YAML inventory + vars'],128:['W64','Hero UI / ShadCN'],
+  129:['A5','Ad-hoc commands'],130:['W65','Error + loading pages'],131:['A6','YAML deep dive'],132:['W66','Image + font optimization'],
+  133:['A7','Week 1 lab'],134:['W67','PROJECT 3: Maritime Dashboard'],135:['A8','First playbook'],136:['W68','BetterAuth setup'],
+  137:['A9','dnf + package module'],138:['W69','Register + login'],139:['A10','service module'],140:['W70','Google + GitHub OAuth'],
+  141:['A11','user + group module'],142:['W71','Route protection'],143:['A12','copy + file module'],144:['W72','Profile + password + email'],
+  145:['A13','ansible-doc mastery'],146:['W73','Dashboard with auth'],147:['A14','Running playbooks'],148:['W74','Node.js architecture'],
+  149:['A15','Variable types'],150:['W75','Express setup + first API'],151:['A16','Variable precedence'],152:['W76','REST API + EDI concepts'],
+  153:['A17','Magic variables'],154:['W77','MongoDB + Mongoose'],155:['A18','Ansible facts'],156:['W78','Mongoose schemas + models'],
+  157:['A19','Custom facts'],158:['W79','CRUD operations'],159:['A20','Jinja2 in tasks'],160:['W80','Advanced MongoDB queries'],
+  161:['A21','Variables lab'],162:['W81','Aggregation + UNCTAD KPIs'],163:['A22','when: conditionals'],164:['W82','JWT authentication'],
+  165:['A23','register: output'],166:['W83','RBAC'],167:['A24','failed_when + changed_when'],168:['W84','Stripe payment'],
+  169:['A25','Loops'],170:['W85','SSLCommerz payment'],171:['A26','Handlers'],172:['W86','Error handling + validation'],
+  173:['A27','Blocks'],174:['W87','Backend deployment'],175:['A28','Task control lab'],176:['W88','PROJECT 4: Port Management API'],
+  177:['A29','template module'],178:['W89','Connect frontend + backend'],179:['A30','Jinja2 templates'],180:['W90','Full stack auth'],
+  181:['A31','lineinfile + blockinfile'],182:['W91','Full stack deployment'],183:['A32','fetch + stat'],184:['W92','PRD writing with AI'],
+  185:['A33','archive + unarchive'],186:['W93','System design + DB planning'],187:['A34','Port server config lab'],188:['W94','MVC architecture'],
+  189:['A35','Files lab'],190:['W95','Full stack interview prep'],191:['A36','Role structure'],192:['W96','PROJECT 5: Port SaaS v1'],
+  193:['A37','Create a role'],194:['W97','PROJECT 6: Port SaaS v2'],195:['A38','Using roles'],196:['W98','Cursor AI + Claude Code'],
+  197:['A39','Role variables'],198:['W99','Lovable + Bolt + V0'],199:['A40','Galaxy + requirements'],200:['W100','FINAL: AI-Powered Port Tool'],
+  201:['A41','Role dependencies'],202:['A42','Complete port server role'],203:['A43','Ansible collections'],204:['A44','Install collections'],
+  205:['A45','FQCN always use'],206:['A46','ansible.posix key modules'],207:['A47','Vault basics'],208:['A48','Vault in playbooks'],
+  209:['A49','Vault + collections lab'],210:['A50','include_tasks vs import_tasks'],211:['A51','Multi-play playbooks'],212:['A52','Rolling updates (serial)'],
+  213:['A53','delegate_to + run_once'],214:['A54','Tags'],215:['A55','Troubleshooting Ansible'],216:['A56','Advanced playbooks lab'],
+  217:['A57','Storage automation'],218:['A58','Users + SSH + Cron via Ansible'],219:['A59','Full port server automation'],220:['A60','RHCE mock exam + interview bootcamp']
+};
+
+const KEY='pts_global_v2';
+let done=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'));
+let sel=null;
+let activeFilter='all';
+
+function save(){localStorage.setItem(KEY,JSON.stringify([...done]));}
+
+function trackOf(tag){return tag.startsWith('W')?'W':tag.startsWith('R')?'R':'A';}
+
+function buildGrid(id,from,to){
+  const g=document.getElementById(id);
+  g.innerHTML='';
+  for(let n=from;n<=to;n++){
+    const[tag,topic]=LESSONS[n];
+    const d=document.createElement('div');
+    d.className='lbtn'+(done.has(n)?' done':'');
+    d.id='lb'+n;
+    d.title=`Lesson ${n} — ${tag}: ${topic}`;
+    d.dataset.track=trackOf(tag);
+    d.innerHTML=`<span class="lnum">${n}</span><span class="ltag">${tag}</span>`;
+    d.onclick=()=>pick(n);
+    g.appendChild(d);
+  }
+}
+
+function applyFilter(){
+  for(let n=1;n<=220;n++){
+    const el=document.getElementById('lb'+n);
+    if(!el)continue;
+    const track=el.dataset.track;
+    const isDone=done.has(n);
+    let show=true;
+    if(activeFilter==='R') show=track==='R';
+    else if(activeFilter==='A') show=track==='A';
+    else if(activeFilter==='W') show=track==='W';
+    else if(activeFilter==='done') show=isDone;
+    else if(activeFilter==='todo') show=!isDone;
+    el.classList.toggle('hidden',!show);
+  }
+}
+
+function setFilter(f,btn){
+  activeFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilter();
+}
+
+function refresh(){
+  for(let n=1;n<=220;n++){
+    const el=document.getElementById('lb'+n);
+    if(!el)continue;
+    el.className='lbtn'+(n===sel?' sel':done.has(n)?' done':'')+(el.classList.contains('hidden')?' hidden':'');
+  }
+  applyFilter();
+}
+
+function pick(n){
+  sel=n;
+  const[tag,topic]=LESSONS[n];
+  const isDone=done.has(n);
+  document.getElementById('sel-info').innerHTML=
+    `<strong>Lesson ${n}/220 &mdash; ${tag}:</strong> ${topic}`+
+    (isDone?' <span class="done-tag">(completed ✓)</span>':'');
+  document.getElementById('btn-start').style.display='';
+  document.getElementById('btn-complete').style.display=isDone?'none':'';
+  document.getElementById('btn-undo').style.display=isDone?'':'none';
+  refresh();
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+function startLesson(){
+  if(!sel)return;
+  const[tag,topic]=LESSONS[sel];
+  const prompt=`Teach me Lesson ${sel}/220 — ${tag}: ${topic}`;
+  navigator.clipboard.writeText(prompt)
+    .then(()=>showToast('Prompt copied! Paste in your Claude project.'))
+    .catch(()=>{
+      document.getElementById('sel-info').innerHTML=
+        `<strong>Copy this prompt:</strong> Teach me Lesson ${sel}/220 — ${tag}: ${topic}`;
+    });
+}
+
+function markDone(){
+  if(!sel)return;
+  done.add(sel);save();
+  const[tag,topic]=LESSONS[sel];
+  document.getElementById('sel-info').innerHTML=
+    `<strong>Lesson ${sel}/220 &mdash; ${tag}:</strong> ${topic} <span class="done-tag">(completed ✓)</span>`;
+  document.getElementById('btn-complete').style.display='none';
+  document.getElementById('btn-undo').style.display='';
+  refresh();updateStats();
+  showToast('Lesson '+sel+' marked complete!');
+}
+
+function undoDone(){
+  if(!sel)return;
+  done.delete(sel);save();
+  const[tag,topic]=LESSONS[sel];
+  document.getElementById('sel-info').innerHTML=`<strong>Lesson ${sel}/220 &mdash; ${tag}:</strong> ${topic}`;
+  document.getElementById('btn-complete').style.display='';
+  document.getElementById('btn-undo').style.display='none';
+  refresh();updateStats();
+}
+
+function updateStats(){
+  let linux=0,web=0;
+  done.forEach(n=>{
+    const[tag]=LESSONS[n]||[''];
+    trackOf(tag)==='W'?web++:linux++;
+  });
+  const t=done.size;
+  document.getElementById('s-done').textContent=t+' / 220';
+  document.getElementById('s-linux').textContent=linux+' / 120';
+  document.getElementById('s-web').textContent=web+' / 100';
+  document.getElementById('s-pct').textContent=Math.round(t/220*100)+'%';
+  document.getElementById('pbar').style.width=Math.round(t/220*100)+'%';
+}
+
+function showReset(){
+  document.getElementById('btn-trigger').style.display='none';
+  document.getElementById('reset-confirm').classList.add('show');
+}
+function hideReset(){
+  document.getElementById('btn-trigger').style.display='';
+  document.getElementById('reset-confirm').classList.remove('show');
+}
+function doReset(){
+  done.clear();sel=null;save();hideReset();
+  document.getElementById('sel-info').textContent='Select a lesson below to begin';
+  document.getElementById('btn-start').style.display='none';
+  document.getElementById('btn-complete').style.display='none';
+  document.getElementById('btn-undo').style.display='none';
+  refresh();updateStats();
+  showToast('All progress reset.');
+}
+
+buildGrid('g1',1,120);
+buildGrid('g2',121,200);
+buildGrid('g3',201,220);
+updateStats();
+</script>
+</body>
+</html>
