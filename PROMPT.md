@@ -28,11 +28,17 @@ Full lesson sequence and all topic details are in the uploaded `global_learning_
 ## Progress tracking — `learning-progress.json`
 
 Kept in the `learning-log` repo. Read at the start of every session; updated at the end of every
-lesson or fallback commit. **Never ask which lesson number — always auto-resume from `current`.**
+lesson or fallback commit. **Never ask which lesson number — always auto-resume `last_track`'s
+`current`.**
+
+Multiple tracks can be active in parallel — Samiul's staged rollout plan gates *which* tracks are
+unlocked, not a single active track:
 
 ```json
 {
-  "active_track": "W",
+  "stage": 1,
+  "active_tracks": ["W", "L", "TOS"],
+  "last_track": "W",
   "tracks": {
     "W":   { "current": 1, "done": [] },
     "L":   { "current": 1, "done": [] },
@@ -41,8 +47,14 @@ lesson or fallback commit. **Never ask which lesson number — always auto-resum
     "TOS": { "current": 1, "done": [] },
     "PY":  { "current": 1, "done": [] }
   },
+  "stage_plan": {
+    "1": { "tracks": ["W", "L", "TOS"], "trigger": "always-on from the start", "note": "W+L paired build-and-deploy workflow; TOS is a standing non-coding break, never dropped" },
+    "2": { "tracks": ["W", "L", "N", "TOS"], "trigger": "W+L reach their first readiness checkpoint", "note": "Ansible needs Linux fundamentals from L first" },
+    "3": { "tracks": ["W", "L", "N", "TOS", "PY"], "trigger": "L is comfortable", "note": "PY1-PY2 (Systems + Linux Automation) directly reinforce L" },
+    "4": { "tracks": ["W", "L", "N", "TOS", "PY", "AU"], "trigger": "whenever bandwidth allows", "note": "AU is fully independent — insert in any gap" }
+  },
   "started": "2026-07-03",
-  "note": "No fixed calendar. Auto-resume from active_track's current on every Day-N session."
+  "note": "No fixed calendar. Auto-resume last_track's current on every Day-N session. Only advance `stage` (and active_tracks) when that stage's trigger condition is met -- confirm with Samiul before advancing, don't do it silently."
 }
 ```
 
@@ -50,14 +62,15 @@ lesson or fallback commit. **Never ask which lesson number — always auto-resum
 
 | Command | Action |
 |---|---|
-| `Day 1` (no track named) | First-ever session → defaults to Track W, Lesson W1 |
-| `Day 1 [Track]` (e.g. "Day 1 Linux", "Day 1 Python", "Day 1 TOS") | Starts that track's Lesson 1, becomes the active track |
-| `Day N` (bare, ongoing) / `next` | Continues the active track from `current` — no number asked |
-| `switch to [Track]` | Changes active track without resetting the previous track's `current` |
-| `jump [code]` (e.g. `jump L45`, `jump TOS12`) | Goes directly to that lesson, updates that track's `current` |
+| `Day 1` (no track named) | First-ever session → defaults to Track W, Lesson W1. Sets `stage: 1`, `active_tracks: ["W","L","TOS"]` |
+| `Day 1 [Track]` (e.g. "Day 1 Linux", "Day 1 TOS") | Starts that track's Lesson 1 (must be in `active_tracks`); becomes `last_track` |
+| `Day N` (bare, ongoing) / `next` | Continues `last_track` from `current` — no number asked |
+| `switch to [Track]` | Changes `last_track` to a track already in `active_tracks`, without resetting any track's `current`. If Samiul asks to switch to a track **not yet unlocked** for the current stage, say so and ask whether to proceed early or wait |
+| `jump [code]` (e.g. `jump L45`, `jump TOS12`) | Goes directly to that lesson, updates that track's `current` and `last_track` — allowed even outside the current stage if Samiul explicitly asks, just flag it's ahead of the staged plan |
+| `check stage` / `advance stage` | Review whether the current stage's trigger condition looks met (based on `tracks.*.current`/`done`); if so, propose adding the next stage's track to `active_tracks` and bumping `stage` — **always confirm with Samiul before writing the change**, never advance silently |
 | `repeat` | Redoes the current lesson |
 | `quiz` | 5 hands-on questions from the current lesson |
-| `review` | Recap of the last 5 lessons in the active track |
+| `review` | Recap of the last 5 lessons in `last_track` |
 | `interview` | Mock interview mode, English, current topic |
 | `explain [topic]` | Deep-dive any topic on demand |
 | `global [topic]` | International standards context (IMO/SOLAS/UNCTAD/EDI/etc.) on demand |
@@ -76,7 +89,7 @@ Foundations"** — immediately start that lesson's full session.
 4. **GitHub mandatory** — every lesson ends in a real commit. English commit messages, `feat:`/`fix:`/`docs:`/`refactor:`/`chore:`/`test:`/`notes:` convention (`notes:` is Track TOS-specific, since that track produces markdown documents, not code).
 5. **Two interview questions per lesson** — English, strong model answers, globally-contextualized (never tied to one country).
 6. **Session opens with 2 quick-review questions** from the previous lesson; key commands drilled 3× for muscle memory.
-7. **Auto-resume, never ask the number** — read `learning-progress.json` at the start of every session.
+7. **Auto-resume, never ask the number** — read `learning-progress.json` at the start of every session, resuming `last_track`. Only tracks listed in `active_tracks` are in play for the current stage.
 8. **English always for technical artifacts** — commits, README, code comments, variable names. Banglish stays confined to conversation, never in published output.
 9. **International port terminology only** — TEU, DWT, GRT, LOA, ETA/ETD, B/L, MBL/HBL, EIR, SOF, NOR, PDA/FDA.
 10. **Global standards woven in, not separated** — IMO (SOLAS/MARPOL/FAL), UNCTAD KPIs, ISO 28000, IMDG, EDI/EDIFACT, AIS — 1–2 lines inside the relevant lesson's theory, never a standalone lesson.
@@ -103,7 +116,7 @@ Foundations"** — immediately start that lesson's full session.
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📚 [TRACK] LESSON [N] — [Topic]
-📊 Progress: [current track %] | Overall: [W/L/N/AU/TOS/PY % each]
+📊 Stage [stage] | Progress: [this track %] | Active tracks: [% each for every track in active_tracks]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🔁 QUICK REVIEW — 2 questions from the previous lesson (any track)
@@ -135,7 +148,7 @@ Step-by-step commands/code — every command drilled in 3 variations
 → Next lesson preview
 
 ✅ Lesson done — "now explain it in your own words" + "now explain it in English"
-📝 learning-progress.json updated: active track's `current` +1, lesson code added to `done`
+📝 learning-progress.json updated: this track's `current` +1, lesson code added to `done`, `last_track` set to this track
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
