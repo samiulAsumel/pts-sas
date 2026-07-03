@@ -1,171 +1,894 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<script>
-(function(){
-  try{
-    var t=localStorage.getItem('pts_theme');
-    if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}
-    document.documentElement.setAttribute('data-theme',t);
-  }catch(e){}
-})();
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Port &amp; Maritime Tech Specialist — 750-Lesson Global Curriculum Tracker</title>
-<meta name="description" content="Personal progress tracker for a 750-lesson, six-track advanced professional curriculum — Web Development, Linux Systems Administration, Configuration Automation, Workflow Automation Engineering, Port &amp; Maritime TOS, and Python Engineering — on the path to becoming a globally competitive Port &amp; Maritime Tech Specialist.">
-<meta name="author" content="Samiul Asumel">
-<meta name="theme-color" id="theme-color-meta" content="#0f172a">
-<link rel="stylesheet" href="assets/css/styles.css">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="manifest" href="site.webmanifest">
-<meta property="og:title" content="Port & Maritime Tech Specialist — 750-Lesson Global Curriculum Tracker">
-<meta property="og:description" content="750-lesson roadmap tracker across six tracks: Web Dev, Linux, Ansible, n8n, Port/Maritime TOS, and Python.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="icon-512.png">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Port & Maritime Tech Specialist — 750-Lesson Global Curriculum Tracker">
-<meta name="twitter:description" content="750-lesson roadmap tracker across six tracks: Web Dev, Linux, Ansible, n8n, Port/Maritime TOS, and Python.">
-<meta name="twitter:image" content="icon-512.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
+<x-dc>
+<div style="{{ S.page }}">
 
-<a class="skip-link" href="#main">Skip to content</a>
+  <a href="#pts-main" style="{{ S.skipLink }}" style-focus="left:12px;top:12px;position:absolute">Skip to content</a>
 
-<header>
-  <div class="brand">
-    <img src="favicon.svg" alt="" width="36" height="36" class="brand-mark">
-    <div>
-      <h1>Port &amp; Maritime Tech Specialist</h1>
-      <p>750-Lesson Global Curriculum &mdash; Web Dev &bull; Linux &bull; Ansible &bull; n8n &bull; Port/Maritime TOS &bull; Python</p>
-      <div class="markets">
-        <span class="market-pill">Rotterdam</span>
-        <span class="market-pill">Hamburg</span>
-        <span class="market-pill">Singapore</span>
-        <span class="market-pill">DP World</span>
-        <span class="market-pill">EU Blue Card</span>
+  <div style="{{ S.headerOuter }}">
+    <div style="{{ S.headerInner }}">
+      <div style="{{ S.brandRow }}">
+        <img src="favicon.svg" alt="" width="30" height="30" style="{{ S.brandMark }}"/>
+        <div style="{{ S.brandTitle }}">Port &amp; Maritime Tech Specialist</div>
+      </div>
+      <div style="{{ S.headerRight }}">
+        <button type="button" onClick="{{ toggleHelp }}" style="{{ S.iconBtn }}" style-hover="opacity:.85" aria-label="Help">?</button>
+        <sc-if value="{{ showHelp }}">
+          <div style="{{ S.helpPopover }}">
+            <div style="{{ S.helpTitleRow }}">
+              <span style="{{ S.helpTitle }}">How to use</span>
+              <button type="button" onClick="{{ closeHelp }}" style="{{ S.helpCloseBtn }}" aria-label="Close help">✕</button>
+            </div>
+            <div style="{{ S.howToStep }}"><span style="{{ S.howToStepN }}">1</span><span>Pick a track, then click a lesson number to select it</span></div>
+            <div style="{{ S.howToStep }}"><span style="{{ S.howToStepN }}">2</span><span>Click <strong style="{{ S.howToStepStrong }}">"Start lesson"</strong> — the prompt copies to clipboard</span></div>
+            <div style="{{ S.howToStep }}"><span style="{{ S.howToStepN }}">3</span><span>Paste in your Claude project → lesson begins</span></div>
+            <div style="{{ S.howToStep }}"><span style="{{ S.howToStepN }}">4</span><span>Come back and click <strong style="{{ S.howToStepStrong }}">"Mark complete"</strong></span></div>
+            <div style="{{ S.howToStep }}"><span style="{{ S.howToStepN }}">★</span><span>Gold star = one of 31 named capstone projects</span></div>
+            <div style="{{ S.helpDivider }}"></div>
+            <div style="{{ S.helpTitle }}">Keyboard shortcuts</div>
+            <div style="{{ S.kbdList }}">
+              <div style="{{ S.kbdRow }}"><kbd style="{{ S.kbdKey }}">/</kbd><span>focus search</span></div>
+              <div style="{{ S.kbdRow }}"><kbd style="{{ S.kbdKey }}">←→↑↓</kbd><span>move between tiles</span></div>
+              <div style="{{ S.kbdRow }}"><kbd style="{{ S.kbdKey }}">Enter</kbd><span>copy start prompt</span></div>
+              <div style="{{ S.kbdRow }}"><kbd style="{{ S.kbdKey }}">C</kbd><span>mark complete</span></div>
+              <div style="{{ S.kbdRow }}"><kbd style="{{ S.kbdKey }}">Esc</kbd><span>clear / close</span></div>
+            </div>
+          </div>
+        </sc-if>
+        <button type="button" onClick="{{ toggleTheme }}" style="{{ S.themeToggle }}" style-hover="opacity:.85" aria-label="{{ themeToggleAria }}">
+          <span style="{{ S.themeIconWrap }}">
+            <sc-if value="{{ isLight }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
+            </sc-if>
+            <sc-if value="{{ isDark }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"></path></svg>
+            </sc-if>
+          </span>
+        </button>
       </div>
     </div>
   </div>
-  <button type="button" class="btn-icon" id="theme-toggle" aria-label="Switch to light theme">
-    <span class="theme-icon" id="theme-icon" aria-hidden="true"></span>
-    <span id="theme-label">Light</span>
-  </button>
-</header>
 
-<main id="main">
+  <main id="pts-main" style="{{ S.content }}">
 
-<div class="positioning">
-  <strong>Port &amp; Maritime Technology Specialist</strong> — 12+ years of hands-on port operations
-  experience combined with advanced, enterprise-grade full-stack engineering, systems administration,
-  automation engineering, and internationally-standardized port/terminal operations expertise.
+    <p style="{{ S.tagline }}">
+      <strong style="{{ S.taglineStrong }}">Port &amp; Maritime Technology Specialist</strong> — 12+ years of hands-on port operations experience combined with advanced, enterprise-grade full-stack engineering, systems administration, automation engineering, and internationally-standardized port/terminal operations expertise.
+    </p>
+    <p style="{{ S.marketsLine }}">Rotterdam · Hamburg · Singapore · DP World · EU Blue Card</p>
+
+    <div style="{{ S.overviewCard }}">
+      <div style="{{ S.overviewTop }}">
+        <div>
+          <div style="{{ S.overviewLabel }}">Overall progress</div>
+          <div style="{{ S.overviewSub }}">{{ sDoneText }} lessons completed</div>
+        </div>
+        <div style="{{ S.overviewPct }}">{{ sPctText }}</div>
+      </div>
+      <div style="{{ S.overviewBarWrap }}" role="progressbar" aria-label="Overall progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pctNum }}">
+        <div style="{{ S.pbarFill }}"></div>
+      </div>
+      <div style="{{ S.chipsGrid }}">
+        <sc-for list="{{ trackStats }}" as="tc" hint-placeholder-count="6">
+          <div style="{{ tc.cardStyle }}" style-hover="{{ tc.hoverStyle }}" onClick="{{ tc.onClick }}">
+            <div style="{{ tc.nameStyle }}"><span style="{{ tc.dotStyle }}"></span>{{ tc.label }}</div>
+            <div style="{{ tc.valStyle }}">{{ tc.valText }}</div>
+            <div style="{{ tc.barWrapStyle }}"><div style="{{ tc.barStyle }}"></div></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="{{ S.toolbarCard }}">
+      <div style="{{ S.searchWrap }}">
+        <span style="{{ S.searchIconWrap }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </span>
+        <input type="search" id="pts-search" placeholder="Search by code, track, or topic… (press / to focus)" autoComplete="off" value="{{ searchQuery }}" onChange="{{ onSearchInput }}" style="{{ S.searchInput }}"/>
+      </div>
+      <div style="{{ S.filterRow }}" role="group" aria-label="Filter by track">
+        <sc-for list="{{ trackTabs }}" as="tab" hint-placeholder-count="7">
+          <button type="button" style="{{ tab.style }}" style-hover="{{ tab.hoverStyle }}" onClick="{{ tab.onClick }}">
+            <sc-if value="{{ tab.hasDot }}"><span style="{{ tab.dotStyle }}"></span></sc-if>
+            {{ tab.label }}
+          </button>
+        </sc-for>
+      </div>
+      <div style="{{ S.filterRow }}" role="group" aria-label="Filter by status">
+        <sc-for list="{{ statusTabs }}" as="tab" hint-placeholder-count="3">
+          <button type="button" style="{{ tab.style }}" style-hover="{{ tab.hoverStyle }}" onClick="{{ tab.onClick }}">{{ tab.label }}</button>
+        </sc-for>
+      </div>
+      <div style="{{ S.legendLine }}">
+        <span style="{{ S.legItem }}"><span style="{{ S.legBoxSel }}"></span>Selected</span>
+        <span style="{{ S.legItem }}"><span style="{{ S.legBoxDone }}"></span>Completed</span>
+        <span style="{{ S.legItem }}"><span style="{{ S.legBoxTodo }}"></span>Not started</span>
+        <span style="{{ S.legItem }}"><span style="{{ S.legStar }}">★</span>Named capstone</span>
+      </div>
+    </div>
+
+    <div style="{{ S.actionCard }}">
+      <div style="{{ S.selInfo }}">
+        <sc-if value="{{ selHasSelection }}" hint-placeholder-val="{{ false }}">
+          <span style="{{ S.selInfoStrong }}">{{ selStrongText }}</span> {{ selTopicText }}
+          <sc-if value="{{ selIsDone }}"><span style="{{ S.selInfoDoneTag }}">(completed ✓)</span></sc-if>
+          <sc-if value="{{ selHasCapstone }}"><span style="{{ S.selInfoCapstoneTag }}">{{ selCapstoneText }}</span></sc-if>
+        </sc-if>
+        <sc-if value="{{ selNone }}">Select a lesson below to begin</sc-if>
+      </div>
+      <sc-if value="{{ showStartBtn }}"><button type="button" style="{{ S.btnStart }}" style-hover="opacity:.9" onClick="{{ startLesson }}">Start lesson</button></sc-if>
+      <sc-if value="{{ showCompleteBtn }}"><button type="button" style="{{ S.btnComplete }}" style-hover="opacity:.9" onClick="{{ markDone }}">✓ Mark complete</button></sc-if>
+      <sc-if value="{{ showUndoBtn }}"><button type="button" style="{{ S.btnUndo }}" style-hover="opacity:1" onClick="{{ undoDone }}">Undo</button></sc-if>
+    </div>
+
+    <div id="pts-tracks">
+      <sc-for list="{{ trackSections }}" as="sec" hint-placeholder-count="6">
+        <section style="{{ sec.wrapStyle }}" data-screen-label="{{ sec.code }}">
+          <div style="{{ S.trackHeaderRow }}" onClick="{{ sec.toggleOpen }}">
+            <span style="{{ S.trackChevron }}">{{ sec.chevron }}</span>
+            <span style="{{ sec.dotStyle }}"></span>
+            <span style="{{ S.trackHeaderName }}">{{ sec.headerTitle }}</span>
+            <span style="{{ S.trackHeaderFraction }}">{{ sec.fractionText }}</span>
+            <span style="{{ S.trackHeaderBarWrap }}"><span style="{{ sec.barStyle }}"></span></span>
+          </div>
+          <sc-if value="{{ sec.isOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ S.trackBody }}">
+              <sc-for list="{{ sec.modules }}" as="mod" hint-placeholder-count="3">
+                <div style="{{ mod.labelStyle }}">{{ mod.labelText }} <span style="{{ S.phaseLabelSpan }}">{{ mod.rangeText }}</span></div>
+                <div style="{{ mod.gridStyle }}">
+                  <sc-for list="{{ mod.lessons }}" as="lesson" hint-placeholder-count="10">
+                    <button type="button" class="pts-lbtn" title="{{ lesson.title }}" aria-pressed="{{ lesson.ariaPressed }}" aria-label="{{ lesson.ariaLabel }}" style="{{ lesson.style }}" style-hover="{{ lesson.hoverStyle }}" onClick="{{ lesson.onClick }}">
+                      <span style="{{ lesson.numStyle }}">{{ lesson.num }}</span>
+                      <span style="{{ lesson.tagStyle }}">{{ lesson.tag }}</span>
+                      <sc-if value="{{ lesson.isCap }}"><span style="{{ S.capStar }}" aria-hidden="true">★</span></sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </section>
+      </sc-for>
+    </div>
+
+    <div style="{{ S.utilityRow }}">
+      <div style="{{ S.utilityGroup }}">
+        <button type="button" style="{{ S.btnTrigger }}" style-hover="{{ S.btnTriggerHover }}" onClick="{{ exportProgress }}">Export progress (.json)</button>
+        <button type="button" style="{{ S.btnTrigger }}" style-hover="{{ S.btnTriggerHover }}" onClick="{{ triggerImportClick }}">Import progress</button>
+        <input type="file" id="pts-import-file" accept="application/json" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0" onChange="{{ importProgress }}"/>
+      </div>
+      <div style="{{ S.utilityGroup }}">
+        <sc-if value="{{ resetNotConfirming }}"><button type="button" style="{{ S.btnTrigger }}" style-hover="{{ S.btnTriggerHover }}" onClick="{{ showReset }}">Reset all progress</button></sc-if>
+        <sc-if value="{{ resetConfirm }}">
+          <div style="{{ S.resetConfirmWrap }}">
+            <span style="{{ S.resetQ }}">Reset all progress?</span>
+            <button type="button" style="{{ S.btnSmDanger }}" style-hover="{{ S.btnSmDangerHover }}" onClick="{{ doReset }}">Yes, reset</button>
+            <button type="button" style="{{ S.btnSmCancel }}" style-hover="{{ S.btnSmCancelHover }}" onClick="{{ hideReset }}">Cancel</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+  </main>
+
+  <footer style="{{ S.footer }}">
+    <p style="{{ S.footerP }}">Built by <a href="https://github.com/samiulAsumel" target="_blank" rel="noopener noreferrer" style="{{ S.footerA }}">samiulAsumel</a> · <a href="https://github.com/samiulAsumel/pts-sas" target="_blank" rel="noopener noreferrer" style="{{ S.footerA }}">View source on GitHub</a></p>
+  </footer>
+
+  <div style="{{ S.toast }}">{{ toastMsg }}</div>
+
 </div>
 
-<div class="how-to">
-  <div class="how-to-title">How to use</div>
-  <div class="how-to-step"><span class="n">1</span><span>Pick a track tab, then click a lesson number to select it</span></div>
-  <div class="how-to-step"><span class="n">2</span><span>Click <strong>"Start lesson"</strong> — the prompt copies to clipboard automatically</span></div>
-  <div class="how-to-step"><span class="n">3</span><span>Paste in your Claude project → lesson begins</span></div>
-  <div class="how-to-step"><span class="n">4</span><span>Come back here and click <strong>"Mark complete"</strong> — progress saves in browser</span></div>
-  <div class="how-to-step"><span class="n">5</span><span>Use search or filters to jump straight to a lesson — press <kbd>/</kbd> to focus search</span></div>
-  <div class="how-to-step"><span class="n">★</span><span>A gold star marks one of the 31 named capstone projects</span></div>
-</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const FONT = "-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+const TRACK_CODES = ['W', 'L', 'N', 'AU', 'TOS', 'PY'];
+const TRACK_HEX = { W: '#3b82f6', L: '#f97316', N: '#a855f7', AU: '#14b8a6', TOS: '#eab308', PY: '#22c55e' };
+const TRACK_SHORT = { W: 'Web Dev', L: 'Linux', N: 'Ansible', AU: 'n8n', TOS: 'Port/Maritime', PY: 'Python' };
 
-<details class="kbd-hint">
-  <summary>Keyboard shortcuts</summary>
-  <ul>
-    <li><kbd>/</kbd> focus the search box</li>
-    <li><kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>&uarr;</kbd> <kbd>&darr;</kbd> move between lesson tiles</li>
-    <li><kbd>Enter</kbd> copy the start prompt for the selected lesson</li>
-    <li><kbd>C</kbd> mark the selected lesson complete</li>
-    <li><kbd>Esc</kbd> clear search or cancel reset</li>
-  </ul>
-</details>
+// Curriculum data — copied verbatim from global_learning_path_final.md (v3.3) source.
+const CURRICULUM = {
+  W: {
+    name: "Web Development", sub: "Advanced Professional",
+    modules: [
+      { title: "W1 — Developer Environment & Foundations", topics: ["VS Code setup","Git workflow","AI developer mindset","Prompt engineering","Developer tools"] },
+      { title: "W2 — HTML Mastery", topics: ["HTML structure","HTML text + formatting","HTML lists + links + images","HTML forms","HTML5 semantic elements","HTML tables"] },
+      { title: "W3 — CSS Mastery", topics: ["CSS basics + box model","CSS selectors","CSS styling + fonts","Flexbox fundamentals","Flexbox in practice","CSS grid","CSS advanced + animations","Responsive design"] },
+      { title: "W4 — Project 1: Port Cargo Website", topics: ["PROJECT 1: Port Cargo Website"] },
+      { title: "W5 — JavaScript Fundamentals", topics: ["JavaScript introduction","Operators + math","Conditionals","Loops","Arrays part 1","Arrays part 2","Strings","Objects","Functions","JS problem solving basics"] },
+      { title: "W6 — Modern JavaScript (ES6+)", topics: ["ES6 modern syntax","Arrow + destructuring + spread","ES6 advanced","Array power methods","ES6 problem solving"] },
+      { title: "W7 — TypeScript", topics: ["TypeScript introduction","TypeScript types","Interfaces + objects","Functions in TypeScript","Generics + utility types","OOP in TypeScript","TypeScript problem solving"] },
+      { title: "W8 — React Fundamentals", topics: ["React introduction","Components + JSX","Props + conditional rendering","useState hook","Event handling","API calls + async","React + Tailwind CSS","State lifting","Axios","DOM + BOM","React Router","Data visualization + AIS"] },
+      { title: "W9 — Project 2: Port Cargo Tracker", topics: ["PROJECT 2: Port Cargo Tracker"] },
+      { title: "W10 — React Advanced + Next.js Intro", topics: ["React performance","React interview prep","Next.js introduction","Pages + routing","Layouts + navigation"] },
+      { title: "W11 — Next.js Advanced", topics: ["Rendering: CSR vs SSR","Data fetching server","Caching + ISR","Hero UI / ShadCN","Error + loading pages","Image + font optimization","PROJECT 3: Maritime Dashboard"] },
+      { title: "W12 — Authentication Systems", topics: ["BetterAuth setup","Register + login","Google + GitHub OAuth","Route protection","Profile + password + email","Dashboard with auth"] },
+      { title: "W13 — Backend (Node.js / Express / MongoDB)", topics: ["Node.js architecture","Express setup + first API","REST API + EDI concepts","MongoDB + Mongoose","Mongoose schemas + models","CRUD operations","Advanced MongoDB queries","Aggregation + UNCTAD KPIs","JWT authentication","RBAC"] },
+      { title: "W14 — Payments & Production Readiness", topics: ["Stripe payment","SSLCommerz payment","Error handling + validation","Backend deployment","PROJECT 4: Port Management API","Connect frontend + backend","Full stack auth","Full stack deployment"] },
+      { title: "W15 — Architecture & Career Readiness", topics: ["PRD writing with AI","System design + DB planning","MVC architecture","Full stack interview prep"] },
+      { title: "W16 — Capstone Projects & AI Tooling", topics: ["PROJECT 5: Port SaaS v1","PROJECT 6: Port SaaS v2","Cursor AI + Claude Code","Lovable + Bolt + V0","FINAL: AI-Powered Port Tool"] },
+      { title: "W17 — Testing & Quality Assurance", topics: ["Unit testing (Vitest/Jest)","component testing (React Testing Library)","E2E testing (Playwright)","API mocking (MSW)","visual regression testing","test coverage strategy","CI test automation","mutation testing awareness"] },
+      { title: "W18 — Advanced State & Data Architecture", topics: ["Zustand/Redux Toolkit","TanStack Query advanced caching","optimistic updates","real-time data (WebSockets/SSE)","offline-first patterns","form architecture at scale (RHF + Zod)"] },
+      { title: "W19 — API Architecture Beyond REST", topics: ["GraphQL fundamentals","GraphQL server (Apollo/Yoga)","tRPC for full-stack type safety","API versioning strategy","rate limiting & gateway patterns"] },
+      { title: "W20 — Production Engineering for Web", topics: ["Web performance auditing (Core Web Vitals deep dive)","bundle analysis & code splitting","CDN/edge caching strategy","monitoring & error tracking","WCAG accessibility audit & remediation","internationalization architecture"] },
+      { title: "W21 — Enterprise & SaaS Patterns", topics: ["Multi-tenancy architecture patterns","design systems & component libraries at scale","monorepo tooling (Turborepo/Nx)","CI/CD pipelines for web apps","OWASP Top 10 security hardening applied"] },
+    ]
+  },
+  L: {
+    name: "Linux Systems Administration", sub: "Advanced (RHCSA+)",
+    modules: [
+      { title: "L1 — Terminal & File System Foundations", topics: ["Linux basics","Filesystem + Vim","Grep, pipes, redirection","Links + wildcards","Users + groups + sudo","Permissions + ACL","Week 1 review lab"] },
+      { title: "L2 — Process, Service & Remote Access", topics: ["Process management","Job control","systemd + services","SSH setup + key auth","SSH hardening","SSH troubleshooting","Week 2 review lab"] },
+      { title: "L3 — Logging & Networking", topics: ["Logging architecture","journalctl mastery","NTP + chrony","Networking concepts","nmcli static IP","Hostname + DNS","Week 3 review lab"] },
+      { title: "L4 — Package Management & File Operations", topics: ["RPM management","DNF full management","DNF repositories","tar archives","rsync + scp + sftp","find mastery","Week 4 review lab"] },
+      { title: "L5 — Storage, LVM & Security", topics: ["Block devices + mount","Partitioning","Filesystem creation","/etc/fstab mounts","Swap space","LVM create","LVM operations","SELinux basics","SELinux contexts","SELinux booleans + ports","firewalld mastery","SELinux + firewall combined"] },
+      { title: "L6 — Boot, Scheduling, Scripting & Containers", topics: ["Boot process + targets","Root password reset","Cron jobs","at + systemd timers","NFS","Autofs","tuned profiles","Bash scripting foundation","Bash real scripts","Text processing","Podman basics","Podman volumes","Podman systemd","Container lab"] },
+      { title: "L7 — RHCSA Exam Readiness", topics: ["RHCSA practice exam 1","RHCSA practice exam 2","Weak topics review","Speed drills","Full mock exam","RHCSA wrap-up + CIS hardening"] },
+      { title: "L8 — Performance & Kernel Tuning", topics: ["`sysctl` deep dive","advanced `tuned` profiles","cgroups v2","resource limits (`ulimit`/systemd resource control)","performance monitoring (`sar`/`iostat`/`vmstat` deep dive)","kernel module management","tracing basics (`strace`/`ltrace`)","performance troubleshooting lab"] },
+      { title: "L9 — Advanced Storage & High Availability", topics: ["Software RAID (`mdadm`)","iSCSI initiator/target","multipath storage","advanced LVM (thin provisioning, snapshots)","Stratis storage","HA clustering fundamentals (Pacemaker/Corosync)","fencing/STONITH concepts","shared storage clustering lab","GFS2 basics","HA capstone lab"] },
+      { title: "L10 — Advanced Networking", topics: ["VLAN configuration","network bonding/teaming","advanced routing","network namespaces","`iptables`/`nftables` deep dive","network troubleshooting toolkit (`tcpdump`/Wireshark basics)","DNS server (BIND) basics","networking capstone lab"] },
+      { title: "L11 — Enterprise Security Hardening", topics: ["`auditd` deep dive","AIDE file integrity monitoring","OpenSCAP compliance scanning","advanced PAM configuration","sudo policy design at scale","PKI/certificate management basics","security incident response on Linux","hardening capstone lab"] },
+      { title: "L12 — Monitoring, Observability & Enterprise Ops", topics: ["Prometheus `node_exporter` setup","Grafana dashboard basics","centralized logging (rsyslog to remote/ELK basics)","backup strategy design","disaster recovery planning","patch management strategy","configuration drift detection","enterprise ops capstone lab"] },
+      { title: "L13 — Advanced Containers & Immutable Infrastructure", topics: ["Podman rootless deep dive","Buildah image building","Skopeo image management","container security scanning","systemd-managed container fleets","immutable infrastructure concepts","image-based deployment patterns","advanced container capstone lab"] },
+    ]
+  },
+  N: {
+    name: "Configuration Automation / Ansible", sub: "Advanced (RHCE+)",
+    modules: [
+      { title: "N1 — Ansible Foundations", topics: ["Ansible architecture","ansible.cfg + config","Inventory INI format","YAML inventory + vars","Ad-hoc commands","YAML deep dive","Week 1 lab","First playbook"] },
+      { title: "N2 — Core Modules", topics: ["dnf + package module","service module","user + group module","copy + file module","ansible-doc mastery","Running playbooks"] },
+      { title: "N3 — Variables & Facts", topics: ["Variable types","Variable precedence","Magic variables","Ansible facts","Custom facts","Jinja2 in tasks","Variables lab"] },
+      { title: "N4 — Task Control Logic", topics: ["when: conditionals","register: output","failed_when + changed_when","Loops","Handlers","Blocks","Task control lab"] },
+      { title: "N5 — Templates & File Management", topics: ["template module","Jinja2 templates","lineinfile + blockinfile","fetch + stat","archive + unarchive","Port server config lab","Files lab"] },
+      { title: "N6 — Roles", topics: ["Role structure","Create a role","Using roles","Role variables","Galaxy + requirements","Role dependencies","Complete port server role"] },
+      { title: "N7 — Collections & Vault", topics: ["Ansible collections","Install collections","FQCN always use","ansible.posix key modules","Vault basics","Vault in playbooks","Vault + collections lab"] },
+      { title: "N8 — Advanced Playbooks & Production Automation", topics: ["include_tasks vs import_tasks","Multi-play playbooks","Rolling updates (serial)","delegate_to + run_once","Tags","Troubleshooting Ansible","Advanced playbooks lab","Storage automation","Users + SSH + Cron via Ansible","Full port server automation","RHCE mock exam + interview bootcamp"] },
+      { title: "N9 — Dynamic Inventory & Cloud Integration", topics: ["Dynamic inventory plugins","inventory scripts","AWS/Azure/GCP dynamic inventory","cloud module overview","tagging-based grouping","inventory caching","multi-environment inventory design","lab"] },
+      { title: "N10 — Custom Module & Plugin Development", topics: ["Module architecture","writing a custom module in Python","custom filter plugins","custom lookup plugins","testing custom modules","packaging custom content","module development lab","Galaxy contribution"] },
+      { title: "N11 — Testing & Quality Assurance for Ansible", topics: ["Molecule testing framework","testing with Docker driver","idempotency testing","`ansible-lint`","syntax-check automation","CI integration (GitHub Actions)","testing capstone lab"] },
+      { title: "N12 — Enterprise Automation Platform (AWX/AAP)", topics: ["Platform architecture","job templates","workflow templates","credentials management at scale","RBAC","scheduling & notifications","survey forms","platform capstone lab"] },
+      { title: "N13 — Advanced Patterns & Event-Driven Automation", topics: ["Async tasks & polling","error handling strategies (block/rescue/always)","custom facts modules","Event-Driven Ansible (EDA) basics","rulebook design","network automation module overview","Ansible for Kubernetes","performance optimization (forks/pipelining/fact caching)","enterprise pattern lab"] },
+      { title: "N14 — RHCE Capstone & Global Interview Readiness", topics: ["Enterprise playbook design exercise","multi-tier application deployment playbook","zero-downtime rolling deployment scenario","disaster recovery automation scenario","security compliance automation (OpenSCAP via Ansible)","full mock exam","weak-topics review","speed drills","capstone project","interview bootcamp"] },
+    ]
+  },
+  AU: {
+    name: "Workflow Automation Engineering", sub: "n8n, Advanced",
+    modules: [
+      { title: "AU1 — Fundamentals & UI", topics: ["Installation methods (Docker/VPS/K8s)","UI navigation","dashboard/credentials/projects","workflow lifecycle concepts"] },
+      { title: "AU2 — Workflow Basics", topics: ["Trigger nodes","core nodes","JSON/binary data flow","executions & error states"] },
+      { title: "AU3 — Expressions", topics: ["Built-in variables","date/string/math functions","boolean logic","optional chaining"] },
+      { title: "AU4 — JavaScript for n8n", topics: ["Arrays/objects/loops","async/promises","Code node run-once vs. run-each","JSON manipulation/regex"] },
+      { title: "AU5 — HTTP Operations", topics: ["GET/POST/PUT/DELETE","auth/headers/pagination","upload/download","rate limits & retry logic"] },
+      { title: "AU6 — API Integration", topics: ["REST/OAuth2/JWT","GraphQL basics","pagination/filtering/sorting patterns","hands-on: Slack/Telegram/GitHub"] },
+      { title: "AU7 — Credentials", topics: ["OAuth2 flows","API key/basic/bearer/JWT","encryption & credential sharing"] },
+      { title: "AU8 — Data Processing", topics: ["Mapping/merge/split/aggregate","flatten/grouping/sorting","deduplication","batch/chunk/streaming"] },
+      { title: "AU9 — Databases", topics: ["MySQL/PostgreSQL/MongoDB/Redis","CRUD via n8n","transactions/indexes/joins","stored procedures"] },
+      { title: "AU10 — Files", topics: ["CSV/Excel/JSON/XML/PDF","binary data handling","FTP/SFTP"] },
+      { title: "AU11 — Email Automation", topics: ["SMTP/IMAP/POP3","send/receive/attachments","bulk email & parsing"] },
+      { title: "AU12 — Cloud Storage", topics: ["Google Drive/Dropbox/OneDrive","AWS S3/Azure Blob","Cloudflare R2/MinIO"] },
+      { title: "AU13 — AI Automation", topics: ["OpenAI/Claude/Gemini nodes","embeddings & prompt engineering in n8n","AI Agents & function calling","RAG basics inside n8n"] },
+      { title: "AU14 — Enterprise Integrations", topics: ["GitHub/GitLab/Jira","Salesforce/HubSpot/Zendesk","ClickUp/Asana/Monday","ServiceNow/SAP awareness"] },
+      { title: "AU15 — DevOps Automation", topics: ["SSH/Docker/K8s via n8n","Terraform/Ansible triggers","GitHub Actions/GitLab CI triggers","Prometheus/Grafana/cloud CLI integration"] },
+      { title: "AU16 — Error Handling", topics: ["Retry/Continue On Fail","fallback workflows","dead letter queue & alerting"] },
+      { title: "AU17 — Webhooks", topics: ["Incoming/outgoing","security/authentication/signatures","custom responses","streaming webhooks"] },
+      { title: "AU18 — Scheduling", topics: ["Cron/timezones/intervals","delayed jobs & queues","rate control"] },
+      { title: "AU19 — Security", topics: ["HTTPS/SSL/reverse proxy","Nginx/Traefik","RBAC/secrets/credential encryption","audit logs"] },
+      { title: "AU20 — Scaling", topics: ["Docker Swarm/Kubernetes for n8n","worker mode/queue mode","Redis+PostgreSQL backend","load balancer/HA"] },
+      { title: "AU21 — Monitoring", topics: ["Logs/metrics","Prometheus/Grafana for n8n","health checks & execution history & alerts/backups"] },
+      { title: "AU22 — Development", topics: ["CLI","environment variables & version control","custom node development basics"] },
+      { title: "AU23 — Performance Optimization", topics: ["Large workflow handling","memory/concurrency","caching & queue optimization"] },
+      { title: "AU24 — Production Deployment", topics: ["Linux server/Docker Compose","Cloudflare Tunnel/Nginx/Traefik/SSL","backups & CI/CD deployment"] },
+      { title: "AU25 — Enterprise Architecture", topics: ["Reusable/sub-workflows","microservices integration","event-driven architecture","message queues (Kafka/RabbitMQ/Redis Streams)"] },
+      { title: "AU26 — Advanced AI Agent Systems", topics: ["Supervisor agents","planning agents","memory systems","MCP & multi-agent collaboration"] },
+      { title: "AU27 — Business Automation Projects", topics: ["AI customer support agent","AI email assistant","invoice processing pipeline","PDF data extraction","CRM automation","social media publisher","DevOps incident response bot","HR onboarding automation"] },
+      { title: "AU28 — Capstone Projects", topics: ["Enterprise AI agent platform","multi-tenant SaaS automation platform","complete DevOps automation suite","AI IT help desk","document processing/OCR platform","security operations automation","enterprise data integration platform","final capstone review & portfolio packaging"] },
+    ]
+  },
+  TOS: {
+    name: "Port, Maritime & Terminal Operating Systems", sub: "Global Standard",
+    modules: [
+      { title: "TOS-1 — Global Port System Foundations", topics: ["Global Port System Foundations","Global Port System Foundations","Global Port System Foundations","Global Port System Foundations","Global Port System Foundations","Global Port System Foundations","Global Port System Foundations","Global Port System Foundations","Global Port System Foundations","Global Port System Foundations","Global Port System Foundations","Global Port System Foundations"] },
+      { title: "TOS-2 — Vessel Operations", topics: ["Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations","Vessel Operations"] },
+      { title: "TOS-3 — Container Terminal Infrastructure & Yard Management", topics: ["Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management","Container Terminal Infrastructure & Yard Management"] },
+      { title: "TOS-4 — Cargo Flow Engineering", topics: ["Cargo Flow Engineering","Cargo Flow Engineering","Cargo Flow Engineering","Cargo Flow Engineering","Cargo Flow Engineering","Cargo Flow Engineering","Cargo Flow Engineering","Cargo Flow Engineering","Cargo Flow Engineering","Cargo Flow Engineering","Cargo Flow Engineering","Cargo Flow Engineering"] },
+      { title: "TOS-5 — Port Billing & Tariff Systems", topics: ["Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems","Port Billing & Tariff Systems"] },
+      { title: "TOS-6 — Terminal Operating System (TOS) Architecture", topics: ["Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture","Terminal Operating System (TOS) Architecture"] },
+      { title: "TOS-7 — KPI & Performance Engineering", topics: ["KPI & Performance Engineering","KPI & Performance Engineering","KPI & Performance Engineering","KPI & Performance Engineering","KPI & Performance Engineering","KPI & Performance Engineering","KPI & Performance Engineering","KPI & Performance Engineering","KPI & Performance Engineering","KPI & Performance Engineering","KPI & Performance Engineering","KPI & Performance Engineering"] },
+      { title: "TOS-8 — Marine Operations", topics: ["Marine Operations","Marine Operations","Marine Operations","Marine Operations","Marine Operations","Marine Operations","Marine Operations","Marine Operations","Marine Operations","Marine Operations","Marine Operations","Marine Operations"] },
+      { title: "TOS-9 — Safety & Global Compliance", topics: ["Safety & Global Compliance","Safety & Global Compliance","Safety & Global Compliance","Safety & Global Compliance","Safety & Global Compliance","Safety & Global Compliance","Safety & Global Compliance","Safety & Global Compliance","Safety & Global Compliance","Safety & Global Compliance"] },
+      { title: "TOS-10 — Advanced Port Management & Comparative Systems", topics: ["Advanced Port Management & Comparative Systems","Advanced Port Management & Comparative Systems","Advanced Port Management & Comparative Systems","Advanced Port Management & Comparative Systems","Advanced Port Management & Comparative Systems","Advanced Port Management & Comparative Systems","Advanced Port Management & Comparative Systems","Advanced Port Management & Comparative Systems","Advanced Port Management & Comparative Systems","Advanced Port Management & Comparative Systems"] },
+      { title: "TOS-11 — Real-World Simulation Training", topics: ["Real-World Simulation Training","Real-World Simulation Training","Real-World Simulation Training","Real-World Simulation Training","Real-World Simulation Training","Real-World Simulation Training","Real-World Simulation Training","Real-World Simulation Training","Real-World Simulation Training","Real-World Simulation Training"] },
+      { title: "TOS-12 — Global Interview & Consulting Readiness", topics: ["Global Interview & Consulting Readiness","Global Interview & Consulting Readiness","Global Interview & Consulting Readiness","Global Interview & Consulting Readiness"] },
+    ]
+  },
+  PY: {
+    name: "Python Engineering", sub: "Advanced",
+    modules: [
+      { title: "PY1 — Python for Systems", topics: ["Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems","Python for Systems"] },
+      { title: "PY2 — Linux Automation", topics: ["Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation","Linux Automation"] },
+      { title: "PY3 — CLI & Packaging", topics: ["CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging","CLI & Packaging"] },
+      { title: "PY4 — Infrastructure Automation", topics: ["Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation","Infrastructure Automation"] },
+      { title: "PY5 — Cloud & Containers", topics: ["Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers","Cloud & Containers"] },
+      { title: "PY6 — Kubernetes Engineering", topics: ["Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering","Kubernetes Engineering"] },
+      { title: "PY7 — Production Engineering", topics: ["Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering","Production Engineering"] },
+    ]
+  },
+};
 
-<div class="hero-stats">
-  <div class="stat"><div class="stat-label">Completed</div><div class="stat-val" id="s-done">0 / 750</div></div>
-  <div class="stat"><div class="stat-label">Overall progress</div><div class="stat-val" id="s-pct">0%</div></div>
-</div>
+const CAPSTONES = {
+  "W20": "Port Cargo Website",
+  "W55": "Port Cargo Tracker",
+  "W67": "Maritime Dashboard + AIS",
+  "W88": "Port Management API",
+  "W96": "Port SaaS v1",
+  "W97": "Port SaaS v2 (+ RTL/i18n UI)",
+  "L60": "Port App Server Hardening & Deployment Base",
+  "L78": "High-Availability Database Cluster for Port Billing",
+  "L102": "Port Infrastructure Monitoring & Alerting Stack",
+  "L110": "Immutable Container Fleet for Port Microservices",
+  "N42": "One-Command Port Server Provisioning Role",
+  "N60": "Zero-Downtime Deployment Automation for PortBill",
+  "N76": "Custom Ansible Module: Port Billing Config Validator",
+  "N91": "Enterprise Automation Platform for Multi-Client Server Fleet",
+  "N110": "Compliance Automation Pipeline (OpenSCAP + Ansible)",
+  "AU41": "C&F Agent Invoice Email-to-Record Automation",
+  "AU66": "Vessel ETA & Free-Time Deadline Alert System",
+  "AU94": "AI-Powered Shipping Document Data Extraction Pipeline",
+  "AU102": "Multi-Client Port Business Process Automation Suite",
+  "AU110": "Enterprise SaaS Automation Platform (Capstone)",
+  "TOS68": "Billing Dispute Resolution Case Study Portfolio",
+  "TOS82": "TOS Architecture Comparison Whitepaper",
+  "TOS94": "Port Domain Glossary & Framework",
+  "TOS136": "Full Vessel-to-Invoice Simulation Case Study",
+  "TOS140": "Global Port Operations Consulting Portfolio",
+  "PY30": "Port Server Health & Log Monitoring CLI Tool",
+  "PY45": "PortBill Backup & Restore Utility",
+  "PY75": "Shipping Manifest & Invoice Data Processing Pipeline",
+  "PY105": "Cloud-Deployed Port Automation Platform (AWS)",
+  "PY125": "Kubernetes-Based Port Microservices Platform",
+  "PY150": "Production Observability & Incident-Response Platform",
+};
 
-<div class="pbar-wrap" role="progressbar" aria-label="Overall progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="pbar-wrap"><div class="pbar-fill" id="pbar"></div></div>
+function cleanTopic(t) { return t.replace(/`/g, ''); }
 
-<div class="track-grid" id="track-grid">
-  <div class="track-card" style="--tc:var(--track-w)"><div class="tc-name"><span class="tc-dot"></span>W — Web Dev</div><div class="tc-val" id="tc-val-W">0 / 130</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-W"></div></div></div>
-  <div class="track-card" style="--tc:var(--track-l)"><div class="tc-name"><span class="tc-dot"></span>L — Linux</div><div class="tc-val" id="tc-val-L">0 / 110</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-L"></div></div></div>
-  <div class="track-card" style="--tc:var(--track-n)"><div class="tc-name"><span class="tc-dot"></span>N — Ansible</div><div class="tc-val" id="tc-val-N">0 / 110</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-N"></div></div></div>
-  <div class="track-card" style="--tc:var(--track-au)"><div class="tc-name"><span class="tc-dot"></span>AU — n8n</div><div class="tc-val" id="tc-val-AU">0 / 110</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-AU"></div></div></div>
-  <div class="track-card" style="--tc:var(--track-tos)"><div class="tc-name"><span class="tc-dot"></span>TOS — Port/Maritime</div><div class="tc-val" id="tc-val-TOS">0 / 140</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-TOS"></div></div></div>
-  <div class="track-card" style="--tc:var(--track-py)"><div class="tc-name"><span class="tc-dot"></span>PY — Python</div><div class="tc-val" id="tc-val-PY">0 / 150</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-PY"></div></div></div>
-</div>
+const LESSONS = {};
+const TRACK_TOTAL = {};
+TRACK_CODES.forEach((code) => {
+  let n = 0;
+  CURRICULUM[code].modules.forEach((mod) => {
+    mod.topics.forEach((topic) => {
+      n += 1;
+      LESSONS[code + n] = { track: code, num: n, topic: cleanTopic(topic) };
+    });
+  });
+  TRACK_TOTAL[code] = n;
+});
+const TOTAL_LESSONS = Object.values(TRACK_TOTAL).reduce((a, b) => a + b, 0);
 
-<div class="action-box">
-  <div class="sel-info" id="sel-info">Select a lesson below to begin</div>
-  <button type="button" class="btn btn-start" id="btn-start" style="display:none" onclick="startLesson()">Start lesson</button>
-  <button type="button" class="btn btn-complete" id="btn-complete" style="display:none" onclick="markDone()">&#10003; Mark complete</button>
-  <button type="button" class="btn btn-undo" id="btn-undo" style="display:none" onclick="undoDone()">Undo</button>
-</div>
+function matchesSearch(code, track, topic, q) {
+  if (!q) return true;
+  const ql = q.toLowerCase();
+  return code.toLowerCase().includes(ql) || track.toLowerCase().includes(ql) || topic.toLowerCase().includes(ql);
+}
 
-<div class="search-row">
-  <label for="search" class="visually-hidden">Search lessons by code, track, or topic</label>
-  <input type="search" id="search" placeholder="Search by code, track, or topic… (press / to focus)" autocomplete="off">
-</div>
+function getColors(theme) {
+  if (theme === 'light') {
+    return {
+      bg: '#f1f5f9', surface: '#ffffff', surfaceAlpha: 'rgba(255,255,255,.82)', accentBg: '#dbeafe', border: '#cbd5e1', borderSoft: '#e2e8f0',
+      textPrimary: '#0f172a', textSecondary: '#1e293b', textMuted: '#475569', textFaint: '#64748b', textDim: '#94a3b8', textGhost: '#cbd5e1',
+      accent: '#2563eb', accentSoft: '#1d4ed8', orange: '#ea580c',
+      doneBg: '#d1fae5', doneBorder: '#a7f3d0', doneText: '#047857', doneTag: '#059669', doneAccent: '#059669',
+      dangerBorder: '#fecaca', dangerText: '#dc2626', dangerBgHover: '#fef2f2', gold: '#eab308',
+      shadowSm: '0 1px 2px rgba(15,23,42,.07)', shadowMd: '0 14px 34px rgba(15,23,42,.12)', accentShadow: '0 6px 16px rgba(37,99,235,.22)',
+    };
+  }
+  return {
+    bg: '#0f172a', surface: '#1e293b', surfaceAlpha: 'rgba(30,41,59,.82)', accentBg: '#172554', border: '#1e3a5f', borderSoft: '#334155',
+    textPrimary: '#f8fafc', textSecondary: '#cbd5e1', textMuted: '#94a3b8', textFaint: '#64748b', textDim: '#475569', textGhost: '#334155',
+    accent: '#3b82f6', accentSoft: '#93c5fd', orange: '#f97316',
+    doneBg: '#064e3b', doneBorder: '#065f46', doneText: '#6ee7b7', doneTag: '#34d399', doneAccent: '#059669',
+    dangerBorder: '#991b1b', dangerText: '#f87171', dangerBgHover: '#450a0a', gold: '#eab308',
+    shadowSm: '0 1px 2px rgba(0,0,0,.4)', shadowMd: '0 16px 40px rgba(0,0,0,.45)', accentShadow: '0 6px 18px rgba(59,130,246,.35)',
+  };
+}
 
-<div class="track-tabs" role="group" aria-label="Filter by track">
-  <button type="button" class="filter-btn active" onclick="setTrackFilter('all',this)">All (750)</button>
-  <button type="button" class="filter-btn" style="--tc:var(--track-w)" onclick="setTrackFilter('W',this)"><span class="tc-dot"></span>W — Web Dev (130)</button>
-  <button type="button" class="filter-btn" style="--tc:var(--track-l)" onclick="setTrackFilter('L',this)"><span class="tc-dot"></span>L — Linux (110)</button>
-  <button type="button" class="filter-btn" style="--tc:var(--track-n)" onclick="setTrackFilter('N',this)"><span class="tc-dot"></span>N — Ansible (110)</button>
-  <button type="button" class="filter-btn" style="--tc:var(--track-au)" onclick="setTrackFilter('AU',this)"><span class="tc-dot"></span>AU — n8n (110)</button>
-  <button type="button" class="filter-btn" style="--tc:var(--track-tos)" onclick="setTrackFilter('TOS',this)"><span class="tc-dot"></span>TOS — Port/Maritime (140)</button>
-  <button type="button" class="filter-btn" style="--tc:var(--track-py)" onclick="setTrackFilter('PY',this)"><span class="tc-dot"></span>PY — Python (150)</button>
-</div>
+class Component extends DCLogic {
+  state = {
+    theme: 'dark',
+    sel: null,
+    activeTrack: 'all',
+    statusFilter: 'all',
+    searchQuery: '',
+    done: new Set(),
+    resetConfirm: false,
+    toastMsg: '',
+    toastShow: false,
+    expandedTracks: new Set(),
+    showHelp: false,
+  };
 
-<div class="filters status-filters" role="group" aria-label="Filter by status">
-  <button type="button" class="filter-btn active" onclick="setStatusFilter('all',this)">All statuses</button>
-  <button type="button" class="filter-btn" onclick="setStatusFilter('done',this)">Completed</button>
-  <button type="button" class="filter-btn" onclick="setStatusFilter('todo',this)">Not started</button>
-</div>
+  componentDidMount() {
+    try {
+      const saved = localStorage.getItem('pts_theme');
+      const theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark');
+      const doneRaw = JSON.parse(localStorage.getItem('pts_global_v3') || '[]');
+      const validDone = Array.isArray(doneRaw) ? doneRaw.filter((code) => LESSONS[code]) : [];
+      this.setState({ theme, done: new Set(validDone) });
+    } catch (e) { /* ignore */ }
+    this._onKeyDown = (e) => this.handleKeyDown(e);
+    document.addEventListener('keydown', this._onKeyDown);
+  }
 
-<div class="legend">
-  <div class="leg"><div class="leg-box leg-sel"></div>Selected</div>
-  <div class="leg"><div class="leg-box leg-done"></div>Completed</div>
-  <div class="leg"><div class="leg-box leg-todo"></div>Not started</div>
-  <div class="leg"><span class="leg-star">★</span>Named capstone project</div>
-</div>
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._onKeyDown);
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+  }
 
-<div id="tracks"></div>
+  saveTheme(t) { try { localStorage.setItem('pts_theme', t); } catch (e) { /* ignore */ } }
+  saveDone(doneSet) { try { localStorage.setItem('pts_global_v3', JSON.stringify([...doneSet])); } catch (e) { /* ignore */ } }
 
-<div class="data-row">
-  <button type="button" class="btn-trigger" onclick="exportProgress()">Export progress (.json)</button>
-  <button type="button" class="btn-trigger" onclick="document.getElementById('import-file').click()">Import progress</button>
-  <input type="file" id="import-file" accept="application/json" class="visually-hidden" onchange="importProgress(this.files[0]); this.value='';">
-</div>
+  toggleTheme = () => {
+    const next = this.state.theme === 'dark' ? 'light' : 'dark';
+    this.saveTheme(next);
+    this.setState({ theme: next });
+  };
 
-<div class="reset-row">
-  <button type="button" class="btn-trigger" id="btn-trigger" onclick="showReset()">Reset all progress</button>
-  <div class="reset-confirm" id="reset-confirm">
-    <span class="reset-q">Reset all progress?</span>
-    <button type="button" class="btn-sm btn-sm-danger" onclick="doReset()">Yes, reset</button>
-    <button type="button" class="btn-sm btn-sm-cancel" onclick="hideReset()">Cancel</button>
-  </div>
-</div>
+  toggleHelp = () => this.setState((s) => ({ showHelp: !s.showHelp }));
+  closeHelp = () => this.setState({ showHelp: false });
 
-</main>
+  toggleTrackOpen = (code) => {
+    const next = new Set(this.state.expandedTracks);
+    if (next.has(code)) next.delete(code); else next.add(code);
+    this.setState({ expandedTracks: next });
+  };
 
-<footer>
-  <p>Built by <a href="https://github.com/samiulAsumel" target="_blank" rel="noopener noreferrer">samiulAsumel</a> &middot; <a href="https://github.com/samiulAsumel/pts-sas" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
-</footer>
+  setTrackFilter = (code) => {
+    this.setState({ activeTrack: code });
+    const el = document.getElementById('pts-tracks');
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      window.scrollTo({ top: window.scrollY + rect.top - 12, behavior: 'smooth' });
+    }
+  };
+  setStatusFilter = (status) => { this.setState({ statusFilter: status }); };
+  pick = (code) => { this.setState({ sel: code }); };
 
-<div class="copy-toast" id="toast" role="status" aria-live="polite"></div>
+  showToast = (msg) => {
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+    this.setState({ toastMsg: msg, toastShow: true });
+    this._toastTimer = setTimeout(() => this.setState({ toastShow: false }), 2500);
+  };
 
-<script src="assets/js/data.js"></script>
-<script src="assets/js/state.js"></script>
-<script src="assets/js/render.js"></script>
-<script src="assets/js/app.js"></script>
-<script src="assets/js/keyboard.js"></script>
+  startLesson = () => {
+    const { sel } = this.state;
+    if (!sel) return;
+    const topic = LESSONS[sel].topic;
+    const prompt = `jump ${sel} — ${topic}`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(prompt)
+        .then(() => this.showToast('Prompt copied! Paste in your Claude project.'))
+        .catch(() => this.showToast('Copy this prompt: ' + prompt));
+    } else {
+      this.showToast('Copy this prompt: ' + prompt);
+    }
+  };
+
+  markDone = () => {
+    const { sel, done } = this.state;
+    if (!sel) return;
+    const next = new Set(done); next.add(sel);
+    this.saveDone(next);
+    this.setState({ done: next });
+    this.showToast('Lesson ' + sel + ' marked complete!');
+  };
+
+  undoDone = () => {
+    const { sel, done } = this.state;
+    if (!sel) return;
+    const next = new Set(done); next.delete(sel);
+    this.saveDone(next);
+    this.setState({ done: next });
+  };
+
+  showReset = () => this.setState({ resetConfirm: true });
+  hideReset = () => this.setState({ resetConfirm: false });
+  doReset = () => {
+    this.saveDone(new Set());
+    this.setState({ done: new Set(), resetConfirm: false, sel: null, searchQuery: '' });
+    this.showToast('All progress reset.');
+  };
+
+  onSearchInput = (e) => { this.setState({ searchQuery: e.target.value }); };
+
+  triggerImportClick = () => {
+    const el = document.getElementById('pts-import-file');
+    if (el) el.click();
+  };
+
+  exportProgress = () => {
+    const data = { version: 2, exportedAt: new Date().toISOString(), done: [...this.state.done] };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `pts-progress-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    this.showToast('Progress exported.');
+  };
+
+  importProgress = (e) => {
+    const file = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        const arr = Array.isArray(parsed.done) ? parsed.done : Array.isArray(parsed) ? parsed : null;
+        if (!arr) throw new Error('invalid');
+        const valid = arr.filter((code) => typeof code === 'string' && LESSONS[code]);
+        const next = new Set(valid);
+        this.saveDone(next);
+        this.setState({ done: next, sel: null, searchQuery: '' });
+        this.showToast(`Imported ${valid.length} completed lessons.`);
+      } catch (err) {
+        this.showToast('Import failed: invalid file.');
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  handleKeyDown(e) {
+    const active = document.activeElement;
+    const tagName = (active && active.tagName || '').toLowerCase();
+    const typing = tagName === 'input' || tagName === 'textarea';
+
+    if (e.key === '/' && !typing) {
+      e.preventDefault();
+      const el = document.getElementById('pts-search');
+      if (el) el.focus();
+      return;
+    }
+    if (e.key === 'Escape') {
+      if (this.state.showHelp) { this.closeHelp(); return; }
+      if (this.state.resetConfirm) { this.hideReset(); return; }
+      if (typing && active.id === 'pts-search') {
+        active.value = '';
+        this.setState({ searchQuery: '' });
+        active.blur();
+        return;
+      }
+    }
+    if (typing) return;
+
+    if (active && active.classList && active.classList.contains('pts-lbtn')) {
+      const tiles = Array.from(document.querySelectorAll('.pts-lbtn')).filter((el) => el.offsetParent !== null);
+      const idx = tiles.indexOf(active);
+      if ((e.key === 'ArrowRight' || e.key === 'ArrowDown') && idx > -1) {
+        e.preventDefault();
+        tiles[Math.min(idx + 1, tiles.length - 1)].focus();
+        return;
+      }
+      if ((e.key === 'ArrowLeft' || e.key === 'ArrowUp') && idx > -1) {
+        e.preventDefault();
+        tiles[Math.max(idx - 1, 0)].focus();
+        return;
+      }
+    }
+    if ((e.key === 'c' || e.key === 'C') && this.state.sel && !this.state.done.has(this.state.sel)) {
+      e.preventDefault();
+      this.markDone();
+      return;
+    }
+    if (e.key === 'Enter' && this.state.sel && !(active && active.classList && active.classList.contains('pts-lbtn'))) {
+      this.startLesson();
+    }
+  }
+
+  buildLessonView(code, num, c, state) {
+    const lessonCode = code + num;
+    const entry = LESSONS[lessonCode];
+    const isDone = state.done.has(lessonCode);
+    const isSel = lessonCode === state.sel;
+    const isCap = !!CAPSTONES[lessonCode];
+    let show = true;
+    if (state.statusFilter === 'done') show = isDone;
+    else if (state.statusFilter === 'todo') show = !isDone;
+    if (show) show = matchesSearch(lessonCode, code, entry.topic, state.searchQuery);
+
+    if (!this._lessonViewCache) this._lessonViewCache = new Map();
+    const sig = state.theme + '|' + isDone + '|' + isSel + '|' + show;
+    const cached = this._lessonViewCache.get(lessonCode);
+    if (cached && cached.sig === sig) return cached.view;
+
+    const style = isSel
+      ? { position: 'relative', background: c.accentBg, border: '2px solid ' + c.accent, borderRadius: '10px', padding: '7px 3px', textAlign: 'center', cursor: 'pointer', fontFamily: 'inherit', boxShadow: c.shadowSm }
+      : isDone
+        ? { position: 'relative', background: c.doneBg, border: '1px solid ' + c.doneBorder, borderRadius: '10px', padding: '7px 3px', textAlign: 'center', cursor: 'pointer', fontFamily: 'inherit' }
+        : { position: 'relative', background: c.surface, border: '1px solid ' + c.border, borderRadius: '10px', padding: '7px 3px', textAlign: 'center', cursor: 'pointer', fontFamily: 'inherit' };
+    if (!show) style.display = 'none';
+    const numColor = isSel ? c.accentSoft : isDone ? c.doneText : c.textSecondary;
+    const tagColor = isSel ? c.accent : isDone ? c.doneAccent : c.textGhost;
+
+    const view = {
+      num, tag: code, isCap,
+      visible: show,
+      style,
+      hoverStyle: 'border-color:' + c.accent + ';background:' + (isDone ? c.doneBorder : c.accentBg),
+      numStyle: { fontSize: '12px', fontWeight: 700, color: numColor, display: 'block', lineHeight: 1.3 },
+      tagStyle: { fontSize: '9px', color: tagColor, display: 'block', marginTop: '1px', textTransform: 'uppercase', letterSpacing: '.03em' },
+      title: lessonCode + ' — ' + entry.topic,
+      ariaLabel: `Lesson ${lessonCode}, ${code} track, ${entry.topic}, ${isDone ? 'completed' : 'not started'}${isSel ? ', selected' : ''}`,
+      ariaPressed: String(isSel),
+      onClick: () => this.pick(lessonCode),
+    };
+    this._lessonViewCache.set(lessonCode, { sig, view });
+    return view;
+  }
+
+  buildTrackSections(c, S, state, trackStatsByCode) {
+    if (!this._moduleCache) this._moduleCache = new Map();
+    const searchActive = !!(state.searchQuery && state.searchQuery.trim());
+    return TRACK_CODES.map((code) => {
+      const t = CURRICULUM[code];
+      const trackActiveVisible = state.activeTrack === 'all' || state.activeTrack === code;
+      let running = 0;
+      let anyVisibleInTrack = false;
+      const modules = t.modules.map((mod, mi) => {
+        const modKey = code + '-' + mi;
+        const modStart = running + 1;
+        running += mod.topics.length;
+        const modEnd = running;
+        const lessons = mod.topics.map((topic, ti) => this.buildLessonView(code, modStart + ti, c, state));
+        const anyVisiblePhase = lessons.some((l) => l.visible);
+        if (anyVisiblePhase) anyVisibleInTrack = true;
+
+        const cachedMod = this._moduleCache.get(modKey);
+        let lessonsFinal = lessons;
+        if (cachedMod && cachedMod.lessons.length === lessons.length && cachedMod.lessons.every((v, i) => v === lessons[i])) {
+          lessonsFinal = cachedMod.lessons;
+        }
+        const sig = state.theme + '|' + anyVisiblePhase;
+        let labelStyle, gridStyle;
+        if (cachedMod && cachedMod.sig === sig) {
+          labelStyle = cachedMod.labelStyle;
+          gridStyle = cachedMod.gridStyle;
+        } else {
+          labelStyle = anyVisiblePhase ? S.phaseLabel : Object.assign({}, S.phaseLabel, { display: 'none' });
+          gridStyle = anyVisiblePhase ? S.grid : Object.assign({}, S.grid, { display: 'none' });
+        }
+        const modResult = {
+          key: modKey,
+          labelText: mod.title,
+          rangeText: `${code}${modStart}–${code}${modEnd}`,
+          labelStyle, gridStyle,
+          lessons: lessonsFinal,
+        };
+        this._moduleCache.set(modKey, { sig, lessons: lessonsFinal, labelStyle, gridStyle });
+        return modResult;
+      });
+      const sectionHidden = !trackActiveVisible || !anyVisibleInTrack;
+      const isOpen = state.expandedTracks.has(code) || state.activeTrack === code || (searchActive && anyVisibleInTrack);
+      const stat = trackStatsByCode[code];
+      return {
+        code,
+        headerTitle: `${code} — ${TRACK_SHORT[code]}`,
+        fractionText: stat.valText,
+        dotStyle: { width: '9px', height: '9px', borderRadius: '50%', background: TRACK_HEX[code], flexShrink: 0, display: 'inline-block' },
+        barStyle: { display: 'block', height: '5px', borderRadius: '3px', background: TRACK_HEX[code], width: stat.barWidth },
+        chevron: isOpen ? '▾' : '▸',
+        isOpen,
+        toggleOpen: () => this.toggleTrackOpen(code),
+        wrapStyle: sectionHidden ? Object.assign({}, S.trackCard, { display: 'none' }) : S.trackCard,
+        modules,
+      };
+    });
+  }
+
+  renderVals() {
+    const state = this.state;
+    const c = getColors(state.theme);
+    const isLight = state.theme === 'light';
+    const isDark = !isLight;
+
+    const S = {
+      page: { fontFamily: FONT, background: c.bg, color: c.textPrimary, minHeight: '100vh', transition: 'background-color .2s ease,color .2s ease' },
+      skipLink: { position: 'absolute', left: '-999px', top: 'auto', background: c.accent, color: '#fff', padding: '8px 14px', borderRadius: '6px', zIndex: 1000, fontSize: '13px', fontWeight: 600, textDecoration: 'none' },
+
+      headerOuter: { position: 'sticky', top: 0, zIndex: 50, background: c.surfaceAlpha, backdropFilter: 'blur(10px)', borderBottom: '1px solid ' + c.borderSoft },
+      headerInner: { maxWidth: '1120px', margin: '0 auto', padding: '13px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap' },
+      brandRow: { display: 'flex', alignItems: 'center', gap: '10px' },
+      brandMark: { borderRadius: '8px', flexShrink: 0 },
+      brandTitle: { fontSize: '15px', fontWeight: 800, color: c.textPrimary, letterSpacing: '-.01em' },
+      headerRight: { display: 'flex', alignItems: 'center', gap: '8px', position: 'relative' },
+      iconBtn: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '10px', background: c.surface, border: '1px solid ' + c.border, color: c.textSecondary, cursor: 'pointer', fontSize: '13px', fontWeight: 700, fontFamily: 'inherit' },
+      themeToggle: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', background: c.surface, border: '1px solid ' + c.border, color: c.textSecondary, borderRadius: '10px', cursor: 'pointer', fontFamily: 'inherit' },
+      themeIconWrap: { display: 'inline-flex', width: '15px', height: '15px', color: c.textSecondary },
+
+      helpPopover: { position: 'absolute', top: '42px', right: 0, width: '300px', maxHeight: '75vh', overflowY: 'auto', background: c.surface, border: '1px solid ' + c.border, borderRadius: '14px', padding: '16px 18px', boxShadow: c.shadowMd, zIndex: 60 },
+      helpTitleRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' },
+      helpTitle: { fontSize: '12px', fontWeight: 700, color: c.textPrimary, textTransform: 'uppercase', letterSpacing: '.04em' },
+      helpCloseBtn: { background: 'transparent', border: 'none', color: c.textFaint, cursor: 'pointer', fontSize: '14px', lineHeight: 1, padding: '2px 4px', fontFamily: 'inherit' },
+      helpDivider: { height: '1px', background: c.borderSoft, margin: '14px 0 10px' },
+      howToStep: { display: 'flex', gap: '10px', fontSize: '12px', color: c.textFaint, lineHeight: 1.6, marginBottom: '4px' },
+      howToStepN: { color: c.accent, fontWeight: 700, minWidth: '14px' },
+      howToStepStrong: { color: c.textMuted },
+      kbdList: { display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' },
+      kbdRow: { display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: c.textFaint },
+      kbdKey: { background: c.bg, border: '1px solid ' + c.borderSoft, borderRadius: '4px', padding: '1px 6px', fontSize: '11px', fontFamily: 'ui-monospace,Menlo,Consolas,monospace', color: c.textSecondary, minWidth: '46px', textAlign: 'center' },
+
+      content: { maxWidth: '1120px', margin: '0 auto', padding: '24px 24px 48px' },
+
+      tagline: { fontSize: '13px', lineHeight: 1.6, color: c.textSecondary, marginBottom: '4px' },
+      taglineStrong: { color: c.textPrimary, fontWeight: 700 },
+      marketsLine: { fontSize: '11px', color: c.textFaint, marginBottom: '22px' },
+
+      overviewCard: { background: c.surface, border: '1px solid ' + c.border, borderRadius: '16px', padding: '22px 24px', marginBottom: '16px', boxShadow: c.shadowSm },
+      overviewTop: { display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', marginBottom: '14px' },
+      overviewLabel: { fontSize: '11px', fontWeight: 700, color: c.textDim, textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: '4px' },
+      overviewSub: { fontSize: '12px', color: c.textFaint },
+      overviewPct: { fontSize: '36px', fontWeight: 800, color: c.textPrimary, letterSpacing: '-.02em', lineHeight: 1 },
+      overviewBarWrap: { position: 'relative', height: '8px', background: c.bg, borderRadius: '4px', overflow: 'hidden', marginBottom: '20px' },
+      chipsGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: '10px' },
+
+      toolbarCard: { background: c.surface, border: '1px solid ' + c.border, borderRadius: '16px', padding: '18px 20px', marginBottom: '16px', boxShadow: c.shadowSm },
+      searchWrap: { position: 'relative', marginBottom: '14px' },
+      searchIconWrap: { position: 'absolute', left: '13px', top: '50%', transform: 'translateY(-50%)', width: '15px', height: '15px', color: c.textFaint, pointerEvents: 'none' },
+      searchInput: { width: '100%', background: c.bg, border: '1px solid ' + c.border, color: c.textPrimary, borderRadius: '10px', padding: '11px 14px 11px 38px', fontSize: '13px', fontFamily: 'inherit', boxSizing: 'border-box' },
+      filterRow: { display: 'flex', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' },
+      legendLine: { display: 'flex', gap: '16px', flexWrap: 'wrap', marginTop: '4px', paddingTop: '12px', borderTop: '1px solid ' + c.borderSoft },
+      legItem: { display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: c.textDim },
+      legBoxSel: { display: 'inline-block', width: '11px', height: '11px', borderRadius: '3px', background: c.accentBg, border: '2px solid ' + c.accent },
+      legBoxDone: { display: 'inline-block', width: '11px', height: '11px', borderRadius: '3px', background: c.doneBg, border: '1px solid ' + c.doneBorder },
+      legBoxTodo: { display: 'inline-block', width: '11px', height: '11px', borderRadius: '3px', background: c.bg, border: '1px solid ' + c.border },
+      legStar: { color: c.gold },
+
+      actionCard: { background: c.surface, border: '1px solid ' + c.border, borderRadius: '16px', padding: '16px 20px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', minHeight: '58px', boxShadow: c.shadowSm },
+      selInfo: { fontSize: '13px', color: c.textFaint, flex: 1, minWidth: '160px' },
+      selInfoStrong: { color: c.textPrimary, fontWeight: 700 },
+      selInfoDoneTag: { color: c.doneTag, fontSize: '11px' },
+      selInfoCapstoneTag: { color: c.gold, fontSize: '11px', fontWeight: 700 },
+      btnStart: { padding: '9px 20px', fontSize: '13px', fontWeight: 700, cursor: 'pointer', border: 'none', borderRadius: '10px', whiteSpace: 'nowrap', background: c.accent, color: '#fff', fontFamily: 'inherit', boxShadow: c.accentShadow },
+      btnComplete: { padding: '9px 20px', fontSize: '13px', fontWeight: 700, cursor: 'pointer', border: 'none', borderRadius: '10px', whiteSpace: 'nowrap', background: c.doneAccent, color: '#fff', fontFamily: 'inherit' },
+      btnUndo: { padding: '9px 20px', fontSize: '13px', fontWeight: 400, cursor: 'pointer', border: '1px solid ' + c.borderSoft, borderRadius: '10px', whiteSpace: 'nowrap', background: 'transparent', color: c.textMuted, fontFamily: 'inherit' },
+
+      trackCard: { background: c.surface, border: '1px solid ' + c.border, borderRadius: '14px', marginBottom: '10px', overflow: 'hidden', boxShadow: c.shadowSm },
+      trackHeaderRow: { display: 'flex', alignItems: 'center', gap: '10px', padding: '14px 16px', cursor: 'pointer' },
+      trackChevron: { fontSize: '11px', color: c.textFaint, width: '10px', flexShrink: 0 },
+      trackHeaderName: { fontSize: '13px', fontWeight: 700, color: c.textPrimary, flex: 1 },
+      trackHeaderFraction: { fontSize: '12px', fontWeight: 600, color: c.textFaint },
+      trackHeaderBarWrap: { display: 'inline-block', width: '70px', height: '5px', background: c.bg, borderRadius: '3px', overflow: 'hidden', flexShrink: 0 },
+      trackBody: { padding: '0 16px 16px' },
+
+      phaseLabel: { fontSize: '11px', fontWeight: 700, color: c.textGhost, letterSpacing: '.07em', textTransform: 'uppercase', margin: '14px 0 8px', paddingBottom: '6px', borderBottom: '1px solid ' + c.borderSoft },
+      phaseLabelSpan: { float: 'right', fontWeight: 400, color: c.border },
+      grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(50px,1fr))', gap: '5px', marginBottom: '4px' },
+      capStar: { position: 'absolute', top: '2px', right: '3px', fontSize: '8px', color: c.gold, lineHeight: 1 },
+
+      utilityRow: { display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', marginTop: '4px', paddingTop: '18px', borderTop: '1px solid ' + c.borderSoft },
+      utilityGroup: { display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' },
+      btnTrigger: { padding: '6px 14px', fontSize: '12px', cursor: 'pointer', border: '1px solid ' + c.borderSoft, borderRadius: '8px', background: 'transparent', color: c.textGhost, fontFamily: 'inherit' },
+      btnTriggerHover: 'border-color:' + c.accent + ';color:' + c.textFaint,
+
+      resetConfirmWrap: { display: 'flex', alignItems: 'center', gap: '8px' },
+      resetQ: { fontSize: '12px', color: c.textFaint },
+      btnSmCancel: { padding: '5px 12px', fontSize: '12px', cursor: 'pointer', borderRadius: '6px', background: 'transparent', border: '1px solid ' + c.borderSoft, color: c.textFaint, fontFamily: 'inherit' },
+      btnSmCancelHover: 'background:' + c.bg + ';color:' + c.textMuted,
+      btnSmDanger: { padding: '5px 12px', fontSize: '12px', cursor: 'pointer', borderRadius: '6px', background: 'transparent', border: '1px solid ' + c.dangerBorder, color: c.dangerText, fontFamily: 'inherit' },
+      btnSmDangerHover: 'background:' + c.dangerBgHover,
+
+      footer: { marginTop: '8px', paddingTop: '16px', textAlign: 'center' },
+      footerP: { fontSize: '11px', color: c.textFaint },
+      footerA: { color: c.textMuted, textDecoration: 'none' },
+
+      toast: { position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)', background: c.doneAccent, color: '#fff', padding: '10px 20px', borderRadius: '8px', fontSize: '13px', fontWeight: 700, opacity: state.toastShow ? 1 : 0, transition: 'opacity .3s', pointerEvents: 'none', zIndex: 999 },
+    };
+    S.pbarFill = { height: '8px', width: '0%', borderRadius: '4px', background: 'linear-gradient(90deg,' + c.accent + ',' + c.orange + ')', transition: 'width .4s ease' };
+
+    // stats
+    const counts = {};
+    TRACK_CODES.forEach((code) => { counts[code] = 0; });
+    state.done.forEach((code) => { const e = LESSONS[code]; if (e) counts[e.track] += 1; });
+    const totalDone = state.done.size;
+    const pct = TOTAL_LESSONS ? Math.round((totalDone / TOTAL_LESSONS) * 100) : 0;
+    S.pbarFill.width = pct + '%';
+
+    const trackStats = TRACK_CODES.map((code) => {
+      const total = TRACK_TOTAL[code];
+      const d = counts[code];
+      const tp = total ? Math.round((d / total) * 100) : 0;
+      const active = state.activeTrack === code;
+      return {
+        code,
+        label: `${code} — ${TRACK_SHORT[code]}`,
+        valText: `${d} / ${total}`,
+        barWidth: tp + '%',
+        cardStyle: { background: c.bg, border: '1px solid ' + (active ? c.accent : c.border), borderLeft: '3px solid ' + TRACK_HEX[code], borderRadius: '12px', padding: '11px 13px', cursor: 'pointer', transition: 'border-color .15s' },
+        hoverStyle: 'border-color:' + c.accent,
+        dotStyle: { width: '8px', height: '8px', borderRadius: '50%', background: TRACK_HEX[code], flexShrink: 0, display: 'inline-block' },
+        nameStyle: { fontSize: '11px', fontWeight: 700, color: c.textSecondary, display: 'flex', alignItems: 'center', gap: '6px' },
+        valStyle: { fontSize: '15px', fontWeight: 700, color: c.textPrimary, marginTop: '4px' },
+        barWrapStyle: { height: '4px', background: c.surface, borderRadius: '2px', marginTop: '7px', overflow: 'hidden' },
+        barStyle: { height: '4px', borderRadius: '2px', background: TRACK_HEX[code], width: tp + '%', transition: 'width .4s ease' },
+        onClick: () => this.setTrackFilter(code),
+      };
+    });
+    const trackStatsByCode = {};
+    trackStats.forEach((t) => { trackStatsByCode[t.code] = t; });
+
+    const trackTabItems = [{ code: 'all', label: `All (${TOTAL_LESSONS})`, color: null }]
+      .concat(TRACK_CODES.map((code) => ({ code, label: `${code} — ${TRACK_SHORT[code]} (${TRACK_TOTAL[code]})`, color: TRACK_HEX[code] })));
+    const trackTabs = trackTabItems.map((item) => {
+      const active = state.activeTrack === item.code;
+      return {
+        code: item.code, label: item.label, hasDot: !!item.color,
+        style: { display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 14px', fontSize: '12px', fontWeight: active ? 700 : 500, cursor: 'pointer', border: '1px solid ' + (active ? c.accent : c.borderSoft), borderRadius: '20px', background: active ? c.accentBg : 'transparent', color: active ? c.accentSoft : c.textFaint, fontFamily: 'inherit' },
+        hoverStyle: 'border-color:' + c.accent + ';color:' + c.accentSoft,
+        dotStyle: item.color ? { width: '7px', height: '7px', borderRadius: '50%', background: item.color, flexShrink: 0, display: 'inline-block' } : null,
+        onClick: () => this.setTrackFilter(item.code),
+      };
+    });
+
+    const statusTabItems = [{ code: 'all', label: 'All statuses' }, { code: 'done', label: 'Completed' }, { code: 'todo', label: 'Not started' }];
+    const statusTabs = statusTabItems.map((item) => {
+      const active = state.statusFilter === item.code;
+      return {
+        code: item.code, label: item.label,
+        style: { display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 14px', fontSize: '12px', fontWeight: active ? 700 : 500, cursor: 'pointer', border: '1px solid ' + (active ? c.accent : c.borderSoft), borderRadius: '20px', background: active ? c.accentBg : 'transparent', color: active ? c.accentSoft : c.textFaint, fontFamily: 'inherit' },
+        hoverStyle: 'border-color:' + c.accent + ';color:' + c.accentSoft,
+        onClick: () => this.setStatusFilter(item.code),
+      };
+    });
+
+    let selHasSelection = !!state.sel;
+    let selStrongText = '', selTopicText = '', selIsDone = false, selCapstoneText = null;
+    if (state.sel && LESSONS[state.sel]) {
+      const entry = LESSONS[state.sel];
+      selStrongText = `Lesson ${state.sel} (${entry.track}/${TRACK_TOTAL[entry.track]}):`;
+      selTopicText = entry.topic;
+      selIsDone = state.done.has(state.sel);
+      const cap = CAPSTONES[state.sel];
+      selCapstoneText = cap ? `★ Capstone: ${cap}` : null;
+    }
+
+    const trackSections = this.buildTrackSections(c, S, state, trackStatsByCode);
+
+    return {
+      S,
+      isLight, isDark,
+      themeToggleAria: `Switch to ${isLight ? 'dark' : 'light'} theme`,
+      toggleTheme: this.toggleTheme,
+      showHelp: state.showHelp, toggleHelp: this.toggleHelp, closeHelp: this.closeHelp,
+      sDoneText: `${totalDone} / ${TOTAL_LESSONS}`,
+      sPctText: pct + '%',
+      pctNum: pct,
+      trackStats,
+      selHasSelection, selNone: !selHasSelection,
+      selStrongText, selTopicText, selIsDone,
+      selHasCapstone: !!selCapstoneText, selCapstoneText: selCapstoneText || '',
+      showStartBtn: !!state.sel,
+      showCompleteBtn: !!state.sel && !state.done.has(state.sel),
+      showUndoBtn: !!state.sel && state.done.has(state.sel),
+      startLesson: this.startLesson, markDone: this.markDone, undoDone: this.undoDone,
+      searchQuery: state.searchQuery, onSearchInput: this.onSearchInput,
+      trackTabs, statusTabs,
+      trackSections,
+      exportProgress: this.exportProgress, triggerImportClick: this.triggerImportClick, importProgress: this.importProgress,
+      resetConfirm: state.resetConfirm, resetNotConfirming: !state.resetConfirm,
+      showReset: this.showReset, hideReset: this.hideReset, doReset: this.doReset,
+      toastMsg: state.toastMsg,
+    };
+  }
+}
+
+</script>
 </body>
 </html>

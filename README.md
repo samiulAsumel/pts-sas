@@ -53,18 +53,16 @@ Markets: Rotterdam · Hamburg · Singapore · Antwerp · DP World (global) · Ge
 - Undo last completion
 - Reset with confirmation
 - Progress persists in browser localStorage — no account needed
-- Installable as a PWA (web app manifest + favicon set)
 - Accessible: keyboard-navigable lesson tiles, ARIA labels, focus states, reduced-motion support
 
 ## Stack
 
-Plain HTML + CSS + JavaScript. No dependencies. No build step. Works offline.
+Plain HTML + JavaScript. No build step. Works offline.
 
 ```
-index.html            — page shell/markup
-assets/css/styles.css — all styling (theming, layout, components)
-assets/js/data.js     — CURRICULUM (750 lessons) + CAPSTONES, generated from the source doc
-assets/js/app.js      — application logic (rendering, filters, progress, persistence)
+index.html   — page markup, curriculum data, and application logic (self-contained)
+support.js   — rendering runtime loaded by index.html
+favicon.svg  — site icon
 ```
 
 ## Deploy
