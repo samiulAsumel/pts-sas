@@ -1,35 +1,52 @@
-# Port Tech Specialist — 220 Lesson Tracker
+# Port & Maritime Tech Specialist — 750-Lesson Global Curriculum Tracker
 
-Personal learning progress tracker for the Port & Maritime Tech Specialist roadmap.
+Personal learning progress tracker for the Port & Maritime Tech Specialist advanced professional
+curriculum — six independent tracks, 750 lessons, 31 named capstone projects.
 
 ## What this is
 
-A standalone HTML tracker for 220 lessons across three skills:
+A standalone HTML tracker for the full curriculum defined in
+[`global_learning_path_final.md`](global_learning_path_final.md) (v3.3):
 
-- **RHCSA** (R1–R60) — Linux fundamentals to certification level
-- **RHCE / Ansible** (A1–A60) — Automation and DevOps
-- **Full Stack Web Dev** (W1–W100) — HTML → React → Next.js → Node.js → MongoDB
+| Track | Domain | Lessons | Outcome |
+|---|---|---|---|
+| **W** | Web Development, Advanced Professional | W1–W130 | Enterprise-grade full-stack developer, 6 capstone projects |
+| **L** | Linux Systems Administration, Advanced | L1–L110 | RHCSA-track + enterprise sysadmin capability |
+| **N** | Configuration Automation / Ansible, Advanced | N1–N110 | RHCE-track + enterprise automation platform capability |
+| **AU** | Workflow Automation Engineering (n8n), Advanced | AU1–AU110 | Enterprise automation architect capability |
+| **TOS** | Port, Maritime & Terminal Operating Systems | TOS1–TOS140 | Internationally-standardized port operations & TOS mastery |
+| **PY** | Python Engineering, Advanced | PY1–PY150 | Production-grade Python automation & systems engineering |
+
+Each track is independent — no fixed calendar, no cross-track sequencing dependency. Progress is
+tracked per lesson code (`W47`, `L102`, `TOS12`, …), matching the Day-N auto-resume protocol used
+in the Claude Project instructor (see `PROMPT.md`).
+
+**Note on lesson detail:** W/L/N/AU carry an exact, individually-named topic per lesson straight
+from the source document. TOS and PY are only specified at the phase level in the source (each
+phase spans many lessons) — the tracker groups those lessons under their phase name rather than
+inventing per-lesson topics the curriculum doesn't specify.
 
 ## Target
 
 Globally competitive **Port & Maritime Tech Specialist**
-Markets: Rotterdam · Hamburg · Singapore · DP World (global) · Germany EU Blue Card
+Markets: Rotterdam · Hamburg · Singapore · Antwerp · DP World (global) · Germany EU Blue Card
 
 ## How to use
 
-1. Open the tracker: [samiulAsumel.github.io/port-tech-tracker](https://samiulAsumel.github.io/port-tech-tracker)
-2. Click a lesson number to select it
-3. Click **"Start lesson"** — the Claude prompt copies to clipboard automatically
+1. Open the tracker: [samiulAsumel.github.io/pts-sas](https://samiulAsumel.github.io/pts-sas)
+2. Pick a track tab, then click a lesson number to select it
+3. Click **"Start lesson"** — a `jump <code> — <topic>` prompt copies to clipboard automatically
 4. Paste in your **Port Tech Specialist** Claude project → lesson begins
 5. Come back and click **"Mark complete"** — progress saves in your browser
 
 ## Features
 
-- 220 lesson grid with phase grouping
-- Live search by lesson number, track, or topic — composes with filters
-- Filter by track: RHCSA / Ansible / Web Dev / Completed / Not started
-- Progress stats: total, RHCSA, Ansible/RHCE, Web Dev, percentage
-- Animated progress bar
+- 750-lesson curriculum across 6 independent tracks, each with its own progress stats
+- Phase-grouped module headers within every track (e.g. `L8 — Performance & Kernel Tuning`)
+- ★ badges on the 31 named capstone-project lessons, with the project name shown on selection
+- Live search by lesson code, track, or topic — composes with track and status filters
+- Track tabs (All / W / L / N / AU / TOS / PY) + status filters (Completed / Not started)
+- Overall + per-track progress bars
 - Dark / light theme toggle, persisted and respects system preference
 - Export and import progress as JSON — portable across browsers/devices
 - Keyboard shortcuts: `/` search, arrow keys to navigate, `Enter` to start, `C` to complete, `Esc` to clear
@@ -43,6 +60,13 @@ Markets: Rotterdam · Hamburg · Singapore · DP World (global) · Germany EU Bl
 
 Plain HTML + CSS + JavaScript. No dependencies. No build step. Works offline.
 
+```
+index.html            — page shell/markup
+assets/css/styles.css — all styling (theming, layout, components)
+assets/js/data.js     — CURRICULUM (750 lessons) + CAPSTONES, generated from the source doc
+assets/js/app.js      — application logic (rendering, filters, progress, persistence)
+```
+
 ## Deploy
 
 Static site — deployable as-is to:
@@ -52,5 +76,7 @@ Static site — deployable as-is to:
 
 ## Related
 
-- Claude Project: Port Tech Specialist (220-lesson instructor system)
+- `global_learning_path_final.md` — the source-of-truth curriculum document (v3.3)
+- `PROMPT.md` — the Claude Project system prompt implementing the Day-N teaching protocol
+- Claude Project: Port Tech Specialist (six-track, 750-lesson instructor system)
 - GitHub: [github.com/samiulAsumel](https://github.com/samiulAsumel)

@@ -12,208 +12,25 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Port Tech Specialist — 220 Lesson Tracker</title>
-<meta name="description" content="Personal progress tracker for a 220-lesson roadmap spanning RHCSA, RHCE/Ansible automation, and full-stack web development — built on the path to becoming a globally competitive Port &amp; Maritime Tech Specialist.">
+<title>Port &amp; Maritime Tech Specialist — 750-Lesson Global Curriculum Tracker</title>
+<meta name="description" content="Personal progress tracker for a 750-lesson, six-track advanced professional curriculum — Web Development, Linux Systems Administration, Configuration Automation, Workflow Automation Engineering, Port &amp; Maritime TOS, and Python Engineering — on the path to becoming a globally competitive Port &amp; Maritime Tech Specialist.">
 <meta name="author" content="Samiul Asumel">
 <meta name="theme-color" id="theme-color-meta" content="#0f172a">
+<link rel="stylesheet" href="assets/css/styles.css">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<meta property="og:title" content="Port Tech Specialist — 220 Lesson Tracker">
-<meta property="og:description" content="220-lesson roadmap tracker: RHCSA, RHCE/Ansible, and Full Stack Web Dev.">
+<meta property="og:title" content="Port & Maritime Tech Specialist — 750-Lesson Global Curriculum Tracker">
+<meta property="og:description" content="750-lesson roadmap tracker across six tracks: Web Dev, Linux, Ansible, n8n, Port/Maritime TOS, and Python.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="icon-512.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Port Tech Specialist — 220 Lesson Tracker">
-<meta name="twitter:description" content="220-lesson roadmap tracker: RHCSA, RHCE/Ansible, and Full Stack Web Dev.">
+<meta name="twitter:title" content="Port & Maritime Tech Specialist — 750-Lesson Global Curriculum Tracker">
+<meta name="twitter:description" content="750-lesson roadmap tracker across six tracks: Web Dev, Linux, Ansible, n8n, Port/Maritime TOS, and Python.">
 <meta name="twitter:image" content="icon-512.png">
-<style>
-  *{box-sizing:border-box;margin:0;padding:0}
-
-  :root{
-    --bg:#0f172a;
-    --surface:#1e293b;
-    --accent-bg:#172554;
-    --border:#1e3a5f;
-    --border-soft:#334155;
-    --text-primary:#f8fafc;
-    --text-secondary:#cbd5e1;
-    --text-muted:#94a3b8;
-    --text-faint:#64748b;
-    --text-dim:#475569;
-    --text-ghost:#334155;
-    --accent:#3b82f6;
-    --accent-soft:#93c5fd;
-    --orange:#f97316;
-    --done-bg:#064e3b;
-    --done-border:#065f46;
-    --done-text:#6ee7b7;
-    --done-tag:#34d399;
-    --done-accent:#059669;
-    --danger-border:#991b1b;
-    --danger-text:#f87171;
-    --danger-bg-hover:#450a0a;
-    --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-    color-scheme:dark;
-  }
-
-  :root[data-theme="light"]{
-    --bg:#f1f5f9;
-    --surface:#ffffff;
-    --accent-bg:#dbeafe;
-    --border:#cbd5e1;
-    --border-soft:#e2e8f0;
-    --text-primary:#0f172a;
-    --text-secondary:#1e293b;
-    --text-muted:#475569;
-    --text-faint:#64748b;
-    --text-dim:#94a3b8;
-    --text-ghost:#cbd5e1;
-    --accent:#2563eb;
-    --accent-soft:#1d4ed8;
-    --orange:#ea580c;
-    --done-bg:#d1fae5;
-    --done-border:#a7f3d0;
-    --done-text:#047857;
-    --done-tag:#059669;
-    --done-accent:#059669;
-    --danger-border:#fecaca;
-    --danger-text:#dc2626;
-    --danger-bg-hover:#fef2f2;
-    color-scheme:light;
-  }
-
-  body{font-family:var(--font-sans);background:var(--bg);color:var(--text-primary);min-height:100vh;padding:24px 20px;transition:background-color .2s ease,color .2s ease}
-
-  :focus{outline:none}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-
-  .skip-link{position:absolute;left:-999px;top:auto;background:var(--accent);color:#fff;padding:8px 14px;border-radius:6px;z-index:1000;font-size:13px;font-weight:600;text-decoration:none}
-  .skip-link:focus{left:12px;top:12px}
-
-  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-  kbd{background:var(--surface);border:1px solid var(--border-soft);border-radius:4px;padding:1px 6px;font-size:11px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--text-secondary)}
-
-  header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
-  .brand{display:flex;align-items:center;gap:12px}
-  .brand-mark{border-radius:8px;flex-shrink:0}
-  .brand h1{font-size:20px;font-weight:700;color:var(--text-primary);letter-spacing:-.02em}
-  .brand p{font-size:12px;color:var(--text-dim);margin-top:4px}
-  .markets{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-  .market-pill{font-size:10px;color:var(--text-faint);border:1px solid var(--border-soft);border-radius:20px;padding:3px 9px;white-space:nowrap}
-
-  .btn-icon{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);color:var(--text-secondary);border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;transition:opacity .15s,background-color .2s ease,border-color .2s ease;font-family:inherit}
-  .btn-icon:hover{opacity:.85}
-  .theme-icon{display:inline-flex;width:14px;height:14px}
-  .theme-icon svg{width:100%;height:100%}
-
-  .how-to{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px;transition:background-color .2s ease,border-color .2s ease}
-  .how-to-title{font-size:11px;font-weight:700;color:var(--text-ghost);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
-  .how-to-step{display:flex;gap:10px;font-size:12px;color:var(--text-faint);line-height:1.6;margin-bottom:2px}
-  .how-to-step .n{color:var(--accent);font-weight:700;min-width:16px}
-  .how-to-step strong{color:var(--text-muted)}
-
-  .kbd-hint{margin-bottom:20px;font-size:12px;color:var(--text-faint)}
-  .kbd-hint summary{cursor:pointer;font-weight:600;color:var(--text-muted);list-style:none}
-  .kbd-hint summary::-webkit-details-marker{display:none}
-  .kbd-hint summary::before{content:'▸ ';color:var(--accent)}
-  .kbd-hint[open] summary::before{content:'▾ '}
-  .kbd-hint ul{margin:8px 0 0 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:5px}
-
-  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
-  .stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;transition:background-color .2s ease,border-color .2s ease}
-  .stat-label{font-size:11px;color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
-  .stat-val{font-size:20px;font-weight:700;color:var(--text-primary)}
-
-  .pbar-wrap{position:relative;height:6px;background:var(--surface);border-radius:3px;margin-bottom:20px;overflow:hidden}
-  .pbar-fill{height:6px;width:0;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--orange));transition:width .4s ease}
-
-  .action-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:54px;transition:background-color .2s ease,border-color .2s ease}
-  .sel-info{font-size:13px;color:var(--text-faint);flex:1;min-width:160px}
-  .sel-info strong{color:var(--text-primary);font-weight:600}
-  .sel-info .done-tag{color:var(--done-tag);font-size:11px}
-
-  .btn{padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer;border:none;border-radius:8px;white-space:nowrap;transition:opacity .15s;font-family:inherit}
-  .btn:hover{opacity:.85}
-  .btn-start{background:var(--accent);color:#fff}
-  .btn-complete{background:var(--done-accent);color:#fff}
-  .btn-undo{background:transparent;border:1px solid var(--border-soft);color:var(--text-muted);font-weight:400}
-  .btn-undo:hover{background:var(--surface);opacity:1}
-
-  .search-row{margin-bottom:12px}
-  .search-row input{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text-primary);border-radius:10px;padding:10px 14px;font-size:13px;font-family:inherit;transition:border-color .15s,background-color .2s ease,color .2s ease}
-  .search-row input::placeholder{color:var(--text-faint)}
-
-  .legend{display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap}
-  .leg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-dim)}
-  .leg-box{width:12px;height:12px;border-radius:3px;flex-shrink:0}
-  .leg-box.leg-sel{background:var(--accent-bg);border:2px solid var(--accent)}
-  .leg-box.leg-done{background:var(--done-bg);border:1px solid var(--done-border)}
-  .leg-box.leg-todo{background:var(--surface);border:1px solid var(--border)}
-
-  .filters{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-  .filter-btn{padding:5px 14px;font-size:12px;cursor:pointer;border:1px solid var(--border-soft);border-radius:20px;background:transparent;color:var(--text-faint);transition:all .15s;font-family:inherit}
-  .filter-btn:hover{border-color:var(--accent);color:var(--accent-soft)}
-  .filter-btn.active{border-color:var(--accent);background:var(--accent-bg);color:var(--accent-soft)}
-
-  .phase-label{font-size:11px;font-weight:700;color:var(--text-ghost);letter-spacing:.07em;text-transform:uppercase;margin:20px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--border-soft)}
-  .phase-label span{float:right;font-weight:400;color:var(--border)}
-
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(50px,1fr));gap:5px;margin-bottom:4px}
-
-  .lbtn{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 3px;text-align:center;cursor:pointer;transition:all .12s;font-family:inherit}
-  .lbtn:hover{border-color:var(--accent);background:var(--accent-bg)}
-  .lbtn.sel{border:2px solid var(--accent);background:var(--accent-bg)}
-  .lbtn.done{background:var(--done-bg);border-color:var(--done-border)}
-  .lbtn.done:hover{background:var(--done-border)}
-  .lbtn.hidden{display:none}
-
-  .lnum{font-size:12px;font-weight:700;color:var(--text-secondary);display:block;line-height:1.3}
-  .ltag{font-size:9px;color:var(--text-ghost);display:block;margin-top:1px;text-transform:uppercase;letter-spacing:.03em}
-  .lbtn.sel .lnum{color:var(--accent-soft)}
-  .lbtn.sel .ltag{color:var(--accent)}
-  .lbtn.done .lnum{color:var(--done-text)}
-  .lbtn.done .ltag{color:var(--done-accent)}
-
-  .copy-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--done-accent);color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
-  .copy-toast.show{opacity:1}
-
-  .data-row{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:16px;flex-wrap:wrap}
-
-  .reset-row{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border-soft)}
-  .reset-confirm{display:none;align-items:center;gap:8px}
-  .reset-confirm.show{display:flex}
-  .reset-q{font-size:12px;color:var(--text-faint)}
-  .btn-sm{padding:5px 12px;font-size:12px;cursor:pointer;border-radius:6px;background:transparent;font-family:inherit}
-  .btn-sm-cancel{border:1px solid var(--border-soft);color:var(--text-faint)}
-  .btn-sm-cancel:hover{background:var(--surface);color:var(--text-muted)}
-  .btn-sm-danger{border:1px solid var(--danger-border);color:var(--danger-text)}
-  .btn-sm-danger:hover{background:var(--danger-bg-hover)}
-  .btn-trigger{padding:6px 14px;font-size:12px;cursor:pointer;border:1px solid var(--surface);border-radius:6px;background:transparent;color:var(--text-ghost);font-family:inherit}
-  .btn-trigger:hover{border-color:var(--border-soft);color:var(--text-faint)}
-
-  footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--border-soft);text-align:center}
-  footer p{font-size:11px;color:var(--text-faint)}
-  footer a{color:var(--text-muted);text-decoration:none}
-  footer a:hover{color:var(--accent-soft);text-decoration:underline}
-
-  @media(max-width:720px){
-    .stats{grid-template-columns:repeat(3,1fr)}
-  }
-  @media(max-width:480px){
-    .stats{grid-template-columns:repeat(2,1fr)}
-    .stat-val{font-size:18px}
-    body{padding:16px 14px}
-  }
-
-  @media(prefers-reduced-motion:reduce){
-    *,*::before,*::after{transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}
-  }
-</style>
 </head>
 <body>
 
@@ -223,8 +40,8 @@
   <div class="brand">
     <img src="favicon.svg" alt="" width="36" height="36" class="brand-mark">
     <div>
-      <h1>Port Tech Specialist</h1>
-      <p>220-Lesson Global Roadmap &mdash; RHCSA &bull; RHCE/Ansible &bull; Full Stack Web Dev</p>
+      <h1>Port &amp; Maritime Tech Specialist</h1>
+      <p>750-Lesson Global Curriculum &mdash; Web Dev &bull; Linux &bull; Ansible &bull; n8n &bull; Port/Maritime TOS &bull; Python</p>
       <div class="markets">
         <span class="market-pill">Rotterdam</span>
         <span class="market-pill">Hamburg</span>
@@ -242,13 +59,20 @@
 
 <main id="main">
 
+<div class="positioning">
+  <strong>Port &amp; Maritime Technology Specialist</strong> — 12+ years of hands-on port operations
+  experience combined with advanced, enterprise-grade full-stack engineering, systems administration,
+  automation engineering, and internationally-standardized port/terminal operations expertise.
+</div>
+
 <div class="how-to">
   <div class="how-to-title">How to use</div>
-  <div class="how-to-step"><span class="n">1</span><span>Click a lesson number to select it</span></div>
+  <div class="how-to-step"><span class="n">1</span><span>Pick a track tab, then click a lesson number to select it</span></div>
   <div class="how-to-step"><span class="n">2</span><span>Click <strong>"Start lesson"</strong> — the prompt copies to clipboard automatically</span></div>
   <div class="how-to-step"><span class="n">3</span><span>Paste in your Claude project → lesson begins</span></div>
   <div class="how-to-step"><span class="n">4</span><span>Come back here and click <strong>"Mark complete"</strong> — progress saves in browser</span></div>
   <div class="how-to-step"><span class="n">5</span><span>Use search or filters to jump straight to a lesson — press <kbd>/</kbd> to focus search</span></div>
+  <div class="how-to-step"><span class="n">★</span><span>A gold star marks one of the 31 named capstone projects</span></div>
 </div>
 
 <details class="kbd-hint">
@@ -262,15 +86,21 @@
   </ul>
 </details>
 
-<div class="stats">
-  <div class="stat"><div class="stat-label">Completed</div><div class="stat-val" id="s-done">0 / 220</div></div>
-  <div class="stat"><div class="stat-label">RHCSA</div><div class="stat-val" id="s-rhcsa">0 / 60</div></div>
-  <div class="stat"><div class="stat-label">Ansible/RHCE</div><div class="stat-val" id="s-ansible">0 / 60</div></div>
-  <div class="stat"><div class="stat-label">Web Dev</div><div class="stat-val" id="s-web">0 / 100</div></div>
-  <div class="stat"><div class="stat-label">Progress</div><div class="stat-val" id="s-pct">0%</div></div>
+<div class="hero-stats">
+  <div class="stat"><div class="stat-label">Completed</div><div class="stat-val" id="s-done">0 / 750</div></div>
+  <div class="stat"><div class="stat-label">Overall progress</div><div class="stat-val" id="s-pct">0%</div></div>
 </div>
 
 <div class="pbar-wrap" role="progressbar" aria-label="Overall progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="pbar-wrap"><div class="pbar-fill" id="pbar"></div></div>
+
+<div class="track-grid" id="track-grid">
+  <div class="track-card" style="--tc:var(--track-w)"><div class="tc-name"><span class="tc-dot"></span>W — Web Dev</div><div class="tc-val" id="tc-val-W">0 / 130</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-W"></div></div></div>
+  <div class="track-card" style="--tc:var(--track-l)"><div class="tc-name"><span class="tc-dot"></span>L — Linux</div><div class="tc-val" id="tc-val-L">0 / 110</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-L"></div></div></div>
+  <div class="track-card" style="--tc:var(--track-n)"><div class="tc-name"><span class="tc-dot"></span>N — Ansible</div><div class="tc-val" id="tc-val-N">0 / 110</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-N"></div></div></div>
+  <div class="track-card" style="--tc:var(--track-au)"><div class="tc-name"><span class="tc-dot"></span>AU — n8n</div><div class="tc-val" id="tc-val-AU">0 / 110</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-AU"></div></div></div>
+  <div class="track-card" style="--tc:var(--track-tos)"><div class="tc-name"><span class="tc-dot"></span>TOS — Port/Maritime</div><div class="tc-val" id="tc-val-TOS">0 / 140</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-TOS"></div></div></div>
+  <div class="track-card" style="--tc:var(--track-py)"><div class="tc-name"><span class="tc-dot"></span>PY — Python</div><div class="tc-val" id="tc-val-PY">0 / 150</div><div class="tc-bar-wrap"><div class="tc-bar" id="tc-bar-PY"></div></div></div>
+</div>
 
 <div class="action-box">
   <div class="sel-info" id="sel-info">Select a lesson below to begin</div>
@@ -280,33 +110,34 @@
 </div>
 
 <div class="search-row">
-  <label for="search" class="visually-hidden">Search lessons by number, track, or topic</label>
-  <input type="search" id="search" placeholder="Search by number, track, or topic… (press / to focus)" autocomplete="off">
+  <label for="search" class="visually-hidden">Search lessons by code, track, or topic</label>
+  <input type="search" id="search" placeholder="Search by code, track, or topic… (press / to focus)" autocomplete="off">
 </div>
 
-<div class="filters" role="group" aria-label="Filter lessons">
-  <button type="button" class="filter-btn active" onclick="setFilter('all',this)">All (220)</button>
-  <button type="button" class="filter-btn" onclick="setFilter('R',this)">RHCSA — R lessons (60)</button>
-  <button type="button" class="filter-btn" onclick="setFilter('A',this)">Ansible/RHCE — A lessons (60)</button>
-  <button type="button" class="filter-btn" onclick="setFilter('W',this)">Web Dev — W lessons (100)</button>
-  <button type="button" class="filter-btn" onclick="setFilter('done',this)">Completed</button>
-  <button type="button" class="filter-btn" onclick="setFilter('todo',this)">Not started</button>
+<div class="track-tabs" role="group" aria-label="Filter by track">
+  <button type="button" class="filter-btn active" onclick="setTrackFilter('all',this)">All (750)</button>
+  <button type="button" class="filter-btn" style="--tc:var(--track-w)" onclick="setTrackFilter('W',this)"><span class="tc-dot"></span>W — Web Dev (130)</button>
+  <button type="button" class="filter-btn" style="--tc:var(--track-l)" onclick="setTrackFilter('L',this)"><span class="tc-dot"></span>L — Linux (110)</button>
+  <button type="button" class="filter-btn" style="--tc:var(--track-n)" onclick="setTrackFilter('N',this)"><span class="tc-dot"></span>N — Ansible (110)</button>
+  <button type="button" class="filter-btn" style="--tc:var(--track-au)" onclick="setTrackFilter('AU',this)"><span class="tc-dot"></span>AU — n8n (110)</button>
+  <button type="button" class="filter-btn" style="--tc:var(--track-tos)" onclick="setTrackFilter('TOS',this)"><span class="tc-dot"></span>TOS — Port/Maritime (140)</button>
+  <button type="button" class="filter-btn" style="--tc:var(--track-py)" onclick="setTrackFilter('PY',this)"><span class="tc-dot"></span>PY — Python (150)</button>
+</div>
+
+<div class="filters status-filters" role="group" aria-label="Filter by status">
+  <button type="button" class="filter-btn active" onclick="setStatusFilter('all',this)">All statuses</button>
+  <button type="button" class="filter-btn" onclick="setStatusFilter('done',this)">Completed</button>
+  <button type="button" class="filter-btn" onclick="setStatusFilter('todo',this)">Not started</button>
 </div>
 
 <div class="legend">
   <div class="leg"><div class="leg-box leg-sel"></div>Selected</div>
   <div class="leg"><div class="leg-box leg-done"></div>Completed</div>
   <div class="leg"><div class="leg-box leg-todo"></div>Not started</div>
+  <div class="leg"><span class="leg-star">★</span>Named capstone project</div>
 </div>
 
-<div class="phase-label" id="phase1-label">Phase 1 &mdash; RHCSA + Web Dev <span>Lessons 1&ndash;120</span></div>
-<div class="grid" id="g1" role="group" aria-labelledby="phase1-label"></div>
-
-<div class="phase-label" id="phase2-label">Phase 2 &mdash; RHCE + Advanced Web Dev <span>Lessons 121&ndash;200</span></div>
-<div class="grid" id="g2" role="group" aria-labelledby="phase2-label"></div>
-
-<div class="phase-label" id="phase3-label">Phase 3 &mdash; RHCE Completion <span>Lessons 201&ndash;220</span></div>
-<div class="grid" id="g3" role="group" aria-labelledby="phase3-label"></div>
+<div id="tracks"></div>
 
 <div class="data-row">
   <button type="button" class="btn-trigger" onclick="exportProgress()">Export progress (.json)</button>
@@ -331,343 +162,10 @@
 
 <div class="copy-toast" id="toast" role="status" aria-live="polite"></div>
 
-<script>
-const LESSONS={
-  1:['R1','Linux basics'],2:['W1','VS Code setup'],3:['R2','Filesystem + Vim'],4:['W2','Git workflow'],
-  5:['R3','Grep, pipes, redirection'],6:['W3','AI developer mindset'],7:['R4','Links + wildcards'],8:['W4','Prompt engineering'],
-  9:['R5','Users + groups + sudo'],10:['W5','Developer tools'],11:['R6','Permissions + ACL'],12:['W6','HTML structure'],
-  13:['R7','Week 1 review lab'],14:['W7','HTML text + formatting'],15:['R8','Process management'],16:['W8','HTML lists + links + images'],
-  17:['R9','Job control'],18:['W9','HTML forms'],19:['R10','systemd + services'],20:['W10','HTML5 semantic elements'],
-  21:['R11','SSH setup + key auth'],22:['W11','HTML tables'],23:['R12','SSH hardening'],24:['W12','CSS basics + box model'],
-  25:['R13','SSH troubleshooting'],26:['W13','CSS selectors'],27:['R14','Week 2 review lab'],28:['W14','CSS styling + fonts'],
-  29:['R15','Logging architecture'],30:['W15','Flexbox fundamentals'],31:['R16','journalctl mastery'],32:['W16','Flexbox in practice'],
-  33:['R17','NTP + chrony'],34:['W17','CSS grid'],35:['R18','Networking concepts'],36:['W18','CSS advanced + animations'],
-  37:['R19','nmcli static IP'],38:['W19','Responsive design'],39:['R20','Hostname + DNS'],40:['W20','PROJECT 1: Port Cargo Website'],
-  41:['R21','Week 3 review lab'],42:['W21','JavaScript introduction'],43:['R22','RPM management'],44:['W22','Operators + math'],
-  45:['R23','DNF full management'],46:['W23','Conditionals'],47:['R24','DNF repositories'],48:['W24','Loops'],
-  49:['R25','tar archives'],50:['W25','Arrays part 1'],51:['R26','rsync + scp + sftp'],52:['W26','Arrays part 2'],
-  53:['R27','find mastery'],54:['W27','Strings'],55:['R28','Week 4 review lab'],56:['W28','Objects'],
-  57:['R29','Block devices + mount'],58:['W29','Functions'],59:['R30','Partitioning'],60:['W30','JS problem solving basics'],
-  61:['R31','Filesystem creation'],62:['W31','ES6 modern syntax'],63:['R32','/etc/fstab mounts'],64:['W32','Arrow + destructuring + spread'],
-  65:['R33','Swap space'],66:['W33','ES6 advanced'],67:['R34','LVM create'],68:['W34','Array power methods'],
-  69:['R35','LVM operations'],70:['W35','ES6 problem solving'],71:['R36','SELinux basics'],72:['W36','TypeScript introduction'],
-  73:['R37','SELinux contexts'],74:['W37','TypeScript types'],75:['R38','SELinux booleans + ports'],76:['W38','Interfaces + objects'],
-  77:['R39','firewalld mastery'],78:['W39','Functions in TypeScript'],79:['R40','SELinux + firewall combined'],80:['W40','Generics + utility types'],
-  81:['R41','Boot process + targets'],82:['W41','OOP in TypeScript'],83:['R42','Root password reset'],84:['W42','TypeScript problem solving'],
-  85:['R43','Cron jobs'],86:['W43','React introduction'],87:['R44','at + systemd timers'],88:['W44','Components + JSX'],
-  89:['R45','NFS'],90:['W45','Props + conditional rendering'],91:['R46','Autofs'],92:['W46','useState hook'],
-  93:['R47','tuned profiles'],94:['W47','Event handling'],95:['R48','Bash scripting foundation'],96:['W48','API calls + async'],
-  97:['R49','Bash real scripts'],98:['W49','React + Tailwind CSS'],99:['R50','Text processing'],100:['W50','State lifting'],
-  101:['R51','Podman basics'],102:['W51','Axios'],103:['R52','Podman volumes'],104:['W52','DOM + BOM'],
-  105:['R53','Podman systemd'],106:['W53','React Router'],107:['R54','Container lab'],108:['W54','Data visualization + AIS'],
-  109:['R55','RHCSA practice exam 1'],110:['W55','PROJECT 2: Port Cargo Tracker'],111:['R56','RHCSA practice exam 2'],112:['W56','React performance'],
-  113:['R57','Weak topics review'],114:['W57','React interview prep'],115:['R58','Speed drills'],116:['W58','Next.js introduction'],
-  117:['R59','Full mock exam'],118:['W59','Pages + routing'],119:['R60','RHCSA wrap-up + CIS hardening'],120:['W60','Layouts + navigation'],
-  121:['A1','Ansible architecture'],122:['W61','Rendering: CSR vs SSR'],123:['A2','ansible.cfg + config'],124:['W62','Data fetching server'],
-  125:['A3','Inventory INI format'],126:['W63','Caching + ISR'],127:['A4','YAML inventory + vars'],128:['W64','Hero UI / ShadCN'],
-  129:['A5','Ad-hoc commands'],130:['W65','Error + loading pages'],131:['A6','YAML deep dive'],132:['W66','Image + font optimization'],
-  133:['A7','Week 1 lab'],134:['W67','PROJECT 3: Maritime Dashboard'],135:['A8','First playbook'],136:['W68','BetterAuth setup'],
-  137:['A9','dnf + package module'],138:['W69','Register + login'],139:['A10','service module'],140:['W70','Google + GitHub OAuth'],
-  141:['A11','user + group module'],142:['W71','Route protection'],143:['A12','copy + file module'],144:['W72','Profile + password + email'],
-  145:['A13','ansible-doc mastery'],146:['W73','Dashboard with auth'],147:['A14','Running playbooks'],148:['W74','Node.js architecture'],
-  149:['A15','Variable types'],150:['W75','Express setup + first API'],151:['A16','Variable precedence'],152:['W76','REST API + EDI concepts'],
-  153:['A17','Magic variables'],154:['W77','MongoDB + Mongoose'],155:['A18','Ansible facts'],156:['W78','Mongoose schemas + models'],
-  157:['A19','Custom facts'],158:['W79','CRUD operations'],159:['A20','Jinja2 in tasks'],160:['W80','Advanced MongoDB queries'],
-  161:['A21','Variables lab'],162:['W81','Aggregation + UNCTAD KPIs'],163:['A22','when: conditionals'],164:['W82','JWT authentication'],
-  165:['A23','register: output'],166:['W83','RBAC'],167:['A24','failed_when + changed_when'],168:['W84','Stripe payment'],
-  169:['A25','Loops'],170:['W85','SSLCommerz payment'],171:['A26','Handlers'],172:['W86','Error handling + validation'],
-  173:['A27','Blocks'],174:['W87','Backend deployment'],175:['A28','Task control lab'],176:['W88','PROJECT 4: Port Management API'],
-  177:['A29','template module'],178:['W89','Connect frontend + backend'],179:['A30','Jinja2 templates'],180:['W90','Full stack auth'],
-  181:['A31','lineinfile + blockinfile'],182:['W91','Full stack deployment'],183:['A32','fetch + stat'],184:['W92','PRD writing with AI'],
-  185:['A33','archive + unarchive'],186:['W93','System design + DB planning'],187:['A34','Port server config lab'],188:['W94','MVC architecture'],
-  189:['A35','Files lab'],190:['W95','Full stack interview prep'],191:['A36','Role structure'],192:['W96','PROJECT 5: Port SaaS v1'],
-  193:['A37','Create a role'],194:['W97','PROJECT 6: Port SaaS v2'],195:['A38','Using roles'],196:['W98','Cursor AI + Claude Code'],
-  197:['A39','Role variables'],198:['W99','Lovable + Bolt + V0'],199:['A40','Galaxy + requirements'],200:['W100','FINAL: AI-Powered Port Tool'],
-  201:['A41','Role dependencies'],202:['A42','Complete port server role'],203:['A43','Ansible collections'],204:['A44','Install collections'],
-  205:['A45','FQCN always use'],206:['A46','ansible.posix key modules'],207:['A47','Vault basics'],208:['A48','Vault in playbooks'],
-  209:['A49','Vault + collections lab'],210:['A50','include_tasks vs import_tasks'],211:['A51','Multi-play playbooks'],212:['A52','Rolling updates (serial)'],
-  213:['A53','delegate_to + run_once'],214:['A54','Tags'],215:['A55','Troubleshooting Ansible'],216:['A56','Advanced playbooks lab'],
-  217:['A57','Storage automation'],218:['A58','Users + SSH + Cron via Ansible'],219:['A59','Full port server automation'],220:['A60','RHCE mock exam + interview bootcamp']
-};
-
-const ICONS={
-  sun:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>',
-  moon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>'
-};
-
-const KEY='pts_global_v2';
-const THEME_KEY='pts_theme';
-let done=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'));
-let sel=null;
-let activeFilter='all';
-let searchQuery='';
-
-function save(){localStorage.setItem(KEY,JSON.stringify([...done]));}
-
-function trackOf(tag){return tag.startsWith('W')?'W':tag.startsWith('R')?'R':'A';}
-
-function buildGrid(id,from,to){
-  const g=document.getElementById(id);
-  g.innerHTML='';
-  for(let n=from;n<=to;n++){
-    const[tag,topic]=LESSONS[n];
-    const b=document.createElement('button');
-    b.type='button';
-    b.className='lbtn'+(done.has(n)?' done':'');
-    b.id='lb'+n;
-    b.title=`Lesson ${n} — ${tag}: ${topic}`;
-    b.setAttribute('aria-pressed','false');
-    b.dataset.track=trackOf(tag);
-    b.innerHTML=`<span class="lnum">${n}</span><span class="ltag">${tag}</span>`;
-    b.onclick=()=>pick(n);
-    g.appendChild(b);
-  }
-}
-
-function matchesSearch(n,tag,topic){
-  if(!searchQuery)return true;
-  return String(n).includes(searchQuery)||tag.toLowerCase().includes(searchQuery)||topic.toLowerCase().includes(searchQuery);
-}
-
-function applyFilter(){
-  for(let n=1;n<=220;n++){
-    const el=document.getElementById('lb'+n);
-    if(!el)continue;
-    const track=el.dataset.track;
-    const isDone=done.has(n);
-    const[tag,topic]=LESSONS[n];
-    let show=true;
-    if(activeFilter==='R')show=track==='R';
-    else if(activeFilter==='A')show=track==='A';
-    else if(activeFilter==='W')show=track==='W';
-    else if(activeFilter==='done')show=isDone;
-    else if(activeFilter==='todo')show=!isDone;
-    if(show)show=matchesSearch(n,tag,topic);
-    el.classList.toggle('hidden',!show);
-  }
-}
-
-function setFilter(f,btn){
-  activeFilter=f;
-  document.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false');});
-  btn.classList.add('active');
-  btn.setAttribute('aria-pressed','true');
-  applyFilter();
-}
-
-function refresh(){
-  for(let n=1;n<=220;n++){
-    const el=document.getElementById('lb'+n);
-    if(!el)continue;
-    const isDone=done.has(n);
-    const isSel=n===sel;
-    el.className='lbtn'+(isSel?' sel':isDone?' done':'')+(el.classList.contains('hidden')?' hidden':'');
-    el.setAttribute('aria-pressed',String(isSel));
-    const[tag,topic]=LESSONS[n];
-    el.setAttribute('aria-label',`Lesson ${n}, ${tag}, ${topic}, ${isDone?'completed':'not started'}${isSel?', selected':''}`);
-  }
-  applyFilter();
-}
-
-function pick(n){
-  sel=n;
-  const[tag,topic]=LESSONS[n];
-  const isDone=done.has(n);
-  document.getElementById('sel-info').innerHTML=
-    `<strong>Lesson ${n}/220 &mdash; ${tag}:</strong> ${topic}`+
-    (isDone?' <span class="done-tag">(completed ✓)</span>':'');
-  document.getElementById('btn-start').style.display='';
-  document.getElementById('btn-complete').style.display=isDone?'none':'';
-  document.getElementById('btn-undo').style.display=isDone?'':'none';
-  refresh();
-}
-
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
-
-function startLesson(){
-  if(!sel)return;
-  const[tag,topic]=LESSONS[sel];
-  const prompt=`Teach me Lesson ${sel}/220 — ${tag}: ${topic}`;
-  navigator.clipboard.writeText(prompt)
-    .then(()=>showToast('Prompt copied! Paste in your Claude project.'))
-    .catch(()=>{
-      document.getElementById('sel-info').innerHTML=
-        `<strong>Copy this prompt:</strong> Teach me Lesson ${sel}/220 — ${tag}: ${topic}`;
-    });
-}
-
-function markDone(){
-  if(!sel)return;
-  done.add(sel);save();
-  const[tag,topic]=LESSONS[sel];
-  document.getElementById('sel-info').innerHTML=
-    `<strong>Lesson ${sel}/220 &mdash; ${tag}:</strong> ${topic} <span class="done-tag">(completed ✓)</span>`;
-  document.getElementById('btn-complete').style.display='none';
-  document.getElementById('btn-undo').style.display='';
-  refresh();updateStats();
-  showToast('Lesson '+sel+' marked complete!');
-}
-
-function undoDone(){
-  if(!sel)return;
-  done.delete(sel);save();
-  const[tag,topic]=LESSONS[sel];
-  document.getElementById('sel-info').innerHTML=`<strong>Lesson ${sel}/220 &mdash; ${tag}:</strong> ${topic}`;
-  document.getElementById('btn-complete').style.display='';
-  document.getElementById('btn-undo').style.display='none';
-  refresh();updateStats();
-}
-
-function updateStats(){
-  let rhcsa=0,ansible=0,web=0;
-  done.forEach(n=>{
-    const[tag]=LESSONS[n]||[''];
-    const trk=trackOf(tag);
-    if(trk==='R')rhcsa++;else if(trk==='A')ansible++;else web++;
-  });
-  const t=done.size;
-  const pct=Math.round(t/220*100);
-  document.getElementById('s-done').textContent=t+' / 220';
-  document.getElementById('s-rhcsa').textContent=rhcsa+' / 60';
-  document.getElementById('s-ansible').textContent=ansible+' / 60';
-  document.getElementById('s-web').textContent=web+' / 100';
-  document.getElementById('s-pct').textContent=pct+'%';
-  document.getElementById('pbar').style.width=pct+'%';
-  document.getElementById('pbar-wrap').setAttribute('aria-valuenow',String(pct));
-}
-
-function showReset(){
-  document.getElementById('btn-trigger').style.display='none';
-  document.getElementById('reset-confirm').classList.add('show');
-}
-function hideReset(){
-  document.getElementById('btn-trigger').style.display='';
-  document.getElementById('reset-confirm').classList.remove('show');
-}
-function doReset(){
-  done.clear();sel=null;save();hideReset();
-  const searchEl=document.getElementById('search');
-  searchEl.value='';searchQuery='';
-  document.getElementById('sel-info').textContent='Select a lesson below to begin';
-  document.getElementById('btn-start').style.display='none';
-  document.getElementById('btn-complete').style.display='none';
-  document.getElementById('btn-undo').style.display='none';
-  refresh();updateStats();
-  showToast('All progress reset.');
-}
-
-function exportProgress(){
-  const data={version:1,exportedAt:new Date().toISOString(),done:[...done]};
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download=`pts-progress-${new Date().toISOString().slice(0,10)}.json`;
-  document.body.appendChild(a);a.click();a.remove();
-  URL.revokeObjectURL(url);
-  showToast('Progress exported.');
-}
-
-function importProgress(file){
-  if(!file)return;
-  const reader=new FileReader();
-  reader.onload=()=>{
-    try{
-      const parsed=JSON.parse(reader.result);
-      const arr=Array.isArray(parsed.done)?parsed.done:Array.isArray(parsed)?parsed:null;
-      if(!arr)throw new Error('Invalid file');
-      const valid=arr.filter(n=>Number.isInteger(n)&&LESSONS[n]);
-      done=new Set(valid);save();
-      sel=null;
-      document.getElementById('sel-info').textContent='Select a lesson below to begin';
-      document.getElementById('btn-start').style.display='none';
-      document.getElementById('btn-complete').style.display='none';
-      document.getElementById('btn-undo').style.display='none';
-      refresh();updateStats();
-      showToast(`Imported ${valid.length} completed lessons.`);
-    }catch(e){
-      showToast('Import failed: invalid file.');
-    }
-  };
-  reader.readAsText(file);
-}
-
-function applyTheme(t){
-  document.documentElement.setAttribute('data-theme',t);
-  try{localStorage.setItem(THEME_KEY,t);}catch(e){}
-  const meta=document.getElementById('theme-color-meta');
-  if(meta)meta.setAttribute('content',t==='light'?'#f1f5f9':'#0f172a');
-  document.getElementById('theme-icon').innerHTML=t==='light'?ICONS.moon:ICONS.sun;
-  document.getElementById('theme-label').textContent=t==='light'?'Dark':'Light';
-  document.getElementById('theme-toggle').setAttribute('aria-label',`Switch to ${t==='light'?'dark':'light'} theme`);
-}
-function toggleTheme(){
-  const current=document.documentElement.getAttribute('data-theme')||'dark';
-  applyTheme(current==='dark'?'light':'dark');
-}
-
-function visibleTiles(){
-  return Array.from(document.querySelectorAll('.lbtn')).filter(el=>!el.classList.contains('hidden'));
-}
-
-document.getElementById('theme-toggle').addEventListener('click',toggleTheme);
-document.getElementById('search').addEventListener('input',e=>{
-  searchQuery=e.target.value.trim().toLowerCase();
-  applyFilter();
-});
-
-document.addEventListener('keydown',e=>{
-  const activeTag=(document.activeElement.tagName||'').toLowerCase();
-  const typing=activeTag==='input'||activeTag==='textarea';
-
-  if(e.key==='/'&&!typing){
-    e.preventDefault();
-    document.getElementById('search').focus();
-    return;
-  }
-  if(e.key==='Escape'){
-    if(document.getElementById('reset-confirm').classList.contains('show')){hideReset();return;}
-    if(typing&&document.activeElement.id==='search'){
-      document.activeElement.value='';searchQuery='';applyFilter();document.activeElement.blur();
-      return;
-    }
-  }
-  if(typing)return;
-
-  if(document.activeElement.classList.contains('lbtn')){
-    const tiles=visibleTiles();
-    const idx=tiles.indexOf(document.activeElement);
-    if((e.key==='ArrowRight'||e.key==='ArrowDown')&&idx>-1){
-      e.preventDefault();
-      tiles[Math.min(idx+1,tiles.length-1)].focus();
-      return;
-    }
-    if((e.key==='ArrowLeft'||e.key==='ArrowUp')&&idx>-1){
-      e.preventDefault();
-      tiles[Math.max(idx-1,0)].focus();
-      return;
-    }
-  }
-  if((e.key==='c'||e.key==='C')&&sel&&!done.has(sel)){
-    e.preventDefault();
-    markDone();
-    return;
-  }
-  if(e.key==='Enter'&&sel&&!document.activeElement.classList.contains('lbtn')&&document.getElementById('btn-start').style.display!=='none'){
-    startLesson();
-  }
-});
-
-buildGrid('g1',1,120);
-buildGrid('g2',121,200);
-buildGrid('g3',201,220);
-refresh();
-updateStats();
-applyTheme(document.documentElement.getAttribute('data-theme')||'dark');
-</script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/state.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/keyboard.js"></script>
 </body>
 </html>
