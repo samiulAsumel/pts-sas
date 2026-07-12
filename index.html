@@ -29,7 +29,7 @@
             <div style="{{ S.howToStep }}"><span style="{{ S.howToStepN }}">2</span><span>Click <strong style="{{ S.howToStepStrong }}">"Start lesson"</strong> — the prompt copies to clipboard</span></div>
             <div style="{{ S.howToStep }}"><span style="{{ S.howToStepN }}">3</span><span>Paste in your Claude project → lesson begins</span></div>
             <div style="{{ S.howToStep }}"><span style="{{ S.howToStepN }}">4</span><span>Come back and click <strong style="{{ S.howToStepStrong }}">"Mark complete"</strong></span></div>
-            <div style="{{ S.howToStep }}"><span style="{{ S.howToStepN }}">★</span><span>Gold star = one of 31 named capstone projects</span></div>
+            <div style="{{ S.howToStep }}"><span style="{{ S.howToStepN }}">★</span><span>Gold star = one of 35 named capstone projects</span></div>
             <div style="{{ S.helpDivider }}"></div>
             <div style="{{ S.helpTitle }}">Keyboard shortcuts</div>
             <div style="{{ S.kbdList }}">
@@ -58,7 +58,7 @@
   <main id="pts-main" style="{{ S.content }}">
 
     <p style="{{ S.tagline }}">
-      <strong style="{{ S.taglineStrong }}">Port &amp; Maritime Technology Specialist</strong> — 12+ years of hands-on port operations experience combined with advanced, enterprise-grade full-stack engineering, systems administration, automation engineering, and internationally-standardized port/terminal operations expertise.
+      <strong style="{{ S.taglineStrong }}">Port &amp; Maritime Technology Specialist</strong> — 12+ years of hands-on port operations experience combined with advanced, enterprise-grade, AI-native full-stack engineering, systems administration, automation engineering, and internationally-standardized port/terminal operations expertise.
     </p>
     <p style="{{ S.marketsLine }}">Rotterdam · Hamburg · Singapore · DP World · EU Blue Card</p>
 
@@ -191,32 +191,45 @@ const TRACK_CODES = ['W', 'L', 'N', 'AU', 'TOS', 'PY'];
 const TRACK_HEX = { W: '#3b82f6', L: '#f97316', N: '#a855f7', AU: '#14b8a6', TOS: '#eab308', PY: '#22c55e' };
 const TRACK_SHORT = { W: 'Web Dev', L: 'Linux', N: 'Ansible', AU: 'n8n', TOS: 'Port/Maritime', PY: 'Python' };
 
-// Curriculum data — copied verbatim from global_learning_path_final.md (v3.3) source.
+// Curriculum data — copied verbatim from global_learning_path_final.md (v4.2) source.
 const CURRICULUM = {
   W: {
-    name: "Web Development", sub: "Advanced Professional",
+    name: "Web Development", sub: "Advanced Professional & AI-Native",
     modules: [
-      { title: "W1 — Developer Environment & Foundations", topics: ["VS Code setup","Git workflow","AI developer mindset","Prompt engineering","Developer tools"] },
-      { title: "W2 — HTML Mastery", topics: ["HTML structure","HTML text + formatting","HTML lists + links + images","HTML forms","HTML5 semantic elements","HTML tables"] },
-      { title: "W3 — CSS Mastery", topics: ["CSS basics + box model","CSS selectors","CSS styling + fonts","Flexbox fundamentals","Flexbox in practice","CSS grid","CSS advanced + animations","Responsive design"] },
+      { title: "W1 — Developer Environment, Git/GitHub & AI-Native Mindset", topics: ["VS Code + Node + Git install","Terminal & CLI basics","Git fundamentals (init/add/commit/push)","Common Git issues & fixes","Multi-developer contributor workflow","Git branches, PRs & merging","AI mindset — capabilities & limits","Developer-vs-engineer mindset","How NOT to use AI & how AI \"thinks\"","Responsible AI-native workflow + prompt-engineering basics"] },
+      { title: "W2 — HTML5 Mastery", topics: ["HTML structure & semantics","Text & formatting","Lists, links, images & buttons","Forms — all input types, fieldset/legend","Semantic elements (nav/header/footer/section/article)","Tables + audio/video/iframe"] },
+      { title: "W3 — CSS3 Mastery", topics: ["Box model & units","Selectors","Flexbox fundamentals","Flexbox in practice","CSS Grid","CSS Grid in practice","Pseudo-classes & pseudo-elements","Positioning & z-index","Responsive design & media queries","Animations, transforms, custom properties & image optimization"] },
       { title: "W4 — Project 1: Port Cargo Website", topics: ["PROJECT 1: Port Cargo Website"] },
-      { title: "W5 — JavaScript Fundamentals", topics: ["JavaScript introduction","Operators + math","Conditionals","Loops","Arrays part 1","Arrays part 2","Strings","Objects","Functions","JS problem solving basics"] },
-      { title: "W6 — Modern JavaScript (ES6+)", topics: ["ES6 modern syntax","Arrow + destructuring + spread","ES6 advanced","Array power methods","ES6 problem solving"] },
-      { title: "W7 — TypeScript", topics: ["TypeScript introduction","TypeScript types","Interfaces + objects","Functions in TypeScript","Generics + utility types","OOP in TypeScript","TypeScript problem solving"] },
-      { title: "W8 — React Fundamentals", topics: ["React introduction","Components + JSX","Props + conditional rendering","useState hook","Event handling","API calls + async","React + Tailwind CSS","State lifting","Axios","DOM + BOM","React Router","Data visualization + AIS"] },
-      { title: "W9 — Project 2: Port Cargo Tracker", topics: ["PROJECT 2: Port Cargo Tracker"] },
-      { title: "W10 — React Advanced + Next.js Intro", topics: ["React performance","React interview prep","Next.js introduction","Pages + routing","Layouts + navigation"] },
-      { title: "W11 — Next.js Advanced", topics: ["Rendering: CSR vs SSR","Data fetching server","Caching + ISR","Hero UI / ShadCN","Error + loading pages","Image + font optimization","PROJECT 3: Maritime Dashboard"] },
-      { title: "W12 — Authentication Systems", topics: ["BetterAuth setup","Register + login","Google + GitHub OAuth","Route protection","Profile + password + email","Dashboard with auth"] },
-      { title: "W13 — Backend (Node.js / Express / MongoDB)", topics: ["Node.js architecture","Express setup + first API","REST API + EDI concepts","MongoDB + Mongoose","Mongoose schemas + models","CRUD operations","Advanced MongoDB queries","Aggregation + UNCTAD KPIs","JWT authentication","RBAC"] },
-      { title: "W14 — Payments & Production Readiness", topics: ["Stripe payment","SSLCommerz payment","Error handling + validation","Backend deployment","PROJECT 4: Port Management API","Connect frontend + backend","Full stack auth","Full stack deployment"] },
-      { title: "W15 — Architecture & Career Readiness", topics: ["PRD writing with AI","System design + DB planning","MVC architecture","Full stack interview prep"] },
-      { title: "W16 — Capstone Projects & AI Tooling", topics: ["PROJECT 5: Port SaaS v1","PROJECT 6: Port SaaS v2","Cursor AI + Claude Code","Lovable + Bolt + V0","FINAL: AI-Powered Port Tool"] },
-      { title: "W17 — Testing & Quality Assurance", topics: ["Unit testing (Vitest/Jest)","component testing (React Testing Library)","E2E testing (Playwright)","API mocking (MSW)","visual regression testing","test coverage strategy","CI test automation","mutation testing awareness"] },
-      { title: "W18 — Advanced State & Data Architecture", topics: ["Zustand/Redux Toolkit","TanStack Query advanced caching","optimistic updates","real-time data (WebSockets/SSE)","offline-first patterns","form architecture at scale (RHF + Zod)"] },
-      { title: "W19 — API Architecture Beyond REST", topics: ["GraphQL fundamentals","GraphQL server (Apollo/Yoga)","tRPC for full-stack type safety","API versioning strategy","rate limiting & gateway patterns"] },
-      { title: "W20 — Production Engineering for Web", topics: ["Web performance auditing (Core Web Vitals deep dive)","bundle analysis & code splitting","CDN/edge caching strategy","monitoring & error tracking","WCAG accessibility audit & remediation","internationalization architecture"] },
-      { title: "W21 — Enterprise & SaaS Patterns", topics: ["Multi-tenancy architecture patterns","design systems & component libraries at scale","monorepo tooling (Turborepo/Nx)","CI/CD pipelines for web apps","OWASP Top 10 security hardening applied"] },
+      { title: "W5 — Tailwind CSS & Utility-First Design", topics: ["Component vs utility philosophy + setup","Typography & spacing utilities","Flex & Grid with Tailwind","Responsive card + pricing component"] },
+      { title: "W6 — JavaScript Foundations", topics: ["Variables, data types & naming","Operators & math","Conditionals (if/else/ternary/logical)","Multi-level conditionals","Loops (break/continue)","Arrays 1 — traversal, push/pop/shift/unshift","Arrays 2 — sort/reverse, array-of-objects","Strings","Objects — get/set, keys/values, nested","Functions — params/args/return","Reading error messages & stack traces","First DevTools console debugging session","Problem solving — container-weight & duplicate B/L","Problem solving — shipment cost & tiered-discount pricing"] },
+      { title: "W7 — Modern JavaScript (ES6+)", topics: ["let/const, template strings, arrow functions","Default params, spread/rest, destructuring","Optional chaining, null vs undefined, == vs ===","Array power methods — map/forEach/filter","Array power methods — find/reduce/slice","Object methods — seal/freeze/entries","Closures & callbacks","Scope, hoisting & pass-by-reference vs value"] },
+      { title: "W8 — TypeScript: Production-Grade Typing", topics: ["Setup & compiler config","Primitive vs non-primitive types","Object types, literals, optional properties","Typed functions","Rest/spread/destructuring + nullish coalescing","Special types (nullable/unknown/never) + assertions","Interfaces","Generics, enums & as const","Utility types","OOP in TypeScript + problem solving"] },
+      { title: "W9 — DOM, BOM & Browser Fundamentals (React Bridge)", topics: ["DOM tree structure","Selection — getElementBy* vs querySelector","Manipulation — text, attributes, styling","Events & addEventListener","Bubbling, capturing & delegation","BOM essentials + timing (setTimeout/setInterval)","Browser storage, async foundations (Promise/fetch) & Virtual DOM concept"] },
+      { title: "W10 — Project 2: Port Cargo Tracker (Vanilla TS + DOM)", topics: ["PROJECT 2: Port Cargo Tracker (Vanilla TS + DOM)"] },
+      { title: "W11 — API Integration, JSON & Async Patterns", topics: ["How the internet works (HTTP/HTTPS, DNS)","REST verbs","fetch","async/await","try/catch error handling","Loading/error/empty states","Pagination-aware fetching — vessel-schedule lookup"] },
+      { title: "W12 — React Fundamentals", topics: ["React vs Next.js","Components & JSX rules","Props","Conditional rendering (6 ways)","Lists & keys","useState & controlled inputs","Event handling","The use() hook","useEffect — deps & cleanup","Axios data fetching","State lifting","Context API basics + thinking in React","Recharts data viz with AIS data"] },
+      { title: "W13 — Project 3: Maritime Dashboard + AIS (React SPA)", topics: ["PROJECT 3: Maritime Dashboard + AIS"] },
+      { title: "W14 — React Router & Client-Side Architecture", topics: ["SPA concepts","Nested routing, Outlet, Link, NavLink","Loaders & useLoaderData","Dynamic params & useNavigate","404 handling & useLocation","React Hook Form","Custom hooks & component-tree design"] },
+      { title: "W15 — Debugging, DevTools & Testing Foundations", topics: ["Scientific debugging method","Chrome DevTools deep dive (Network/Sources/Performance)","Error taxonomy (syntax/runtime/logic/async)","Vitest introduction & first unit tests","First React component tests + debugging AI-generated code"] },
+      { title: "W16 — Next.js Foundations & Rendering", topics: ["Why Next.js & App Router","Pages, dynamic & catch-all routes","Multiple layouts","CSR vs SSR vs SSG vs ISR + hydration","Server vs client components","Server-component data fetching","Caching — no-store, revalidate","generateStaticParams","Image & font optimization","Metadata, SEO & next/dynamic"] },
+      { title: "W17 — Modern UI Systems: Hero UI, ShadCN & Design Systems", topics: ["Hero UI setup & theming","ShadCN integration","Component composition patterns","Design-token-driven consistency","Accessible component patterns (keyboard nav, ARIA)"] },
+      { title: "W18 — Authentication: BetterAuth (Primary) + Firebase (Alternate)", topics: ["BetterAuth architecture","MongoDB adapter","Credentials register/login","Session management","Route protection via proxy/middleware","Google OAuth","GitHub OAuth","Profile update + image upload","Password reset + email verification","Logout, deployment & Firebase Auth alternate"] },
+      { title: "W19 — Backend Engineering: Node.js, Express & MongoDB", topics: ["Client-server architecture & Node internals","Express fundamentals & first API","REST design + EDI/EDIFACT concepts","MongoDB fundamentals","Raw driver CRUD — insertOne/find","Raw driver CRUD — updateOne/deleteOne/ObjectId","Query & update operators","Projection & sorting","Aggregation — $match/$group/$project","Aggregation — $lookup/$unwind/$facet (UNCTAD KPIs)","JWT auth","Auth middleware","RBAC — admin/user/moderator"] },
+      { title: "W20 — SQL & Relational Databases (PostgreSQL + Prisma)", topics: ["Why relational databases still run most of the world","PostgreSQL setup","Schema design & normalization","Joins & aggregations","Transactions & indexes","Prisma ORM + migrations","SQL-vs-NoSQL decision framework","PROJECT: Relational Port Billing Schema"] },
+      { title: "W21 — Production Backend Essentials", topics: ["Transactional email (Nodemailer/Resend)","File uploads & object storage (Cloudflare R2/S3, presigned URLs)","Background jobs & queues (BullMQ)","App-level caching with Redis","Webhook reliability & idempotency keys","Scheduled tasks / cron","Environment & secrets management"] },
+      { title: "W22 — Full-Stack Project 1: Port Management API (AI-First)", topics: ["Writing a PRD with AI","Wireframing with AI + tech-stack decisioning","Next.js/Hero UI/Node/Express/MongoDB build","RBAC implementation","Stripe checkout session + payment","Stripe webhooks — signature verification & idempotency","Deployment — Cloudflare Pages + VPS (Docker + Caddy + systemd)","PROJECT: Port Management API — end-to-end testing"] },
+      { title: "W23 — Full-Stack Project 2: Port SaaS v1 (Modular + Local AI)", topics: ["Modular/MVC feature-based architecture","Mongoose ODM","ShadCN UI build","SSLCommerz integration","Local AI via Ollama — cargo-manifest summarization","AI-assisted code review & refactoring","Security & performance pass","PROJECT: Port SaaS v1 — Cloudflare + VPS deploy"] },
+      { title: "W24 — Cloudflare-Native Full-Stack & the Deployment Doctrine", topics: ["Cloudflare Pages advanced (build config, previews)","Workers with web-standard APIs + Hono","D1 — SQLite at the edge","R2, KV & cache API","Queues, Cron Triggers & Next.js on Cloudflare (OpenNext)","PROJECT: PortBill-style app + escape-hatch VPS redeploy"] },
+      { title: "W25 — AI-Assisted Coding I: Foundations & Rapid Builders", topics: ["Vibe-coding origin & mindset","Golden rules of responsible vibe coding","PRD → Spec → Prompt → Review workflow","2026 AI tool landscape","Prompt engineering → context engineering","Figma MCP — design-to-code","Lovable & Bolt.new","V0 + comparative tour (AI Studio, Firebase Studio, Base44, Replit)","AI feasibility scoping as a client service","Representing AI-assisted work honestly"] },
+      { title: "W26 — AI-Assisted Coding II: Cursor & Claude Code Mastery", topics: ["Cursor — rules files & codebase indexing","Cursor — agent mode & @-context pinning","Cursor — MCP integration (GitHub/Supabase/Browser)","Cursor — parallel agents via git worktrees","Claude Code — CLAUDE.md as project constitution","Claude Code — slash commands & skills","Claude Code — hooks as guardrails","Claude Code — subagents & agent teams","Claude Code — plan → execute → review","Copilot Pro vs Claude Code + agentic SaaS feature","Context Engineering — restructuring a messy repo","Agent failure modes & when NOT to use an agent","MCP fundamentals — tools/resources/prompts"] },
+      { title: "W27 — AI-Assisted Coding III: Verification, Security & Deployment", topics: ["Why code quality matters more when you vibe-code","AI-assisted PR review (CodeRabbit-style)","AI-assisted automated tests","Refactoring to clean/MVC with agents","AI-assisted security review","Complex multi-file refactors & parallel agents","Deployment master class — Cloudflare + VPS","Custom domain & SSL + UAT discipline","AI-output verification drills — finding planted bugs","OWASP LLM Top 10 introduction","AI governance & guardrails-before-production"] },
+      { title: "W28 — Final AI-Native Capstone: Port SaaS v2 (Multi-Tool + i18n)", topics: ["Multi-tool pipeline (Figma MCP → Cursor/Claude Code → AI review)","Building the port-domain SaaS feature","RTL/i18n as a portable pattern","PROJECT: Port SaaS v2 — README + video walkthrough"] },
+      { title: "W29 — Testing & Quality Assurance (Advanced)", topics: ["Unit testing depth (Vitest/Jest)","React Testing Library","E2E testing (Playwright)","API mocking (MSW)","Visual regression testing","Coverage strategy","CI test automation","Mutation-testing awareness"] },
+      { title: "W30 — Advanced State & Data Architecture", topics: ["Zustand / Redux Toolkit","TanStack Query advanced caching","Optimistic updates","Real-time (WebSockets/SSE)","Offline-first patterns","Form architecture at scale (RHF + Zod)"] },
+      { title: "W31 — API Architecture Beyond REST", topics: ["GraphQL fundamentals","GraphQL server (Apollo/Yoga)","tRPC for full-stack type safety","API versioning strategy","Rate limiting & gateway patterns"] },
+      { title: "W32 — Production Engineering for Web", topics: ["Core Web Vitals deep dive","Bundle analysis & code splitting","CDN/edge caching (Cloudflare cache rules + Workers cache API)","Monitoring & error tracking (Sentry-style)","WCAG accessibility audit & remediation","i18n architecture"] },
+      { title: "W33 — Enterprise & SaaS Patterns", topics: ["Multi-tenancy patterns","Design systems & component libraries at scale","Monorepo tooling (Turborepo/Nx)","CI/CD pipelines","OWASP Top 10 (classic web) hardening"] },
+      { title: "W34 — AI-Native Product Engineering: Production LLM Integration", topics: ["Streaming chat UIs (SSE, served from Workers)","RAG over port/shipping docs — chunking & embeddings","Vector-DB basics (Cloudflare Vectorize / pgvector)","Function-calling / tool-use in a web-facing agent","Eval design — port-domain test set & regression measurement","Guardrails & hallucination-aware UX","Structured-output validation (Zod on LLM responses)","Cost control & multi-model routing (Cloudflare AI Gateway)","Workers AI & self-hosted Ollama serving tiers","Applied LLM security — prompt-injection tests","Build port-mcp-server — MCP tools over port data (part 1)","port-mcp-server — publish & agent-callable tools (part 2)","FINAL: \"Ask About Your Shipment\" AI widget + honest client docs"] },
     ]
   },
   L: {
@@ -321,12 +334,16 @@ const CURRICULUM = {
 };
 
 const CAPSTONES = {
-  "W20": "Port Cargo Website",
-  "W55": "Port Cargo Tracker",
-  "W67": "Maritime Dashboard + AIS",
-  "W88": "Port Management API",
-  "W96": "Port SaaS v1",
-  "W97": "Port SaaS v2 (+ RTL/i18n UI)",
+  "W27": "Port Cargo Website",
+  "W71": "Port Cargo Tracker (Vanilla TS + DOM)",
+  "W92": "Maritime Dashboard + AIS",
+  "W150": "Relational Port Billing Schema",
+  "W165": "Port Management API",
+  "W173": "Port SaaS v1",
+  "W179": "Cloudflare-Native PortBill-Style App",
+  "W217": "Final AI-Native Capstone: Port SaaS v2",
+  "W247": "Advanced-Layer Capability Showcase",
+  "W260": "AI Port Assistant Widget + port-mcp-server",
   "L60": "Port App Server Hardening & Deployment Base",
   "L78": "High-Availability Database Cluster for Port Billing",
   "L102": "Port Infrastructure Monitoring & Alerting Stack",

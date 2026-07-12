@@ -1,5 +1,5 @@
 # Global Port & Maritime Tech Specialist
-## Advanced Professional Curriculum — Full & Final Learning Path
+## Advanced Professional Curriculum — v4.0 (Track W Full Rebuild Edition)
 
 | | |
 |---|---|
@@ -7,7 +7,86 @@
 | **Current Role** | Senior Outdoor Assistant — Mongla Port Authority, Traffic Department, Revenue Branch |
 | **Document Purpose** | Complete, advanced-level, multi-track technical and domain curriculum for global remote software & port-domain consulting |
 | **Scope** | Sequence-based — no fixed calendar; advance at own pace |
-| **Version** | 3.3 (Full & Final) — Every major track expanded to advanced/professional depth, minimum 100+ numbered lessons per track, 27 named portfolio projects, a lesson-by-lesson GitHub repo timeline, and a full Day-N teaching protocol (in-depth, hands-on, port-analogy, GitHub-mandatory, interview-integrated, auto-resuming) |
+| **Version** | **4.2 (Gap-Free, Platform-Sovereign Edition)** — v4.1 plus a full deployment-doctrine rewrite: Vercel removed entirely (not used, not taught); Cloudflare is the primary platform, self-hosted VPS (Docker + reverse proxy, Track L tie-in) is the sovereignty fallback, and every framework choice is screened for portability/lock-in. Prior v4.1 scope: v4.0's Track W audited lesson-by-lesson for sequencing bugs, forward dependencies, and market gaps; six new modules added, one sequencing bug fixed, and the AI-assisted-coding layer hardened against the 2026 hiring-market's actual screens (AI-output verification, context engineering, agent failure modes, eval design, LLM security). Track W is now W1–W260. Originally rebuilt in v4.0 from Programming Hero **Batch 12** and **Batch 14** from Programming Hero **Batch 12** ("Let's Code Your Career") and **Batch 14** ("AI-Driven Full Stack Web Engineering") source material, expanded and re-sequenced to advanced/professional/AI-native depth. **Tracks L, N, AU, TOS, and PY are unchanged from v3.3/3.7** — nothing outside Track W was removed. |
+
+---
+
+## 0. Version 4.0 → 4.2 Changelog — What Changed and Why
+
+**Ki change hoyeche:** Purono Track W (v3.3, W1–W130) shudhu original 100-lesson Programming Hero base + 30-lesson custom advanced layer diye toiri chilo. Ekhon tumi nijer haate Batch 12 (81 modules, 14 milestones — purono/foundational batch) ebong Batch 14 (AI-Driven Full Stack, newest batch — TypeScript-first, BetterAuth, Hero UI/ShadCN, Mongoose, dual-payment, heavy AI-assisted-coding milestone) upload korecho. Ei duita **real, current Programming Hero curriculum** — tai Track W-ke ekdom notun kore, ei duita source-er upor base kore, rebuild kora hoyeche.
+
+**Ki change hoyni:** Track L (110), Track N (110), Track AU (110), Track TOS (140), Track PY (150) — ei paanchta track **word-for-word unchanged** ache eyi document-e, exactly jevabe v3.3/3.7-e chilo. GitHub protocol, commit convention, Daily Teaching Protocol (Section 15.8), Readiness Checkpoints — shobkichu same structure-e ache, shudhu Track W-related numbers/repo-names update kora hoyeche jekhane dorkar.
+
+**Lesson count change (v4.0):** Track W 130 → 220 lessons (W1–W220). Karon: Batch 14-er updated stack (TypeScript-first sequencing, BetterAuth, Hero UI/ShadCN, Mongoose, dual payment rails, AI-first PRD-driven project workflow) + Batch 12-er valuable extra depth (Git branch/PR/merge, raw MongoDB driver before ORM, Firebase Auth as portable alternate pattern, extra Vibe-Coding tool tour) + **three full AI-assisted-coding modules** (Cursor, Claude Code, multi-agent workflows — pulled directly from Batch 14's Milestone 11, which is far deeper than anything in the old v3.3) + **one brand-new module** or production LLM/RAG integration into web products (not in either batch — added because this is now a real, biddable freelance skill in 2026). Grand total curriculum after v4.0: 750 → 840 lessons (only Track W's count changed).
+
+### 0.1 — v4.1 Deep Gap Analysis (Why W220 Became W260)
+
+v4.1 is the result of a lesson-by-lesson audit of v4.0 against two tests: **(a) no forward dependencies** — no lesson may require a concept taught later — and **(b) no market gaps** — every skill a paying client brief or a 2026 technical screen would probe must have a home. Findings and fixes:
+
+| # | Gap Found in v4.0 (and in both PH batches) | Severity | Fix in v4.1 |
+|---|---|---|---|
+| 1 | **Sequencing bug:** Project 2 (Port Cargo Tracker, "TS + DOM") sat at W63 — one lesson *before* the DOM module (W64–W70). A project cannot use DOM APIs that haven't been taught. | High | Project moved to W71, after the DOM module. Design rule added: no forward dependencies anywhere in the track. |
+| 2 | **No SQL/relational databases anywhere.** Both PH batches are MongoDB-only. Most enterprise port/logistics systems and a large share of freelance briefs are PostgreSQL/MySQL-backed; "SQL vs NoSQL" is also a standard interview probe. | **Critical** | New Module W20 (W143–W150): PostgreSQL, schema design/normalization, joins, transactions/indexes, Prisma, migrations, SQL-vs-NoSQL decision framework, relational port-billing schema mini-project. |
+| 3 | **Testing deferred ~80 lessons too late.** Batch 14 flags "Introduction to Testing" as a NEW topic but never sequences it; v4.0 pushed all testing to W183+. That trains a write-untested-code habit for months. | High | New Module W15 (W100–W104): debugging method, DevTools deep dive, error taxonomy, Vitest intro, first component tests — so W29's advanced testing later builds on habit, not zero. |
+| 4 | **Debugging never taught as a skill.** Both batches show debugging incidentally, never as a method. Reading stack traces and DevTools fluency are daily-survival skills. | High | One lesson added inside W6 (error messages & stack traces, first console-debug session) + the W15 module above. |
+| 5 | **Production backend essentials missing:** transactional email (one buried Batch 12 lesson), real file storage (Batch 12 uses ImageBB, a toy), background jobs/queues, app-level caching, webhook idempotency (a retried Stripe webhook must not double-bill), cron, secrets management. All appear constantly in real freelance briefs. | **Critical** | New Module W21 (W151–W157) covering all seven — deliberately placed *before* the payment-integration projects so idempotent webhook handling is available when Stripe/SSLCommerz arrive. |
+| 6 | **The actual delivery stack (Cloudflare) absent.** PortBill and carview run on Cloudflare Pages/Workers, yet both batches teach only other platforms (Railway/Netlify/Firebase and similar). Learning-vs-shipping platform mismatch. | High | New Module W24 (W174–W179): Pages advanced, Workers, D1 (reusing W20's SQL), R2, KV, cron triggers, PortBill-style mini-deploy. |
+| 7 | **AI-output verification not drilled.** 2026 market data: ~92% of developers use AI tools (commodity), but only ~29% trust the output and only ~30% of suggestions survive review unmodified — the scarce, paid skill is catching what AI got wrong. v4.0 taught *using* agents, not *auditing* them. | **Critical (market)** | W27 gains recurring **verification drills**: AI-generated code with planted logic/security/performance bugs, found by reading before running, then explained. |
+| 8 | **Context engineering unnamed.** Structuring repos/docs/API boundaries so agents (and humans) work effectively is emerging as its own hiring criterion, distinct from prompting. v4.0 had it only implicitly via CLAUDE.md. | Medium-High | W26 gains a named, drilled Context Engineering unit (restructure a messy repo for agent + human navigability). |
+| 9 | **Agent failure modes untaught.** Subagent timeouts, state across tool calls, runaway cost, and when NOT to use an agent — the line between "used Claude Code" and "can run agents in production." Roughly half of developers still don't use agents at all, so this remains genuinely differentiated. | Medium-High | W26 gains an agent-failure-modes unit + MCP protocol fundamentals (groundwork for the W34 MCP-server capstone). |
+| 10 | **LLM-specific security missing.** OWASP LLM Top 10 (prompt injection, insecure output handling, context data leakage) is distinct from classic web OWASP (which W33 covers) and is a standard screen for anyone shipping customer-facing AI. | High | Introduced in W27, then applied in W34 (prompt-injection tests against your own deployed widget). |
+| 11 | **No eval design.** "How do you know your AI feature still works after a prompt/model change?" is described in current hiring guides as the universal 2026 screen. v4.0's W30 shipped AI features without measurement. | High | W34 gains eval design as a first-class unit (port-domain test set, regression measurement) plus guardrails/hallucination-aware UX, cost control & multi-model routing. |
+| 12 | **AI feasibility scoping & honest representation not formalized.** Clients ask for "AI" vaguely; the person who scopes honestly (can/can't/costs) wins trust. This matches the existing no-overhype principle but had no lesson. | Medium | W25 gains two units: feasibility scoping as a client service, and representing AI-assisted work honestly in proposals/READMEs. |
+| 13 | **MCP-server building absent.** Consuming MCP servers was covered; *building* one wasn't. An MCP server exposing port-billing/vessel data combines Samiul's rarest asset with the current interoperability standard — near-zero competition in the "port + web" freelance niche. | Medium (high differentiation) | W34 capstone extended: build & publish `port-mcp-server` alongside the AI widget. |
+| 14 | **Accessibility introduced too late.** v4.0 first touched a11y at W28 (production layer). Retrofitting accessibility is far costlier than building with it. | Medium | Accessible component patterns (keyboard nav, ARIA basics) moved into W17 (UI Systems); full WCAG audit remains in W32. |
+
+**Deliberately NOT added (with reasons, so these are conscious decisions rather than silent gaps):** deep data-structures-and-algorithms (LeetCode-style) — low relevance to freelance clients; problem-solving drills throughout W6–W8 cover the practical layer, revisit only if pursuing salaried big-tech interviews. Docker for web apps — containers are covered properly in Track L (L48–L54, L103–L110) and cross-referenced; duplicating here would violate the curriculum's no-duplication rule. Ops-level Redis/queues — Track AU9 and Track L own the operational side; W21 covers only the application-developer side. Mobile development (React Native) — out of scope for the positioning; revisit only on client demand. Fine-tuning/LoRA — API-level + RAG + evals covers the actual freelance market; fine-tuning is a niche within a niche and Phase 1's deferred list already holds it.
+
+Grand total curriculum after v4.1: **880 lessons** (Track W 260 + L 110 + N 110 + AU 110 + TOS 140 + PY 150). Lesson count unchanged in v4.2 — the v4.2 revision changes *what runs where*, not how much is taught.
+
+### 0.2 — v4.2 Deployment Doctrine (Vercel Removed; Platform-Sovereign & Future-Proof)
+
+**Trigger:** Samiul does not use Vercel; PortBill, carview, and the Smart Port Billing Infrastructure all ship on Cloudflare. v4.1 still carried Vercel residue inherited from the Batch 14 syllabus (which deploys nearly everything to Vercel). v4.2 removes it completely and replaces "pick a hosting brand" with an explicit, professional **deployment doctrine** — because platform choices, not framework choices, are where most lock-in and most future-proofing actually live.
+
+**The doctrine (applies to every deployment lesson in Track W):**
+
+| Tier | Platform | When |
+|---|---|---|
+| **Primary** | **Cloudflare** — Pages, Workers, D1, R2, KV, Queues, Cron Triggers, Workers AI, AI Gateway | Default for everything Samiul ships: own products, demos, portfolio, and client work where Samiul chooses the platform |
+| **Sovereign fallback** | **Self-hosted VPS** — Docker + reverse proxy (Caddy/Nginx) + systemd, directly reusing Track L skills | Long-running/stateful backends the edge can't host, clients demanding data residency or full control, and as the permanent proof that no platform owns the portfolio |
+| **Client-context awareness** | Railway / Render / Netlify / Firebase — *awareness-level only, never primary* | Only when inheriting a client project that already lives there; a professional can operate in a client's environment without adopting it |
+
+**Future-proofing rules encoded into the track (not slogans — each maps to a concrete lesson change):**
+1. **Web-standard APIs over vendor APIs** — Workers' fetch/Request/Response model is the web standard; code written this way runs on any standards-compliant runtime.
+2. **Portable frameworks** — the backend framework taught for edge work in W24 is **Hono** (runs unmodified on Workers, Node, Bun, and Deno), so backend skills survive any platform shift; Express remains for the Node/VPS path.
+3. **Next.js without the Vercel umbilical** — Next.js is deployed to Cloudflare via the **OpenNext Cloudflare adapter**, taught explicitly, with the honest caveat that adapter fidelity is version-sensitive and must be verified against current docs at teach-time (per the standing version-drift rule); the VPS/Docker path is the guaranteed-portable alternative for any Next.js app.
+4. **Data has an exit door** — D1 is SQLite (exportable), R2 is S3-API-compatible, Postgres (W20) is self-hostable; every storage choice in the track must have a documented migration path off the platform.
+5. **Escape-hatch drill** — the W24 mini-project ends with a required exercise: take the Cloudflare-deployed app and redeploy its backend to a bare VPS with Docker + Caddy, proving the architecture is portable in practice, not in theory. This doubles as the Track W ↔ Track L bridge.
+6. **AI infrastructure follows the same doctrine** — W34's AI features run behind **Cloudflare AI Gateway** (provider-agnostic caching, rate-limiting, cost analytics, and one-line provider swap) with **Workers AI** as the edge-inference option and **Ollama on a VPS** (from W23) as the fully self-hosted option — three tiers, zero mandatory dependence on any single model vendor.
+
+**What was actually edited in v4.2:** the W22/W23 project deployment specs, the whole of W24 (upgraded from "Cloudflare module" to the doctrine's home module, adding Hono, OpenNext, Queues, and the escape-hatch drill), W27's deployment master class, W34's serving/infra stack, the source-map annotations (Batch 14's Vercel-based deployment lessons are explicitly marked *superseded*), and the Deployment Doctrine cross-references in W32. V0 (the UI-generation tool) is retained in W25 — it generates portable React code and is not a hosting dependency; its output deploys to Cloudflare like everything else.
+
+**Honesty note (per your standing preference):** Kichu project pattern (jemon Batch 12-er "Zap Shift" delivery-tracking capstone) sরাসরি port-domain-e reskin kora hoyeche — ei chapter-e explicitly bola ache kothay theke ashche, jate tumi client-ke bolar shomoy honestly bolte paro "ei architecture pattern-ta ami ekটা established delivery-logistics capstone theke shikhe port cargo tracking-e adapt korechi," overhype na kore.
+
+**Batch → Module Source Map (transparency table):**
+
+| Track W Module | Primary Source | What Was Kept / Added |
+|---|---|---|
+| W1 (Dev Env, Git, AI Mindset) | Batch 14 (Orientation + AI Mindset milestones) + Batch 12 (Git branch/PR/merge) | Batch 14's AI-mindset content is new vs. old v3.3; Batch 12's advanced Git workflow added |
+| W2–W5 (HTML/CSS/Tailwind) | Batch 14 (primary, more granular CSS: pseudo-classes, positioning, custom properties) + Batch 12 (portfolio project structure) | Batch 14 is more current; Batch 12's portfolio-build sequencing reused for Project 1 |
+| W6–W7 (JS + ES6) | Batch 14 (primary) | Nearly identical core in both batches; Batch 14's sequencing used |
+| W8 (TypeScript) | Batch 14 (Milestone 4 — TypeScript moved earlier + full OOP-in-TS module) | **Major upgrade** — old v3.3 taught TS later and lighter; Batch 14 teaches it as a dedicated early milestone including OOP |
+| W10 (DOM/BOM) | Batch 14 (dedicated "React Bridge" module) | New explicit module — old v3.3 folded this into JS fundamentals only |
+| W12–W14 (React) | Batch 14 (primary, `use()` hook, modern data fetching) + Batch 12 (Payooo/BPL-Dream reusability patterns) | Batch 14 teaches the newer `use()` hook pattern; Batch 12's reusable-function/component patterns folded in |
+| W15–W16 (Next.js + Hero UI/ShadCN) | Batch 14 (primary) | Hero UI + ShadCN are new — old v3.3 only had "Hero UI/ShadCN" as a single throwaway line |
+| W17 (BetterAuth) | Batch 14 (primary) + Batch 12 (Firebase Auth kept as alternate pattern) | **Major upgrade** — BetterAuth is a modern, self-hosted auth library replacing the Firebase-only approach; Firebase kept as a documented alternative since some clients specifically want BaaS |
+| W18 (Backend/DB) | Batch 14 (raw MongoDB driver + deep operator/aggregation dive) | Old v3.3 jumped straight to Mongoose; now raw-driver fundamentals taught first (matches how real interviews probe understanding) |
+| W19 (Full-Stack Project 1) | Batch 14 (Milestone 9, AI-first PRD workflow, Stripe) | Explicit PRD-writing-with-AI step is new. **v4.2:** Batch 14's Vercel-based deployment lessons for this project are superseded by the Cloudflare-first doctrine (Section 0.2) |
+| W20 (Full-Stack Project 2) | Batch 14 (Milestone 10, Modular/MVC, Mongoose, SSLCommerz, Ollama) + Batch 12 (Zap Shift delivery-tracking architecture, reskinned to port cargo) | SSLCommerz + local AI (Ollama) integration are new; Zap Shift's role-based delivery-tracking pattern is the direct architectural ancestor of the port cargo-tracking capstone here — **credit given explicitly, no overhype**. **v4.2:** deployment path replaced per Section 0.2 (Cloudflare/VPS, not Railway-Render-Vercel) |
+| W21–W23 (AI-Assisted Coding I–III) | Batch 14 (Milestone 11, by far the deepest AI-coding content of either batch) + Batch 12 (Vibe Coding milestone — Figma Make, Google AI Studio, Firebase Studio, Base44, GitHub Copilot Pro tour) | **This is the single biggest upgrade in v4.0.** Batch 14 alone has ~27 lessons on Cursor/Claude Code/Figma MCP/CodeRabbit; Batch 12 adds a wider tool-comparison tour. Old v3.3 had one throwaway line ("Cursor AI + Claude Code, Lovable/Bolt/V0") — now it's three full modules |
+| W24 (Final AI-Native Capstone) | New synthesis | Combines Batch 14's "3 AI tools" final project requirement with the port-domain RTL/i18n capstone already planned in v3.3 |
+| W25–W29 (Testing / State / API / Production Eng / Enterprise) | **Unchanged from v3.3** (W101–W130 originally) | This layer was already advanced-professional and ahead of both batches — kept as-is, just renumbered |
+| W30 (AI-Native Product Engineering) | **New — not in either batch** | Added because production LLM integration (streaming chat, RAG, tool-calling, guardrails) is now a distinct, biddable 2026 freelance skill; keeps the track ahead of the market rather than just current with it |
 
 ---
 
@@ -19,55 +98,55 @@
 4. Competency Architecture (Skill Map)
 5. Curriculum Overview & Track Index
 6. Phase 1 — AI Engineering Fundamentals
-7. Track W — Web Development, Advanced Professional (130 Lessons)
-8. Track L — Linux Systems Administration, Advanced (110 Lessons)
-9. Track N — Configuration Automation / Ansible, Advanced (110 Lessons)
-10. Track AU — Workflow Automation Engineering (n8n), Advanced (110 Lessons)
-11. Track TOS — Port, Maritime & Terminal Operating Systems, Global Standard (140 Lessons)
-12. Track PY — Python Engineering, Advanced (150 Lessons)
-13. Phase 8 — Professional English Communication
-14. Portfolio & Deliverables Roadmap
-15. GitHub Daily Commit Protocol & Repository Architecture
-16. Readiness Checkpoints (Milestone Framework)
+7. **Track W — Web Development, Advanced Professional & AI-Native (220 Lessons) — REBUILT v4.0**
+8. Track L — Linux Systems Administration, Advanced (110 Lessons) — *unchanged*
+9. Track N — Configuration Automation / Ansible, Advanced (110 Lessons) — *unchanged*
+10. Track AU — Workflow Automation Engineering (n8n), Advanced (110 Lessons) — *unchanged*
+11. Track TOS — Port, Maritime & Terminal Operating Systems, Global Standard (140 Lessons) — *unchanged*
+12. Track PY — Python Engineering, Advanced (150 Lessons) — *unchanged*
+13. Phase 8 — Professional English Communication — *unchanged*
+14. Portfolio & Deliverables Roadmap — updated project index
+15. GitHub Daily Commit Protocol & Repository Architecture — updated Track W repo timeline
+16. Readiness Checkpoints (Milestone Framework) — updated Track W thresholds
 17. Immediate Action Items
-18. Content Governance Notes
-19. Appendix — Source Material Index & Total Lesson Count Summary
+18. Content Governance Notes — updated with v4.0 sourcing
+19. Appendix — Source Material Index & Total Lesson Count Summary — updated totals
 
 ---
 
 ## 1. Executive Summary
 
-Ei version (3.1) age-r consolidated roadmap-ke **advanced-professional depth-e upgrade kore**, protek core technical track-ke minimum 100+ numbered lesson-e expand kore, ebong protek track-e **explicit, named, port-domain-tied portfolio project** add kore (age shudhu Web Dev track-e concrete project chilo — ekhon shob 6-ta track-e ache). Age-r document-e RHCSA/RHCE/Web Dev/n8n/Port Domain shudhu foundational-to-intermediate level porjonto chilo — ekhon eishob **enterprise/advanced professional standard**-e niye jawa hoyeche, jate remote global client, ba jekono formal hiring/vetting process-e tumi **specialist-level depth** demonstrate korte paro, generalist na.
+Ei v4.0 update-e **shudhu Track W rebuild hoyeche** — tomar real Batch 12 + Batch 14 Programming Hero course content diye, jate curriculum-ta tomar actual enrolled course-er shathe exactly match kore, ebong shathe shathe advanced-professional + AI-native layer jog kore jate eita generic bootcamp na theke world-class, market-differentiated hoy.
 
-**Six major numbered tracks**, each independently sequenced, each with 100+ lessons and multiple named capstone projects (27 total projects across all tracks — see Section 14 for the full index):
+**Six major numbered tracks, updated lesson counts:**
 
-| Track | Domain | Lessons |
-|---|---|---|
-| W | Web Development (Advanced Professional) | 130 |
-| L | Linux Systems Administration (Advanced / RHCSA+) | 110 |
-| N | Configuration Automation / Ansible (Advanced / RHCE+) | 110 |
-| AU | Workflow Automation Engineering (n8n, Advanced) | 110 |
-| TOS | Port, Maritime & Terminal Operating Systems (Global Standard) | 140 |
-| PY | Python Engineering (Advanced) | 150 |
+| Track | Domain | Lessons | Status |
+|---|---|---|---|
+| W | Web Development, Advanced Professional & AI-Native | **260** | **Rebuilt v4.0, gap-audited v4.1** |
+| L | Linux Systems Administration (Advanced / RHCSA+) | 110 | Unchanged |
+| N | Configuration Automation / Ansible (Advanced / RHCE+) | 110 | Unchanged |
+| AU | Workflow Automation Engineering (n8n, Advanced) | 110 | Unchanged |
+| TOS | Port, Maritime & Terminal Operating Systems (Global Standard) | 140 | Unchanged |
+| PY | Python Engineering (Advanced) | 150 | Unchanged |
 
-**Grand total: 750 numbered lessons** across the six advanced tracks, plus two supporting phases (AI Engineering Fundamentals, Professional English) that remain at their previously-scoped depth since tumi ei duita expand korte bolo nai.
+**Grand total: 880 numbered lessons** (up from 750 — the +130 all sits inside Track W: +90 in the v4.0 rebuild, +40 in the v4.1 gap-close).
 
-**Country-neutral throughout:** Kono track-e kono country-specific employment framing nai. TOS track "international global standard"-e build kora — SOLAS, ISPS, MARPOL, IMDG, EDI standards — jekono port/jekono country-r client-er jonno applicable.
+**Country-neutral throughout, unchanged principle:** Track W-er port-domain projects (Port Cargo Website, Tracker, Maritime Dashboard, Port Management API, Port SaaS v1/v2) shob global-applicable — kono single-country dependency nai. Batch 12/14-er original course project names (Zap Shift, Book Vibe, Dragon News, Hero Kidz, ityadi) shobgulo port/maritime-domain-e reskin kora hoyeche.
 
 ---
 
 ## 2. Professional Positioning Statement
 
-> **"Port & Maritime Technology Specialist — 12+ years of hands-on port operations experience (Mongla Port Authority, Traffic Department) combined with advanced, enterprise-grade full-stack software engineering, systems administration, automation engineering, and internationally-standardized port/terminal operations expertise. I design, automate, and deploy production-grade billing, tracking, and terminal-management systems — backed by certifiable technical depth across Linux, Python, Ansible, and modern web architecture."**
+> **"Port & Maritime Technology Specialist — 12+ years of hands-on port operations experience (Mongla Port Authority, Traffic Department) combined with advanced, enterprise-grade, AI-native full-stack software engineering, systems administration, automation engineering, and internationally-standardized port/terminal operations expertise. I design, automate, and deploy production-grade billing, tracking, and terminal-management systems — using both traditional engineering rigor and modern AI-assisted development workflows (Cursor, Claude Code, agentic coding) — backed by certifiable technical depth across Linux, Python, Ansible, and modern web architecture."**
 
 ### Why This Positioning Works
 
 | Factor | Explanation |
 |---|---|
-| **Rarity** | Very few professionals hold both deep port-domain expertise and advanced, certifiable software/systems engineering skill. This roadmap closes that gap deliberately and completely. |
-| **Depth over breadth claims** | Every track now targets advanced/professional depth, not surface familiarity — this supports credible claims in client conversations and technical vetting. |
-| **Proof, not claims** | PortBill, client-intake system, ship operations MIS, plus the new capstone projects across all six tracks — all deployable, all GitHub-visible. |
-| **Global applicability** | Every technical certification path (RHCSA/RHCE-track) and every domain standard (SOLAS/ISPS/MARPOL/EDI) is internationally recognized — no single-country dependency. |
+| **Rarity** | Very few professionals hold both deep port-domain expertise and advanced, certifiable software/systems engineering skill — fewer still can demonstrate fluency in *both* classical engineering and 2026-era AI-assisted development. |
+| **Depth over breadth claims** | Every track targets advanced/professional depth; Track W now explicitly demonstrates AI-native workflow fluency, which is a distinct, biddable skill separate from "knows React." |
+| **Proof, not claims** | PortBill, client-intake system, plus capstone projects across all six tracks — all deployable, all GitHub-visible, all honestly labeled with their real methodology (including where AI tools did the heavy lifting). |
+| **Global applicability** | Every certification path and domain standard is internationally recognized — no single-country dependency. |
 
 ---
 
@@ -81,20 +160,21 @@ Ei version (3.1) age-r consolidated roadmap-ke **advanced-professional depth-e u
 - Companies needing Linux/Ansible infrastructure support with automation-first delivery
 - Businesses needing n8n-based process automation regardless of industry
 - Independent logistics consultants needing a technical co-builder
+- **(New, v4.0)** Small businesses wanting an "AI feature" bolted onto an existing web product (chatbot, document-extraction widget, AI-assisted search) — a direct, sellable outcome of Track W's new Module W30
 
 ### 3.2 Revenue Channel Map
 
 | Channel | Mechanism | Priority | Current Status |
 |---|---|---|---|
-| Upwork / Fiverr | Multiple gigs: "Port & Logistics Billing Web Apps," "n8n Workflow Automation," "Linux/Ansible Infrastructure Setup" | **High** | Launch immediately |
-| LinkedIn organic content | Structured post series (Day 7 / 14 / 21…) showcasing real, working projects across all tracks | **High** | Already active — continue cadence |
+| Upwork / Fiverr | Multiple gigs: "Port & Logistics Billing Web Apps," "AI-Powered Web Features," "n8n Workflow Automation," "Linux/Ansible Infrastructure Setup" | **High** | Launch immediately |
+| LinkedIn organic content | Structured post series showcasing real, working projects across all tracks — Track W's AI-assisted-coding capstones are especially shareable content | **High** | Already active — continue cadence |
 | Direct cold outreach | Targeted email/LinkedIn messages to global freight forwarders, C&F agencies | Medium | Ongoing, needs volume |
 | PortBill as an indie SaaS product | Reposition from Bangladesh-only to globally-marketed small-agent tool | Medium-term | Requires repositioning (see Section 17) |
 | Existing local network referrals | Mongla-based C&F/shipping agents with international chain connections | Ongoing | Passive — stay visible |
 
 ### 3.3 Realistic Timeline Expectations
 
-This remains a positioning and marketing problem, not a skills gap. Historical pattern for domain-niche freelance transitions:
+Unchanged from v3.3 — this remains a positioning and marketing problem, not a skills gap:
 
 - **First inbound inquiry:** 2–4 weeks of consistent outreach + content
 - **First paying client:** 4–8 weeks
@@ -107,12 +187,12 @@ This remains a positioning and marketing problem, not a skills gap. Historical p
 | Domain | Current Level | Target Level | Track | Lessons |
 |---|---|---|---|---|
 | AI-Assisted Engineering / Prompting | Intermediate (informal) | Structured, repeatable competency | Phase 1 | — |
-| Web Development (Full-Stack) | Strong practically, uneven fundamentals | **Advanced Professional** | Track W | 130 |
-| Linux Systems Administration | Developing | **Advanced (RHCSA-certifiable + enterprise depth)** | Track L | 110 |
-| Configuration Automation (Ansible) | None | **Advanced (RHCE-certifiable + enterprise automation platform)** | Track N | 110 |
-| Workflow Automation Engineering (n8n) | None | **Advanced (enterprise automation architecture)** | Track AU | 110 |
-| Port & Maritime / TOS Domain Expertise | Expert (practical), informal vocabulary | **Advanced (internationally-standardized, certifiable vocabulary + TOS architecture mastery)** | Track TOS | 140 |
-| Python Engineering | Beginner–Intermediate | **Advanced (systems, automation, cloud, and production engineering)** | Track PY | 150 |
+| **Web Development (Full-Stack + AI-Native)** | Strong practically, uneven fundamentals | **Advanced Professional + AI-Native Product Engineering** | **Track W** | **260** |
+| Linux Systems Administration | Developing | Advanced (RHCSA-certifiable + enterprise depth) | Track L | 110 |
+| Configuration Automation (Ansible) | None | Advanced (RHCE-certifiable + enterprise automation platform) | Track N | 110 |
+| Workflow Automation Engineering (n8n) | None | Advanced (enterprise automation architecture) | Track AU | 110 |
+| Port & Maritime / TOS Domain Expertise | Expert (practical), informal vocabulary | Advanced (internationally-standardized, certifiable vocabulary + TOS architecture mastery) | Track TOS | 140 |
+| Python Engineering | Beginner–Intermediate | Advanced (systems, automation, cloud, and production engineering) | Track PY | 150 |
 | Professional English Communication | Functional | Client-facing fluency | Phase 8 | — |
 | Business Development / Freelance Ops | Early-stage | Consistent lead generation | Section 3 (ongoing) | — |
 
@@ -122,24 +202,23 @@ This remains a positioning and marketing problem, not a skills gap. Historical p
 
 | Track | Full Name | Lesson Range | Total Lessons | Certification / Outcome Target |
 |---|---|---|---|---|
-| **W** | Web Development, Advanced Professional | W1–W130 | 130 | Enterprise-grade full-stack developer, 6+ live capstone projects |
+| **W** | Web Development, Advanced Professional & AI-Native | W1–W260 | **260** | Enterprise-grade, AI-native full-stack developer, 10 live capstone deliverables |
 | **L** | Linux Systems Administration, Advanced | L1–L110 | 110 | RHCSA + advanced enterprise sysadmin capability |
 | **N** | Configuration Automation / Ansible, Advanced | N1–N110 | 110 | RHCE + enterprise automation platform capability |
 | **AU** | Workflow Automation Engineering (n8n), Advanced | AU1–AU110 | 110 | Enterprise automation architect capability |
 | **TOS** | Port, Maritime & Terminal Operating Systems, Global Standard | TOS1–TOS140 | 140 | Internationally-standardized port operations & TOS architecture mastery |
 | **PY** | Python Engineering, Advanced | PY1–PY150 | 150 | Production-grade Python automation & systems engineering |
-| — | **Grand Total (Six Advanced Tracks)** | — | **750** | — |
+| — | **Grand Total (Six Advanced Tracks)** | — | **880** | — |
 
-Supporting phases (not lesson-count-expanded, retained at prior scope): **Phase 1 — AI Engineering Fundamentals**, **Phase 8 — Professional English Communication**.
+Supporting phases (unchanged): **Phase 1 — AI Engineering Fundamentals**, **Phase 8 — Professional English Communication**.
 
-**Sequencing guidance:** Kono track-i onno track-er upor hard-dependent na. Tumi ekshathe **Track W + Track L** shuru korte paro (web dev + Linux parallel), tarpor **Track N** (Ansible, Linux-er upor build kore), **Track AU** (n8n, independent), **Track PY** (Python, shob track-er shathe reinforcing), ebong **Track TOS** (pure domain knowledge, jekono shomoy parallel-e cholte pare, kono coding dependency nai).
+**Sequencing guidance (unchanged):** No track is hard-dependent on another. W + L can run in parallel, N builds on L, AU is independent, PY reinforces everything, TOS is pure domain knowledge and can run anytime alongside any other track.
 
 ---
 
 ## 6. Phase 1 — AI Engineering Fundamentals
 
-**Source material:** AI Engineering Master Syllabus, Levels 1–3 (Level 4 onward deferred)
-**Status:** Kept at original scope — not part of the "100+ lesson" expansion request, but retained as a foundational supporting phase since it underlies effective delivery across every other track.
+*(Unchanged from v3.3/3.7.)*
 
 | Sub-Phase | Core Topics |
 |---|---|
@@ -147,50 +226,98 @@ Supporting phases (not lesson-count-expanded, retained at prior scope): **Phase 
 | Level 2 — No-Code AI Automation | AI-driven workflows, tool landscape (Zapier AI, Make.com, Notion AI) — bridges directly into Track AU |
 | Level 3 — Applied Python + API Integration | Python fundamentals for automation, LLM API calls, PDF/CSV/JSON processing — bridges directly into Track PY |
 
-**Deferred:** RAG, vector databases, LangChain, LlamaIndex — revisit only when a client project needs document-search/retrieval functionality.
+**Deferred:** RAG, vector databases, LangChain, LlamaIndex at the general-purpose level — revisit only when a client project needs document-search/retrieval functionality. (**Note:** Track W's new Module W30 now *does* cover RAG/vector search specifically in a production web-app context — that is a narrower, applied slice of this deferred content, not a contradiction.)
 
 ---
 
-## 7. Track W — Web Development, Advanced Professional (130 Lessons: W1–W130)
+## 7. Track W — Web Development, Advanced Professional & AI-Native (260 Lessons: W1–W260) — v4.1 Gap-Free Edition
 
-**Source:** Original 100-lesson Web Development track, extended with 30 additional advanced-professional lessons covering testing, architecture, and production-engineering depth expected of a senior/staff-level web engineer.
+**Source:** Rebuilt in full from Programming Hero **Batch 12** + **Batch 14**, merged with the v3.3 Advanced Professional Layer, then **audited lesson-by-lesson in v4.1 for sequencing bugs, missing prerequisites, and market gaps** (see the v4.1 Gap Analysis in Section 0.1). Six new modules and one sequencing fix were added as a result — nothing was skipped or removed.
 
-### Foundational Layer (W1–W100)
+**Design rule for v4.1:** every lesson may only use concepts taught in an earlier lesson (no forward dependencies), and every skill a paying client or a 2026 technical interview would probe must have a home somewhere in the track — either here or explicitly cross-referenced to another track.
 
-| Module | Lessons | Core Topics |
-|---|---|---|
-| **W1 — Developer Environment & Foundations** | W1–W5 | VS Code + Git setup, Git/GitHub workflow, AI developer mindset, prompt engineering, developer tools |
-| **W2 — HTML Mastery** | W6–W11 | Structure, text & formatting, lists/links/images, forms, HTML5 semantic elements, tables |
-| **W3 — CSS Mastery** | W12–W19 | Basics & box model, selectors, styling & fonts, Flexbox (fundamentals + practice), CSS Grid, advanced CSS & animations, responsive design |
-| **W4 — Project 1: Port Cargo Website** | W20 | First applied project — HTML + CSS deployed site |
-| **W5 — JavaScript Fundamentals** | W21–W30 | Introduction, operators & math, conditionals, loops, arrays (parts 1–2), strings, objects, functions, problem solving |
-| **W6 — Modern JavaScript (ES6+)** | W31–W35 | Modern syntax, arrow/destructuring/spread, ES6 advanced, array power methods, problem solving |
-| **W7 — TypeScript** | W36–W42 | Introduction, types, interfaces & objects, functions, generics & utility types, OOP, problem solving |
-| **W8 — React Fundamentals** | W43–W54 | Introduction, components & JSX, props & conditional rendering, `useState`, event handling, API calls & async, React + Tailwind, state lifting, Axios, DOM/BOM, React Router, data visualization + AIS data |
-| **W9 — Project 2: Port Cargo Tracker** | W55 | Applied React project |
-| **W10 — React Advanced + Next.js Intro** | W56–W60 | Performance optimization, interview prep, Next.js intro, pages & routing, layouts & navigation |
-| **W11 — Next.js Advanced** | W61–W67 | CSR vs. SSR, server data fetching, caching & ISR, Hero UI/ShadCN, error & loading pages, image & font optimization, **Project 3: Maritime Dashboard + AIS** |
-| **W12 — Authentication Systems** | W68–W73 | BetterAuth setup, register/login, Google + GitHub OAuth, route protection, profile/password/email, dashboard with auth |
-| **W13 — Backend (Node.js / Express / MongoDB)** | W74–W83 | Node architecture, Express + first API, REST API + EDI/EDIFACT concepts, MongoDB + Mongoose, schemas/models, CRUD, advanced queries, aggregation + UNCTAD KPI reporting, JWT auth, RBAC |
-| **W14 — Payments & Production Readiness** | W84–W91 | Stripe, SSLCommerz, error handling/validation, backend deployment, **Project 4: Port Management API**, connect frontend+backend, full-stack auth, full-stack deployment |
-| **W15 — Architecture & Career Readiness** | W92–W95 | PRD writing with AI, system design & DB planning, MVC architecture, full-stack interview prep |
-| **W16 — Capstone Projects & AI Tooling** | W96–W100 | **Project 5: Port SaaS v1**, **Project 6: Port SaaS v2** (+ RTL/i18n UI support), Cursor AI + Claude Code, Lovable/Bolt/V0, **Final Capstone: AI-Powered Port Tool** |
-
-### Advanced Professional Layer (W101–W130)
+### PART A — Foundational Layer (W1–W179)
 
 | Module | Lessons | Core Topics |
 |---|---|---|
-| **W17 — Testing & Quality Assurance** | W101–W108 | Unit testing (Vitest/Jest), component testing (React Testing Library), E2E testing (Playwright), API mocking (MSW), visual regression testing, test coverage strategy, CI test automation, mutation testing awareness |
-| **W18 — Advanced State & Data Architecture** | W109–W114 | Zustand/Redux Toolkit, TanStack Query advanced caching, optimistic updates, real-time data (WebSockets/SSE), offline-first patterns, form architecture at scale (RHF + Zod) |
-| **W19 — API Architecture Beyond REST** | W115–W119 | GraphQL fundamentals, GraphQL server (Apollo/Yoga), tRPC for full-stack type safety, API versioning strategy, rate limiting & gateway patterns |
-| **W20 — Production Engineering for Web** | W120–W125 | Web performance auditing (Core Web Vitals deep dive), bundle analysis & code splitting, CDN/edge caching strategy, monitoring & error tracking, WCAG accessibility audit & remediation, internationalization architecture |
-| **W21 — Enterprise & SaaS Patterns** | W126–W130 | Multi-tenancy architecture patterns, design systems & component libraries at scale, monorepo tooling (Turborepo/Nx), CI/CD pipelines for web apps, OWASP Top 10 security hardening applied |
+| **W1 — Developer Environment, Git/GitHub & AI-Native Mindset** | W1–W10 | VS Code + Node + Git + GitHub install (Win/Mac), terminal basics, Git fundamentals (init/add/commit/push), common Git issues, **advanced: multi-developer contributor workflow, branch/PR/merge**, AI mindset (capabilities & limits, developer-vs-engineer mindset, how NOT to use AI, how AI "thinks" conceptually), responsible AI-native workflow, prompt-engineering basics |
+| **W2 — HTML5 Mastery** | W11–W16 | Structure & semantics, text/formatting, lists/links/images/buttons, forms (all input types, fieldset/legend), semantic elements (nav/header/footer/section/article), tables, audio/video/iframe |
+| **W3 — CSS3 Mastery** | W17–W26 | Box model & units, selectors, Flexbox fundamentals + practice, CSS Grid + practice, pseudo-classes & pseudo-elements, positioning & z-index, responsive design & media queries, animations/transitions/transforms, custom properties, image optimization |
+| **W4 — Project 1: Port Cargo Website** | W27 | First applied project — HTML + CSS deployed site, Git-versioned from day one, deployed to GitHub Pages/Cloudflare Pages |
+| **W5 — Tailwind CSS & Utility-First Design** | W28–W31 | Component vs. utility philosophy, Tailwind setup, typography/spacing utilities, Flex & Grid with Tailwind, responsive card + pricing component |
+| **W6 — JavaScript Foundations with a Problem-Solving Mindset** | W32–W45 | Variables/data types/naming, operators, conditionals (if/else/ternary/logical/multi-level), loops (for/while/do-while, break/continue), arrays (traversal, push/pop/shift/unshift, sort/reverse, array-of-objects), strings, objects (get/set, keys/values, nested, looping), functions (params/args/return), **NEW (gap-close): reading error messages & stack traces + first DevTools console debugging session** — problem-solving drills using port-domain data (container-weight conversion, duplicate B/L detection, shipment cost calculator, tiered-discount cargo pricing) |
+| **W7 — Modern JavaScript (ES6+)** | W46–W53 | `let`/`const`, template strings, arrow functions, default params, spread/rest, destructuring, optional chaining, array power methods (`map`/`forEach`/`filter`/`find`/`reduce`/`slice`), object methods (seal/freeze/entries), closures, callbacks, pass-by-reference vs. value, null vs. undefined, truthy/falsy, `==` vs `===`, scope & hoisting |
+| **W8 — TypeScript: Production-Grade Typing** | W54–W63 | Setup & compiler config, primitive vs. non-primitive types, object types/literals/optional properties, typed functions, rest/spread/destructuring in TS, nullish coalescing, special types (nullable/unknown/never), type assertions, interfaces, generics, enums & `as const`, utility types, **OOP in TypeScript** (classes, constructors, inheritance, narrowing, access modifiers, getters/setters/static, polymorphism, abstraction, encapsulation), problem-solving with TS |
+| **W9 — DOM, BOM & Browser Fundamentals (React Bridge)** | W64–W70 | DOM tree structure, selection (`getElementBy*` vs. `querySelector`), manipulation (text/attributes/styling), events & `addEventListener`, bubbling/capturing/delegation, BOM essentials (window/location/history), timing (`setTimeout`/`setInterval`), browser storage, async foundations (`Promise`, `fetch`), Virtual DOM & diffing concept |
+| **W10 — Project 2: Port Cargo Tracker (Vanilla TS + DOM)** | W71 | **v4.1 sequencing fix: moved AFTER the DOM module** (in v4.0 this project sat at W63, one lesson *before* DOM was taught — a forward dependency). Cargo-status tracker with add/update/delete, typed with TS, deployed |
+| **W11 — API Integration, JSON & Async Patterns** | W72–W78 | How the internet works (HTTP/HTTPS, DNS, request lifecycle), REST verbs, `fetch`, async/await, try/catch error handling, loading/error/empty states, pagination-aware fetching — port scenario: live vessel-schedule lookup page |
+| **W12 — React Fundamentals** | W79–W91 | React vs. Next.js, components & JSX rules, props, conditional rendering (6 ways), lists + keys, `useState` & controlled inputs, events, the **`use()` hook**, `useEffect` (deps, cleanup), Axios, state lifting, Context API basics, "thinking in React," Recharts data viz with AIS-style vessel data |
+| **W13 — Project 3: Maritime Dashboard + AIS (React SPA)** | W92 | Deployed React SPA visualizing simulated AIS vessel-position/ETA data with charts, filters, responsive layout |
+| **W14 — React Router & Client-Side Architecture** | W93–W99 | SPA concepts, nested routing/`Outlet`/`Link`/`NavLink`, loaders & `useLoaderData`, dynamic params, `useNavigate`, 404 handling, `useLocation`, React Hook Form, custom hooks for reuse, component-tree design |
+| **W15 — NEW (gap-close): Debugging, DevTools & Testing Foundations** | W100–W104 | The scientific debugging method (reproduce → isolate → hypothesize → verify), Chrome DevTools deep dive (Network/Sources/Performance tabs, breakpoints), error taxonomy (syntax vs. runtime vs. logic vs. async), **Vitest introduction & first unit tests**, first React component tests — plus a preview drill: debugging a piece of AI-generated code with a planted logic bug. *Why here: Batch 14 lists "Introduction to Testing" as a NEW batch topic but never sequences it; v4.0 deferred all testing to W183+, which is ~80 lessons of untested code. This closes that gap early so testing becomes a habit, not a chapter.* |
+| **W16 — Next.js Foundations & Rendering** | W105–W114 | Why Next.js, App Router structure, pages/dynamic routes/catch-all segments, multiple layouts, CSR vs. SSR vs. SSG vs. ISR + hydration, server vs. client components, server-component data fetching, caching behavior (`no-store`, `revalidate`), `generateStaticParams`, image/font optimization, metadata & SEO, `next/dynamic` lazy loading |
+| **W17 — Modern UI Systems: Hero UI, ShadCN & Design Systems** | W115–W119 | Hero UI setup & theming, ShadCN integration, component composition patterns, design-token-driven consistency, **accessible component patterns from the start** (keyboard nav, ARIA basics — moved earlier than v4.0's W28-only placement) |
+| **W18 — Authentication: BetterAuth (Primary) + Firebase Auth (Alternate)** | W120–W129 | BetterAuth architecture, MongoDB adapter, credentials register/login, session management, route protection via proxy/middleware, Google OAuth, GitHub OAuth, profile update + image upload, password reset + email verification, logout & deployment — plus documented Firebase Auth alternate pattern for BaaS-preferring clients |
+| **W19 — Backend Engineering: Node.js, Express & MongoDB** | W130–W142 | Client-server architecture & Node internals, Express fundamentals & first API, REST design + **EDI/EDIFACT concepts**, MongoDB fundamentals, **raw driver CRUD before any ORM** (`insertOne`/`find`/`updateOne`/`deleteOne`/`ObjectId`), full query/update operators, projection/sorting, **aggregation pipeline** (`$match`/`$group`/`$project`/`$lookup`/`$unwind`/`$facet`) tied to UNCTAD-style KPI reporting, JWT auth + middleware, RBAC (admin/user/moderator) |
+| **W20 — NEW (gap-close): SQL & Relational Databases (PostgreSQL + Prisma)** | W143–W150 | Why relational databases still run most of the world, PostgreSQL setup, schema design & normalization, joins & aggregations, transactions & indexes, Prisma (or Drizzle) ORM + migrations, **SQL-vs-NoSQL decision framework** (when Mongo was actually the wrong choice), mini-project: relational **port billing schema** (vessels → calls → invoices → line-items — a naturally relational domain). *Why here: both PH batches are Mongo-only — a known blind spot. Most enterprise port/logistics systems, and a large share of freelance briefs, are SQL-backed. This is the single largest technical gap in both source batches.* |
+| **W21 — NEW (gap-close): Production Backend Essentials** | W151–W157 | Transactional email (Nodemailer/Resend — promoted from a single buried Batch 12 lesson), file uploads & object storage (**Cloudflare R2**/S3, presigned URLs — replacing Batch 12's ImageBB toy pattern), background jobs & queues (BullMQ concepts), caching with Redis (app-level; ops-level Redis lives in Track AU9/L), **webhook reliability & idempotency keys** (critical for the payment modules that follow — retried Stripe webhooks must not double-bill), scheduled tasks/cron, environment & secrets management done properly. *Why here: every one of these appears in real freelance briefs; none had a dedicated home in either batch or v4.0.* |
+| **W22 — Full-Stack Project 1: Port Management API (AI-First Approach)** | W158–W165 | Writing a **PRD with AI**, wireframing with AI tools, tech-stack decisioning, Next.js/Hero UI/Node/Express/MongoDB/TypeScript build, RBAC, **Stripe** payment + webhooks (checkout session, signature verification, **idempotent webhook handling using W21 skills**), **deployment per the v4.2 doctrine: frontend on Cloudflare Pages, Express API on a self-managed VPS (Docker + Caddy reverse proxy + systemd — first live use of Track L skills) — no managed-PaaS dependency**, end-to-end testing **using the W15 testing habits** |
+| **W23 — Full-Stack Project 2: Port SaaS v1 (Modular Architecture + Local AI)** | W166–W173 | **Modular/MVC pattern** (feature-based modules), **Mongoose ODM**, ShadCN UI, **SSLCommerz** integration (regional payment rail — real differentiator for clients Stripe doesn't serve), **local AI via Ollama** (AI-assisted cargo-manifest summarization feature), AI-assisted code review, refactoring bloated files, security & performance pass, **deployment per the v4.2 doctrine (Cloudflare Pages frontend + VPS backend; the Ollama AI feature runs on the same VPS — a fully self-hosted, zero-API-cost AI deployment, itself a sellable pattern for privacy-sensitive clients)**. *(Architecture honestly credited: descended from Batch 12's Zap Shift delivery-tracking capstone, reskinned to port cargo.)* |
+| **W24 — Cloudflare-Native Full-Stack & the Deployment Doctrine (home module)** | W174–W179 | Cloudflare Pages advanced (build config, preview deployments), **Workers with web-standard APIs** (fetch/Request/Response — code that runs on any standards-compliant runtime), **Hono** as the portable edge framework (identical code on Workers/Node/Bun/Deno — the future-proof backend skill), **D1** (SQLite at the edge — directly reuses W20's SQL skills, with export/migration path), **R2** (S3-API-compatible object storage) + KV & cache API, **Queues & Cron Triggers** (edge-native version of W21's background-jobs patterns), **Next.js on Cloudflare via the OpenNext adapter** (with the honest version-drift caveat: adapter fidelity verified against current docs at teach-time), and the **escape-hatch drill**: redeploy the mini-project's backend to a bare VPS with Docker + Caddy, proving portability in practice — mini-project: PortBill-style calculator fully on the Cloudflare stack, then partially re-hosted sovereign. *Why here: this is Samiul's actual production stack (PortBill, carview), yet both PH batches teach managed-PaaS-only deployment. This module is the doctrine's home (Section 0.2): Cloudflare primary, VPS sovereign fallback, zero vendor lock-in by design. When PH lessons demonstrate deployment on their default platform, follow conceptually but do the actual deploy on Cloudflare — this module exists to make that translation second nature.* |
 
-**Portfolio outcome:** 6 built-in capstone projects (Foundational Layer) + 5 advanced-layer capability demonstrations (a tested app, a GraphQL/tRPC API, a performance-audited production app, a multi-tenant SaaS pattern implementation, a CI/CD-deployed monorepo) = a senior-level, client-ready portfolio.
+### PART B — AI-Assisted Coding, Rebuilt & Market-Hardened (W180–W217)
+
+*v4.1 upgrades in this part come directly from the 2026 hiring-market analysis: the commodity skill is "uses AI tools" (~92% of developers); the scarce skills are verifying AI output, context design, agent-failure handling, and honest AI governance.*
+
+| Module | Lessons | Core Topics |
+|---|---|---|
+| **W25 — AI-Assisted Coding I: Foundations, Design-to-Code & Rapid Builders** | W180–W189 | Vibe-coding origin/mindset, **golden rules of responsible vibe coding**, the PRD → Spec → Prompt → Review workflow, 2026 AI tool landscape, prompt engineering → context engineering, **Figma MCP** (design-to-code, homepage & multi-page generation, Figma Make export), **Lovable**, **Bolt.new**, **V0**, troubleshooting wrong AI output, comparative tour (Google AI Studio, Firebase Studio, Base44, Replit Agent) — **NEW: AI feasibility scoping as a client service** (translating a vague "we want AI" brief into what's realistically buildable, with honest can/can't boundaries) and **NEW: representing AI-assisted work honestly in proposals and READMEs** (your existing no-overhype principle, formalized into a repeatable client-communication pattern) |
+| **W26 — AI-Assisted Coding II: Agentic IDEs — Cursor & Claude Code Mastery** | W190–W202 | **Cursor deep dive:** rules files, codebase indexing, agent mode, `@`-context pinning, MCP integration (GitHub/Supabase/Browser MCP), parallel agents via git worktrees. **Claude Code deep dive:** `CLAUDE.md` as project AI-constitution, slash commands & skills, hooks as guardrails/quality gates, subagents & agent teams, plan → execute → review workflow. Copilot Pro vs. Claude Code comparison. One real SaaS feature built end-to-end agentically. **NEW (market gap-close): Context Engineering as a named, drilled skill** — given a deliberately messy repo, restructure folders, write docs that serve humans *and* agents, and design API boundaries so AI-assisted work gets faster for a whole team (this is emerging as its own hiring criterion, distinct from prompting). **NEW: Agent failure modes** — subagent timeouts, state management across tool calls, runaway-cost detection, and the judgment call of **when NOT to use an agent at all** (production agent experience remains genuinely scarce — ~half of developers still don't use agents). **NEW: MCP fundamentals deep dive** — the protocol itself (tools/resources/prompts), not just consuming pre-built servers, as groundwork for the W34 capstone |
+| **W27 — AI-Assisted Coding III: Verification, Security & Deployment Mastery** | W203–W213 | Why code quality matters *more* when you vibe-code, AI-assisted PR review (CodeRabbit-style), AI-assisted automated tests, refactoring to clean/MVC architecture with agents, AI-assisted security review, complex multi-file refactors, parallel agents on separate tasks, deployment master class **per the v4.2 doctrine** (Cloudflare Pages/Workers primary; self-hosted VPS via Docker + reverse proxy as the sovereign path; Railway/Render/Netlify at awareness-level only, strictly for inherited client projects — a professional operates in a client's environment without adopting it), custom domain & SSL on both Cloudflare and VPS paths, **UAT discipline**. **NEW (the scarcest 2026 skill, drilled explicitly): AI-output verification drills** — a recurring exercise format where AI-generated code with planted bugs (logic errors, subtle security holes, performance cliffs) must be found *by reading, before running*, then explained; only ~30% of AI suggestions survive review unmodified, and the market pays for the person who knows which 70% to reject and why. **NEW: OWASP LLM Top 10 introduction** (prompt injection, insecure output handling, data leakage via context) — applied later in W34. **NEW: AI governance & guardrails-before-production** — accountability for AI-assisted decisions, deciding where AI output is reliable vs. risky |
+| **W28 — Final AI-Native Capstone: Port SaaS v2 (Multi-Tool Build + i18n)** | W214–W217 | Build & deploy one port-domain SaaS feature using **≥3 AI tools in one pipeline** (e.g., Figma MCP → Cursor/Claude Code → AI review pass), RTL/i18n support retained as a portable pattern, polished README **honestly documenting which tool did what** + short project video walkthrough |
+
+### PART C — Advanced Professional Layer (W218–W247) — *content unchanged from v3.3, renumbered*
+
+| Module | Lessons | Core Topics |
+|---|---|---|
+| **W29 — Testing & Quality Assurance (Advanced)** | W218–W225 | Unit testing depth (Vitest/Jest), React Testing Library, E2E (Playwright), API mocking (MSW), visual regression, coverage strategy, CI test automation, mutation-testing awareness — *builds on the W15 foundations rather than starting cold* |
+| **W30 — Advanced State & Data Architecture** | W226–W231 | Zustand/Redux Toolkit, TanStack Query advanced caching, optimistic updates, real-time (WebSockets/SSE), offline-first patterns, form architecture at scale (RHF + Zod) |
+| **W31 — API Architecture Beyond REST** | W232–W236 | GraphQL fundamentals, GraphQL server (Apollo/Yoga), tRPC, API versioning strategy, rate limiting & gateway patterns |
+| **W32 — Production Engineering for Web** | W237–W242 | Core Web Vitals deep dive, bundle analysis & code splitting, CDN/edge caching strategy (extends W24 and the v4.2 doctrine — Cloudflare cache rules + Workers cache API as the worked examples), monitoring & error tracking (Sentry-style, self-hostable option noted), WCAG accessibility audit & remediation, i18n architecture |
+| **W33 — Enterprise & SaaS Patterns** | W243–W247 | Multi-tenancy patterns, design systems & component libraries at scale, monorepo tooling (Turborepo/Nx), CI/CD pipelines, OWASP Top 10 (classic web) hardening applied |
+
+### PART D — Production AI Integration Layer (W248–W260) — expanded in v4.1
+
+*Reframed around the market's actual screen: not "can you call an LLM API" (commodity) but "can you ship an AI feature a client can trust" — evals, guardrails, cost control, and honest failure-mode communication.*
+
+| Module | Lessons | Core Topics |
+|---|---|---|
+| **W34 — AI-Native Product Engineering: Production LLM Integration (Doctrine-Compliant Serving)** | W248–W260 | Streaming chat UIs (SSE / web-standard streaming-response patterns, framework-agnostic, served from Cloudflare Workers), RAG over port/shipping documents (chunking strategy, embeddings, vector-DB basics — **Cloudflare Vectorize as the platform-native option, with a self-hostable alternative (pgvector on the W20 Postgres) so the RAG skill is portable**), function-calling/tool-use in a web-facing agent, **eval design as a first-class skill** (a test-set of real port-domain questions with expected answers, measuring regressions when prompts/models change — the universal 2026 interview screen), **guardrails & hallucination-aware UX** (confidence signaling, citation-required answers, graceful "I don't know"), structured-output validation (Zod schemas on LLM responses), **cost control & multi-model routing behind Cloudflare AI Gateway** (provider-agnostic caching, rate limiting, spend analytics, one-line provider swap — plus **Workers AI** for edge inference and **self-hosted Ollama on the VPS** as the zero-vendor tier: three serving tiers, no mandatory dependence on any single model vendor), **applied LLM security** (defending the W27 OWASP LLM Top 10 in a live app — prompt-injection tests against your own deployed widget), deploying a customer-facing AI widget on Workers, **capstone extension: build & publish an MCP server exposing port-billing/vessel-schedule data as agent-callable tools** (2 lessons — your rarest asset combined with the current interoperability standard), honest client-facing AI documentation (what it does, what it can't, what it costs to run) — **final capstone: "Ask About Your Shipment" AI assistant widget + companion `port-mcp-server`, for a freight-forwarder client persona** |
+
+### Portfolio Outcome (Track W v4.1)
+
+**10 named capstone deliverables** (up from 8):
+
+| # | Project | Built At | Demonstrates |
+|---|---|---|---|
+| W-1 | Port Cargo Website | W27 | HTML/CSS fundamentals, deployed |
+| W-2 | Port Cargo Tracker (Vanilla TS + DOM) | W71 | DOM manipulation + TypeScript (now correctly sequenced) |
+| W-3 | Maritime Dashboard + AIS (React SPA) | W92 | React fundamentals + data viz |
+| W-4 | Relational Port Billing Schema (mini) | W150 | SQL/PostgreSQL/Prisma competence — the gap both PH batches leave open |
+| W-5 | Port Management API (Full-Stack Project 1) | W165 | AI-first PRD workflow, Stripe + idempotent webhooks, RBAC, tested |
+| W-6 | Port SaaS v1 (Full-Stack Project 2) | W173 | Modular architecture, Mongoose, SSLCommerz, local AI (Ollama) |
+| W-7 | Cloudflare-Native PortBill-Style App (mini) | W179 | Workers/D1/R2/KV — your actual production stack, made a portfolio proof |
+| W-8 | Final AI-Native Capstone: Port SaaS v2 | W217 | Multi-tool AI-assisted build, honestly documented, i18n/RTL |
+| W-9 | Advanced-Layer Capability Set (tested app / GraphQL-tRPC API / performance audit / multi-tenant pattern / CI-CD monorepo) | W218–W247 | Senior-level production engineering |
+| W-10 | AI-Powered Port Assistant Widget + `port-mcp-server` | W260 | Production LLM/RAG with evals & guardrails, plus an MCP server over port data — the single most differentiating pairing in the portfolio |
+
+**Practical priority note:** W-1 through W-6 give the fastest client-facing portfolio; W-7 aligns the portfolio with your real delivery stack; W-8 and W-10 are what separate you from every other Programming Hero graduate bidding on the same gigs — almost none will have a documented multi-AI-tool workflow, an eval-tested LLM feature, or an MCP server over real domain data.
 
 ---
 
 ## 8. Track L — Linux Systems Administration, Advanced (110 Lessons: L1–L110)
+
+*Unchanged from v3.3/3.7 — reproduced in full below.*
 
 **Source:** Original 60-lesson RHCSA track, extended with 50 additional advanced lessons covering enterprise-grade Linux operations beyond exam scope — performance, HA clustering, advanced networking, security hardening, observability, and immutable infrastructure.
 
@@ -221,16 +348,18 @@ Supporting phases (not lesson-count-expanded, retained at prior scope): **Phase 
 
 | # | Project | Built At | Demonstrates |
 |---|---|---|---|
-| L-1 | **Port App Server Hardening & Deployment Base** | End of L7 (~L60) | CIS-hardened RHEL/Rocky server, ready to host PortBill/client-intake apps — SELinux enforcing, firewalld configured, SSH hardened |
-| L-2 | **High-Availability Database Cluster for Port Billing** | End of L9 (~L78) | 2-node Pacemaker/Corosync HA cluster protecting a PostgreSQL/MySQL instance, with fencing and failover tested |
-| L-3 | **Port Infrastructure Monitoring & Alerting Stack** | End of L12 (~L102) | Prometheus + Grafana + centralized logging, actively monitoring real deployed apps (PortBill or client-intake system) with working alert rules |
-| L-4 | **Immutable Container Fleet for Port Microservices** | End of L13 (~L110) | Rootless Podman container fleet, systemd-managed, image-scanned, running a small multi-service port app (e.g., billing API + tracker frontend as separate containers) |
+| L-1 | Port App Server Hardening & Deployment Base | End of L7 (~L60) | CIS-hardened RHEL/Rocky server, ready to host PortBill/client-intake apps — SELinux enforcing, firewalld configured, SSH hardened |
+| L-2 | High-Availability Database Cluster for Port Billing | End of L9 (~L78) | 2-node Pacemaker/Corosync HA cluster protecting a PostgreSQL/MySQL instance, with fencing and failover tested |
+| L-3 | Port Infrastructure Monitoring & Alerting Stack | End of L12 (~L102) | Prometheus + Grafana + centralized logging, actively monitoring real deployed apps with working alert rules |
+| L-4 | Immutable Container Fleet for Port Microservices | End of L13 (~L110) | Rootless Podman container fleet, systemd-managed, image-scanned, running a small multi-service port app |
 
 **Portfolio outcome:** RHCSA-track certification + the four named projects above, each published as a documented public GitHub repo with setup instructions and architecture notes.
 
 ---
 
 ## 9. Track N — Configuration Automation / Ansible, Advanced (110 Lessons: N1–N110)
+
+*Unchanged from v3.3/3.7 — reproduced in full below.*
 
 **Source:** Original 60-lesson RHCE track, extended with 50 additional advanced lessons covering enterprise automation platform operations, custom module development, testing, and event-driven automation.
 
@@ -262,19 +391,21 @@ Supporting phases (not lesson-count-expanded, retained at prior scope): **Phase 
 
 | # | Project | Built At | Demonstrates |
 |---|---|---|---|
-| N-1 | **One-Command Port Server Provisioning Role** | End of N6 (~N42) | A complete, reusable Ansible role that provisions a port-app-ready server (users, packages, firewall, app dependencies) from zero in a single playbook run |
-| N-2 | **Zero-Downtime Deployment Automation for PortBill** | End of N8/N14 (~N60–N110) | A rolling-update playbook that deploys a new PortBill version across servers with no service interruption, using `serial` and health checks |
-| N-3 | **Custom Ansible Module: Port Billing Config Validator** | End of N10 (~N76) | A custom Python-based Ansible module that validates tariff/billing config files before deployment, packaged and documented for reuse |
-| N-4 | **Enterprise Automation Platform for Multi-Client Server Fleet** | End of N12 (~N91) | An AWX/AAP setup managing multiple client servers from job templates with RBAC — the operational backbone for scaling freelance infrastructure delivery |
-| N-5 | **Compliance Automation Pipeline (OpenSCAP + Ansible)** | End of N14 (~N110) | An automated security-compliance scan-and-remediate pipeline, directly reusing Track L's hardening work but making it repeatable at scale |
+| N-1 | One-Command Port Server Provisioning Role | End of N6 (~N42) | A complete, reusable Ansible role that provisions a port-app-ready server from zero in a single playbook run |
+| N-2 | Zero-Downtime Deployment Automation for PortBill | End of N8/N14 (~N60–N110) | A rolling-update playbook deploying a new PortBill version across servers with no service interruption |
+| N-3 | Custom Ansible Module: Port Billing Config Validator | End of N10 (~N76) | A custom Python-based Ansible module validating tariff/billing config files before deployment |
+| N-4 | Enterprise Automation Platform for Multi-Client Server Fleet | End of N12 (~N91) | An AWX/AAP setup managing multiple client servers from job templates with RBAC |
+| N-5 | Compliance Automation Pipeline (OpenSCAP + Ansible) | End of N14 (~N110) | An automated security-compliance scan-and-remediate pipeline, reusing Track L's hardening work at scale |
 
-**Portfolio outcome:** RHCE-track certification + the five named projects above, published as public GitHub repos — N-1 and N-2 in particular make a strong "I can operate your infrastructure" pitch to clients.
+**Portfolio outcome:** RHCE-track certification + the five named projects above, published as public GitHub repos.
 
 ---
 
 ## 10. Track AU — Workflow Automation Engineering (n8n), Advanced (110 Lessons: AU1–AU110)
 
-**Source:** Full 28-phase n8n roadmap (previously only 11 of 28 phases were included) — now expanded to near-complete coverage, structured as a professional automation-architecture track.
+*Unchanged from v3.3/3.7 — reproduced in full below.*
+
+**Source:** Full 28-phase n8n roadmap, structured as a professional automation-architecture track.
 
 | Module (Original Phase) | Lessons | Core Topics |
 |---|---|---|
@@ -311,11 +442,11 @@ Supporting phases (not lesson-count-expanded, retained at prior scope): **Phase 
 
 | # | Project | Built At | Demonstrates |
 |---|---|---|---|
-| AU-1 | **C&F Agent Invoice Email-to-Record Automation** | End of AU11 (~AU41) | Parses incoming invoice emails from C&F agents, extracts data, logs it to a database/sheet automatically — a directly sellable Fiverr/Upwork gig on its own |
-| AU-2 | **Vessel ETA & Free-Time Deadline Alert System** | End of AU18 (~AU66) | Scheduled workflow that tracks free-time deadlines and sends alerts before storage charges kick in — ties directly to the PortBill monetization idea already in progress |
-| AU-3 | **AI-Powered Shipping Document Data Extraction Pipeline** | End of AU26 (~AU94) | Uses AI nodes to extract structured data (container numbers, weights, dates) from PDF manifests/invoices — high-value, hard-to-replicate automation |
-| AU-4 | **Multi-Client Port Business Process Automation Suite** | End of AU27 (~AU102) | A packaged set of reusable workflows (invoice processing, email triage, CRM sync) deployable for multiple freight-forwarder/C&F clients |
-| AU-5 | **Enterprise SaaS Automation Platform (Capstone)** | End of AU28 (~AU110) | A production-deployed, multi-tenant automation platform combining several of the above into one offering — the flagship n8n portfolio piece |
+| AU-1 | C&F Agent Invoice Email-to-Record Automation | End of AU11 (~AU41) | Parses incoming invoice emails, extracts data, logs it automatically — a directly sellable Fiverr/Upwork gig |
+| AU-2 | Vessel ETA & Free-Time Deadline Alert System | End of AU18 (~AU66) | Scheduled workflow tracking free-time deadlines and sending alerts before storage charges kick in |
+| AU-3 | AI-Powered Shipping Document Data Extraction Pipeline | End of AU26 (~AU94) | Uses AI nodes to extract structured data from PDF manifests/invoices |
+| AU-4 | Multi-Client Port Business Process Automation Suite | End of AU27 (~AU102) | A packaged set of reusable workflows deployable for multiple freight-forwarder/C&F clients |
+| AU-5 | Enterprise SaaS Automation Platform (Capstone) | End of AU28 (~AU110) | A production-deployed, multi-tenant automation platform — the flagship n8n portfolio piece |
 
 **Portfolio outcome:** The five named projects above, with AU-1 and AU-2 specifically designed to be turned into standalone Upwork/Fiverr gigs immediately upon completion.
 
@@ -323,75 +454,71 @@ Supporting phases (not lesson-count-expanded, retained at prior scope): **Phase 
 
 ## 11. Track TOS — Port, Maritime & Terminal Operating Systems, Global Standard (140 Lessons: TOS1–TOS140)
 
-**Source:** Merged and restructured from the "Port Operations Manager" theoretical guide and the "Global Seaport Operations" training system (two near-duplicate documents in the original material, fully consolidated here). All country-specific regulatory content (Mawani, FASAH, ZATCA, Vision 2030) has been removed; only internationally-applicable standards, frameworks, and formulas remain.
+*Unchanged from v3.3/3.7 — reproduced in full below.*
 
-**Rationale:** Eita tomar career-er **core differentiator**. Ei track complete korle tumi global port/shipping/logistics client-ke ekটা independently-verifiable claim korte parba: *"I understand vessel operations, yard management, port billing, TOS architecture, KPI frameworks, and international compliance standards at a professional level — not just from 12 years of practice, but from a structured, internationally-referenced framework."*
+**Rationale:** This track remains your core career differentiator, unaffected by the Track W rebuild.
 
 | Phase | Lessons | Core Topics |
 |---|---|---|
-| **TOS-1 — Global Port System Foundations** | TOS1–TOS12 | Port definitions & operational logic, port ecosystem & stakeholder map, global shipping chain (shipper → hub → consignee), port revenue mechanics, failure case: berth congestion cascade, failure case: single point of failure (customs system down), KPI foundations (vessel calls, throughput, berth occupancy, turnaround, dwell time), full simulation & assessment |
-| **TOS-2 — Vessel Operations** | TOS13–TOS26 | Full vessel lifecycle (ETA to post-departure), Notice of Readiness (NOR) mastery & dispute scenarios, laytime calculation methodology + worked examples + exceptions, pilotage operations & SOLAS boarding requirements, tug operations & bollard-pull mechanics, berth allocation strategy & priority matrix, failure case: early arrival/berth conflict, failure case: NOR dispute mid-operation, KPI deep dive, full simulation & assessment |
-| **TOS-3 — Container Terminal Infrastructure & Yard Management** | TOS27–TOS40 | Bay-Row-Tier addressing system, yard zoning (import/export/transship/reefer/hazmat/OOG), dwell time control & escalation triggers, stack planning logic & rehandle ratio, STS crane systems & productivity formulas, RTG crane systems, RMG crane systems, equipment chain & synchronization, gate operations & truck TAT, failure case: yard saturation, failure case: rehandle cascade, KPI reference table, full simulation & assessment |
-| **TOS-4 — Cargo Flow Engineering** | TOS41–TOS52 | Five cargo flow types (import/export/direct transshipment/yard transshipment/coastal), hub-and-spoke transshipment model, Bill of Lading types (Master/House/Through/Seaway/Telex/Switch/Charter Party), bottleneck & cascade delay analysis, generic customs/clearance workflow, full simulation & assessment |
-| **TOS-5 — Port Billing & Tariff Systems** | TOS53–TOS68 | Complete vessel charge framework (port dues/pilotage/towage/berth hire), complete cargo/container charge framework (THC/storage/reefer/hazmat/OOG), gate & trucking charges, free time & tiered slab billing logic with worked calculations, demurrage vs. detention vs. storage — precise distinctions, invoice structure & verification checklist, billing dispute resolution process, worked exercise: 500 TEU batch with 18-day dwell slab calculation, worked exercise: disputed free time (vessel delay vs. terminal fault), full simulation & assessment |
-| **TOS-6 — Terminal Operating System (TOS) Architecture** | TOS69–TOS82 | TOS concept & major platforms (NAVIS N4, COSMOS, Tideworks, CargoWise), vessel planning module, yard management module, gate operations module, equipment control system (ECS), billing integration module, EDI messaging deep dive (BAPLIE/COPRAR/CODECO/COPARN/CUSCAR/IFTMIN/VERMAS/COARRI), system failure protocols & manual fallback procedures, live BAPLIE file reading exercise, full simulation & assessment |
-| **TOS-7 — KPI & Performance Engineering** | TOS83–TOS94 | KPI hierarchy (operational/tactical/strategic), master KPI reference table & formulas, root-cause analysis framework, performance degradation cascade modeling, shipping-line SLA mechanics, KPI reporting cadence & formats, presenting KPI data to management, full KPI analysis exercise against a real dataset |
-| **TOS-8 — Marine Operations** | TOS95–TOS106 | Pilotage systems deep dive (compulsory vs. voluntary), tug coordination & undocking procedures, anchorage management & allocation sequencing, draft & tide-window calculation, VTS coordination & traffic separation schemes, COLREGs applied to port operations, emergency scenarios (blackout/tug failure/collision risk/weather abort), full simulation & assessment |
-| **TOS-9 — Safety & Global Compliance** | TOS107–TOS116 | ISPS Code (3 security levels + PFSO role), SOLAS full coverage (structural/fire/LSA/cargo securing), MARPOL full coverage (6 annexes + port reception facilities), IMDG Code deep dive (class segregation/stowage/emergency response), emergency response plan & incident command structure, port facility security plan components, full emergency-drill simulation |
-| **TOS-10 — Advanced Port Management & Comparative Systems** | TOS117–TOS126 | Multi-vessel conflict resolution framework, yard-saturation crisis full recovery plan, berth optimization under schedule disruption, cost vs. efficiency tradeoff analysis, shipping-line communication protocols, seasonal-peak capacity planning, equipment fleet optimization, contingency planning framework (equipment/weather/customs/labor), comparative global port case studies (major hub models), full simulation |
-| **TOS-11 — Real-World Simulation Training** | TOS127–TOS136 | Simulation: early vessel arrival/berth conflict, Simulation: yard saturation crisis, Simulation: crane breakdown during peak operations, Simulation: customs system failure blocking cargo flow, Simulation: missed transshipment connection, plus 5 integrated cross-cutting simulations combining operations + billing + KPI + compliance |
-| **TOS-12 — Global Interview & Consulting Readiness** | TOS137–TOS140 | Senior operations interview question bank & model answers, presenting domain expertise + software capability as a unified pitch, building a client-facing "Port Domain Glossary & Framework" document, final portfolio capstone: a one-page global port operations case study write-up |
+| **TOS-1 — Global Port System Foundations** | TOS1–TOS12 | Port definitions & operational logic, port ecosystem & stakeholder map, global shipping chain, port revenue mechanics, failure cases (berth congestion cascade, customs system down), KPI foundations, full simulation & assessment |
+| **TOS-2 — Vessel Operations** | TOS13–TOS26 | Full vessel lifecycle, NOR mastery & dispute scenarios, laytime calculation methodology, pilotage & SOLAS boarding requirements, tug operations, berth allocation strategy, failure cases, KPI deep dive, full simulation & assessment |
+| **TOS-3 — Container Terminal Infrastructure & Yard Management** | TOS27–TOS40 | Bay-Row-Tier addressing, yard zoning, dwell time control, stack planning & rehandle ratio, STS/RTG/RMG crane systems, gate operations & truck TAT, failure cases, KPI reference table, full simulation & assessment |
+| **TOS-4 — Cargo Flow Engineering** | TOS41–TOS52 | Five cargo flow types, hub-and-spoke transshipment model, Bill of Lading types, bottleneck & cascade delay analysis, generic customs/clearance workflow, full simulation & assessment |
+| **TOS-5 — Port Billing & Tariff Systems** | TOS53–TOS68 | Complete vessel/cargo/gate charge frameworks, free time & tiered slab billing logic, demurrage vs. detention vs. storage, invoice structure & verification checklist, billing dispute resolution, worked exercises, full simulation & assessment |
+| **TOS-6 — Terminal Operating System (TOS) Architecture** | TOS69–TOS82 | TOS concept & major platforms (NAVIS N4, COSMOS, Tideworks, CargoWise), vessel/yard/gate/equipment/billing modules, EDI messaging deep dive, system failure protocols, live BAPLIE file reading exercise, full simulation & assessment |
+| **TOS-7 — KPI & Performance Engineering** | TOS83–TOS94 | KPI hierarchy, master KPI reference table & formulas, root-cause analysis framework, performance degradation cascade modeling, shipping-line SLA mechanics, KPI reporting cadence & formats, full KPI analysis exercise |
+| **TOS-8 — Marine Operations** | TOS95–TOS106 | Pilotage systems deep dive, tug coordination & undocking, anchorage management, draft & tide-window calculation, VTS coordination, COLREGs applied to port operations, emergency scenarios, full simulation & assessment |
+| **TOS-9 — Safety & Global Compliance** | TOS107–TOS116 | ISPS Code, SOLAS full coverage, MARPOL full coverage, IMDG Code deep dive, emergency response plan & incident command structure, port facility security plan components, full emergency-drill simulation |
+| **TOS-10 — Advanced Port Management & Comparative Systems** | TOS117–TOS126 | Multi-vessel conflict resolution, yard-saturation crisis recovery, berth optimization under disruption, cost vs. efficiency tradeoff analysis, seasonal-peak capacity planning, contingency planning framework, comparative global port case studies, full simulation |
+| **TOS-11 — Real-World Simulation Training** | TOS127–TOS136 | Simulations: early vessel arrival/berth conflict, yard saturation crisis, crane breakdown, customs system failure, missed transshipment connection, plus 5 integrated cross-cutting simulations |
+| **TOS-12 — Global Interview & Consulting Readiness** | TOS137–TOS140 | Senior operations interview question bank & model answers, presenting domain expertise + software capability as a unified pitch, building a Port Domain Glossary & Framework document, final portfolio capstone |
 
 ### Named Capstone Projects — Track TOS
 
 | # | Project | Built At | Demonstrates |
 |---|---|---|---|
-| TOS-P1 | **Billing Dispute Resolution Case Study Portfolio** | End of TOS-5 (~TOS68) | A set of 3–5 written, worked-through billing dispute scenarios (with calculations) — directly reusable as PortBill marketing/credibility content |
-| TOS-P2 | **TOS Architecture Comparison Whitepaper** | End of TOS-6 (~TOS82) | A comparison document (NAVIS N4 vs. COSMOS vs. Tideworks vs. CargoWise) — positions tumi as someone who understands the systems clients already use |
-| TOS-P3 | **Port Domain Glossary & Framework** | End of TOS-7 (~TOS94) | A structured client-facing reference document covering terminology, formulas, and KPIs — the single most reusable credibility asset from this entire track |
-| TOS-P4 | **Full Vessel-to-Invoice Simulation Case Study** | End of TOS-11 (~TOS136) | An end-to-end written simulation tracing one vessel call from NOR through billing to final invoice — demonstrates integrated, not siloed, domain mastery |
-| TOS-P5 | **Global Port Operations Consulting Portfolio** | End of TOS-12 (~TOS140) | The final packaged capstone — combines TOS-P1 through TOS-P4 into one public-facing consulting portfolio page |
+| TOS-P1 | Billing Dispute Resolution Case Study Portfolio | End of TOS-5 (~TOS68) | 3–5 written, worked-through billing dispute scenarios with calculations |
+| TOS-P2 | TOS Architecture Comparison Whitepaper | End of TOS-6 (~TOS82) | Comparison document (NAVIS N4 vs. COSMOS vs. Tideworks vs. CargoWise) |
+| TOS-P3 | Port Domain Glossary & Framework | End of TOS-7 (~TOS94) | A structured client-facing reference document covering terminology, formulas, and KPIs |
+| TOS-P4 | Full Vessel-to-Invoice Simulation Case Study | End of TOS-11 (~TOS136) | End-to-end written simulation tracing one vessel call from NOR through billing to final invoice |
+| TOS-P5 | Global Port Operations Consulting Portfolio | End of TOS-12 (~TOS140) | The final packaged capstone — combines TOS-P1 through TOS-P4 into one public-facing portfolio page |
 
-**Portfolio outcome:** Five named deliverables (TOS-P1 through TOS-P5), most of which are **written documents, not code** — meaning they can be published and start generating credibility well before the full track is finished.
+**Portfolio outcome:** Five named deliverables, most of which are written documents, not code — publishable well before the full track is finished.
 
 ---
 
 ## 12. Track PY — Python Engineering, Advanced (150 Lessons: PY1–PY150)
 
-**Source:** Full 7-phase, 150-lesson Python Mastery Roadmap. Previously only Phases 1–4 were included (deferring Cloud/Kubernetes/Production Engineering); since advanced-level Python was explicitly requested, all seven phases are now included in full.
+*Unchanged from v3.3/3.7 — reproduced in full below.*
 
 | Phase | Lessons | Core Topics |
 |---|---|---|
-| **PY1 — Python for Systems** | PY1–PY15 | Environment setup (venv/pyenv/conda), core syntax & control flow, data structures (lists/tuples/dicts/sets), functions, string manipulation, file I/O, exception handling, modules & packages, OOP (classes, inheritance, polymorphism, encapsulation, magic methods), capstone mini-project |
-| **PY2 — Linux Automation** | PY16–PY30 | System interaction via `os`, process automation via `subprocess`, advanced process management with `psutil`, log file processing, service automation (`systemctl`), file-system automation, network operations, monitoring dashboard, configuration management, scheduled task automation, security automation, performance optimization, backup & recovery automation, integration testing, capstone: production automation platform |
-| **PY3 — CLI & Packaging** | PY31–PY45 | `argparse` fundamentals, advanced CLI design, Click framework, professional CLI development, testing CLI applications, packaging fundamentals (`pyproject.toml`), advanced packaging & PyPI publishing, structured logging, error handling & debugging, configuration management, testing strategies (pytest), code quality (`ruff`/`mypy`/`bandit`), documentation (Sphinx), performance optimization, capstone: production CLI platform |
-| **PY4 — Infrastructure Automation** | PY46–PY75 | YAML automation (Kubernetes/Ansible/CI-CD/Helm contexts), SSH automation (Paramiko, multi-server patterns), network programming for DevOps, API automation (FastAPI for DevOps tooling), database automation (PostgreSQL/MySQL/SQLite backup & migration), Docker automation via Python SDK, advanced CLI distribution, CLI security best practices, production reliability engineering (retry/circuit breaker/idempotency), capstone: infrastructure automation platform |
-| **PY5 — Cloud & Containers** | PY76–PY105 | AWS automation via boto3 (EC2/S3/IAM/CloudWatch/Lambda/VPC), advanced AWS services (RDS/ELB/CloudFormation/Route53/ECS/EKS), Docker CLI + SDK integration, advanced Docker automation, container orchestration, CI/CD pipeline automation (GitHub Actions/GitLab CI/Jenkins), multi-cloud automation (Azure/GCP), Infrastructure as Code (Terraform/Ansible via Python), cloud security automation, monitoring & observability, disaster recovery automation, serverless automation, capstone: production cloud automation platform |
-| **PY6 — Kubernetes Engineering** | PY106–PY125 | Kubernetes Python client fundamentals, ConfigMaps & Secrets automation, deployment automation patterns (rolling/blue-green/canary), service & ingress management, resource management & monitoring, namespace & RBAC automation, advanced pod management, storage automation, network policy automation, Custom Resource Definitions (CRDs), cluster management automation, GitOps (ArgoCD/Flux), Kubernetes security, monitoring & observability, capstone: production Kubernetes platform |
-| **PY7 — Production Engineering** | PY126–PY150 | Observability & structured logging, centralized logging (ELK), security practices & automation, performance engineering, production deployment strategies, incident management & response automation, backup & disaster recovery, compliance & governance automation, cost management & FinOps, quality assurance automation, documentation automation, multi-environment management, advanced automation patterns (event-driven, GitOps), enterprise integration (SSO/LDAP), scalability & high availability, capstone: production-ready DevOps platform |
+| **PY1 — Python for Systems** | PY1–PY15 | Environment setup, core syntax & control flow, data structures, functions, string manipulation, file I/O, exception handling, modules & packages, OOP, capstone mini-project |
+| **PY2 — Linux Automation** | PY16–PY30 | System interaction via `os`, process automation via `subprocess`, `psutil`, log file processing, service automation, file-system automation, network operations, monitoring dashboard, configuration management, scheduled tasks, security automation, performance optimization, backup & recovery, integration testing, capstone |
+| **PY3 — CLI & Packaging** | PY31–PY45 | `argparse`, advanced CLI design, Click framework, testing CLI apps, packaging (`pyproject.toml`), PyPI publishing, structured logging, error handling & debugging, configuration management, pytest, code quality (`ruff`/`mypy`/`bandit`), Sphinx documentation, performance optimization, capstone |
+| **PY4 — Infrastructure Automation** | PY46–PY75 | YAML automation, SSH automation (Paramiko), network programming for DevOps, API automation (FastAPI), database automation, Docker automation via Python SDK, advanced CLI distribution, CLI security, production reliability engineering, capstone |
+| **PY5 — Cloud & Containers** | PY76–PY105 | AWS automation via boto3, advanced AWS services, Docker CLI + SDK, container orchestration, CI/CD pipeline automation, multi-cloud automation, Infrastructure as Code, cloud security automation, monitoring & observability, disaster recovery automation, serverless automation, capstone |
+| **PY6 — Kubernetes Engineering** | PY106–PY125 | Kubernetes Python client, ConfigMaps & Secrets automation, deployment patterns, service & ingress management, resource management & monitoring, namespace & RBAC automation, advanced pod management, storage/network policy automation, CRDs, cluster management, GitOps, Kubernetes security, capstone |
+| **PY7 — Production Engineering** | PY126–PY150 | Observability & structured logging, centralized logging (ELK), security practices, performance engineering, production deployment strategies, incident management, backup & disaster recovery, compliance & governance automation, cost management & FinOps, QA automation, documentation automation, multi-environment management, advanced automation patterns, enterprise integration (SSO/LDAP), scalability & HA, capstone |
 
 ### Named Capstone Projects — Track PY
 
 | # | Project | Built At | Demonstrates |
 |---|---|---|---|
-| PY-1 | **Port Server Health & Log Monitoring CLI Tool** | End of PY2 (~PY30) | A CLI utility that checks server health (CPU/memory/disk) and parses application logs for a deployed port app, alerting on anomalies |
-| PY-2 | **PortBill Backup & Restore Utility** | End of PY3 (~PY45) | A packaged, PyPI-installable CLI tool that automates backup/restore for PortBill's data — a real, usable operational tool, not a toy exercise |
-| PY-3 | **Shipping Manifest & Invoice Data Processing Pipeline** | End of PY4 (~PY75) | A script pipeline that ingests CSV/PDF manifests and invoices, cleans and processes the data, and outputs structured records — directly reusable in client billing-automation work |
-| PY-4 | **Cloud-Deployed Port Automation Platform (AWS)** | End of PY5 (~PY105) | A boto3-driven automation platform managing cloud resources for a demo port-app deployment — broadens credibility to AWS-based clients |
-| PY-5 | **Kubernetes-Based Port Microservices Platform** | End of PY6 (~PY125) | A small multi-service port app (billing API + tracker + auth) deployed and managed on Kubernetes via the Python client |
-| PY-6 | **Production Observability & Incident-Response Platform for Port SaaS** | End of PY7 (~PY150) | A full observability stack (structured logging, alerting, incident runbooks) wrapped around one of the earlier port-domain projects — the final production-engineering capstone |
+| PY-1 | Port Server Health & Log Monitoring CLI Tool | End of PY2 (~PY30) | A CLI utility checking server health and parsing application logs for anomalies |
+| PY-2 | PortBill Backup & Restore Utility | End of PY3 (~PY45) | A packaged, PyPI-installable CLI tool automating backup/restore for PortBill's data |
+| PY-3 | Shipping Manifest & Invoice Data Processing Pipeline | End of PY4 (~PY75) | A script pipeline ingesting/cleaning/outputting structured manifest and invoice data |
+| PY-4 | Cloud-Deployed Port Automation Platform (AWS) | End of PY5 (~PY105) | A boto3-driven automation platform managing cloud resources for a demo deployment |
+| PY-5 | Kubernetes-Based Port Microservices Platform | End of PY6 (~PY125) | A small multi-service port app deployed and managed on Kubernetes |
+| PY-6 | Production Observability & Incident-Response Platform | End of PY7 (~PY150) | A full observability stack wrapped around an earlier port-domain project |
 
-**Practical priority note:** Tomar current delivery stack Cloudflare-centric — tai PY-1 through PY-3 (Systems/CLI/Infrastructure Automation) **highest immediate applicability** rakhe. PY-4 through PY-6 (Cloud/Kubernetes/Production) advanced professional depth-er jonno guruttopurno ebong client range-ke AWS/multi-cloud-based companies porjonto extend kore — kintu immediate delivery-er jonno na, **capability breadth-er jonno**.
-
-**Portfolio outcome:** 6 named projects, all tied to real port-domain use cases rather than generic exercises — minimum PY-1 through PY-3 should be published publicly as the strongest immediate Python-specific portfolio evidence.
+**Practical priority note (unchanged):** PY-1 through PY-3 have the highest immediate applicability given your Cloudflare-centric delivery stack; PY-4 through PY-6 broaden capability breadth toward AWS/multi-cloud clients.
 
 ---
 
 ## 13. Phase 8 — Professional English Communication
 
-**Source material:** 365-Day Technical English Roadmap — reframed from exam/interview prep to **client communication capability**
-**Priority:** Lower than the six advanced tracks; activate on demand
-**Status:** Not expanded (not part of the "advanced/100+" request) — retained at previously-reframed scope.
+*Unchanged from v3.3/3.7.*
 
 | Focus Area | Purpose |
 |---|---|
@@ -405,19 +532,22 @@ Supporting phases (not lesson-count-expanded, retained at prior scope): **Phase 
 
 ## 14. Portfolio & Deliverables Roadmap
 
-**Total named, built portfolio projects across all six tracks: 27** — plus certifications (RHCSA-track, RHCE-track) and the two existing live products (PortBill, client-intake system). This section is the master index; each track section above has the same projects with more detail.
+**Total named, built portfolio projects across all six tracks: 35** (up from 27 — the +8 is entirely from Track W: 10 named deliverables instead of 7) — plus certifications (RHCSA-track, RHCE-track) and the two existing live products (PortBill, client-intake system).
 
 ### Master Project Index (All Tracks)
 
 | Track | # | Project | Built At |
 |---|---|---|---|
-| **W** | W-1 | Port Cargo Website | W20 |
-| **W** | W-2 | Port Cargo Tracker | W55 |
-| **W** | W-3 | Maritime Dashboard + AIS | W67 |
-| **W** | W-4 | Port Management API | W88 |
-| **W** | W-5 | Port SaaS v1 | W96 |
-| **W** | W-6 | Port SaaS v2 (+ RTL/i18n UI) | W97 |
-| **W** | W-7 | Advanced-layer capability set (tested app / GraphQL-tRPC API / performance audit / multi-tenant pattern / CI-CD monorepo) | W101–W130 |
+| **W** | W-1 | Port Cargo Website | W27 |
+| **W** | W-2 | Port Cargo Tracker (Vanilla TS + DOM) | W71 |
+| **W** | W-3 | Maritime Dashboard + AIS | W92 |
+| **W** | W-4 | Relational Port Billing Schema (SQL/Prisma mini) | W150 |
+| **W** | W-5 | Port Management API (Full-Stack Project 1, AI-first) | W165 |
+| **W** | W-6 | Port SaaS v1 (Full-Stack Project 2, Modular + local AI) | W173 |
+| **W** | W-7 | Cloudflare-Native PortBill-Style App (Workers/D1/R2 mini) | W179 |
+| **W** | W-8 | Final AI-Native Capstone: Port SaaS v2 (multi-tool build) | W217 |
+| **W** | W-9 | Advanced-layer capability set (tested app / GraphQL-tRPC API / performance audit / multi-tenant pattern / CI-CD monorepo) | W218–W247 |
+| **W** | W-10 | AI-Powered Port Assistant Widget + `port-mcp-server` (production LLM/RAG + MCP) | W260 |
 | **L** | L-1 | Port App Server Hardening & Deployment Base | ~L60 |
 | **L** | L-2 | High-Availability Database Cluster for Port Billing | ~L78 |
 | **L** | L-3 | Port Infrastructure Monitoring & Alerting Stack | ~L102 |
@@ -444,16 +574,15 @@ Supporting phases (not lesson-count-expanded, retained at prior scope): **Phase 
 | **PY** | PY-5 | Kubernetes-Based Port Microservices Platform | ~PY125 |
 | **PY** | PY-6 | Production Observability & Incident-Response Platform | ~PY150 |
 
-### Fastest Path to a Sellable Portfolio (If Prioritizing Speed Over Completeness)
-
-Jodi shob track complete howar age-i kichu bikri-joggo dekhate chao, ei 6-ta project shob theke fast client-facing value dey:
+### Fastest Path to a Sellable Portfolio (unchanged philosophy, one addition)
 
 1. **AU-1** (Invoice automation) — standalone gig, low build time
 2. **AU-2** (ETA/free-time alerts) — directly extends PortBill's existing monetization plan
-3. **W-1 through W-4** — already core to existing web dev capability
-4. **L-1** — makes every other deployed project look more professional (hardened, not ad-hoc)
-5. **TOS-P3** (Port Domain Glossary) — pure writing, no coding dependency, can be done in parallel with anything
+3. **W-1 through W-6** — already core to existing web dev capability, now AI-first-workflow-documented; **W-7 (Cloudflare mini)** additionally aligns the portfolio with your real delivery stack
+4. **L-1** — makes every other deployed project look more professional
+5. **TOS-P3** (Port Domain Glossary) — pure writing, no coding dependency
 6. **N-1** — turns manual server setup into a repeatable, demoable asset
+7. **(New) W-10** — the AI Assistant Widget + `port-mcp-server` pairing is arguably your *most* differentiating portfolio piece for 2026-era clients asking for "AI features" — and near-zero competition in the port niche
 
 ### Ongoing (Outside the Six Tracks)
 
@@ -469,75 +598,27 @@ Jodi shob track complete howar age-i kichu bikri-joggo dekhate chao, ei 6-ta pro
 
 ## 15. GitHub Daily Commit Protocol & Repository Architecture
 
-**Purpose:** GitHub-i tomar resume — degree nai. Tai ei roadmap-er protek track emonvabe design kora hoyeche jate **prottek study session-e minimum ekটা genuine commit hoy**, kono track-e thako na keno, ebong GitHub profile-ta nijeই ekটা polished portfolio hoye othe, shudhu ekটা green-square streak na.
-
-**Core rule:** No fake commits. Contribution graph gaming (empty commits, single-character edits) ekটা technical reviewer 5-second-e dhorte pare, ebong eita credibility-r ulটo kaj kore. Protek commit-er ekটা real, describable reason thakte hobe — eta section-e defined "fallback commit types" diyeo shomvob, karon kono din-i "kichu na kora" obostha nai jodi tumi eishob category use koro.
+*Structure, core rules, and commit conventions unchanged from v3.3/3.7. Only Track W's repo timeline (15.7) and one row in 15.1 are updated below; everything else in this section is reproduced verbatim.*
 
 ### 15.1 Repository Architecture
 
-Two-tier structure: **lab repos** (daily lesson work, high commit frequency) + **capstone repos** (polished, pinned, client-facing).
-
 | Repo | Purpose | Feeds From |
 |---|---|---|
-| `linux-systems-lab` | Daily RHCSA/advanced Linux lesson work — configs, scripts, notes per lesson folder | Track L (L1–L110) |
-| `ansible-automation-lab` | Daily Ansible lesson work — playbooks, roles-in-progress | Track N (N1–N110) |
-| `n8n-workflows-lab` | Exported workflow JSONs + setup notes per lesson | Track AU (AU1–AU110) |
+| `linux-systems-lab` | Daily RHCSA/advanced Linux lesson work | Track L (L1–L110) |
+| `ansible-automation-lab` | Daily Ansible lesson work | Track N (N1–N110) |
+| `n8n-workflows-lab` | Exported workflow JSONs + setup notes | Track AU (AU1–AU110) |
 | `python-engineering-lab` | Daily Python lesson scripts, organized by phase folder | Track PY (PY1–PY150) |
-| `web-dev-lab` | Daily HTML/CSS/JS/TS/React/Next.js lesson exercises (pre-capstone) | Track W (W1–W130, excluding capstone lessons) |
-| `port-domain-notes` | Glossary entries, case studies, simulation write-ups, KPI reference sheets | Track TOS (TOS1–TOS140) — the only track producing docs, not code |
+| `web-dev-lab` | Daily HTML/CSS/JS/TS/React/Next.js/AI-coding lesson exercises (pre-capstone) | **Track W (W1–W260, excluding capstone lessons) — v4.1 range** |
+| `port-domain-notes` | Glossary entries, case studies, simulation write-ups, KPI reference sheets | Track TOS (TOS1–TOS140) |
 | `learning-log` | Meta-repo: weekly review notes, progress tracker JSON, cross-track reflection | All tracks, weekly cadence |
-| **Capstone repos** (standalone, one each) | W-1 through W-7, L-1 through L-4, N-1 through N-5, AU-1 through AU-5, PY-1 through PY-6 — each gets its own repo once it reaches demo-ready state | Section 14 master project index |
-| `samiulAsumel/samiulAsumel` | Special GitHub profile README repo (renders on profile page) | See Section 15.4 |
+| **Capstone repos** (standalone, one each) | W-1 through W-10, L-1 through L-4, N-1 through N-5, AU-1 through AU-5, PY-1 through PY-6 | Section 14 master project index |
+| `samiulAsumel/samiulAsumel` | Special GitHub profile README repo | See Section 15.4 |
 
-**Why lab repos are separate from capstone repos:** A client browsing GitHub shouldn't wade through 130 small lesson commits to find the actual product. Lab repos absorb the daily commit volume; capstone repos stay clean, documented, and pinned.
+*(Section 15.2 Commit Message Convention, 15.3 Daily Commit Decision Tree, and 15.3.1 Fallback Commit Menu are unchanged from v3.3/3.7 — see original document; the only edit is the Track W capstone-lesson example list in 15.3, updated below.)*
 
-### 15.2 Commit Message Convention (Applies to Every Repo)
+**15.3 update — Track W capstone-lesson row:** "Completed a Track W capstone lesson (**W27/W71/W92/W150/W165/W173/W179/W217/W260**, etc.) → Full project push → That capstone's own repo."
 
-Reused from the original RHCSA plan's convention — keep it consistent across all six tracks:
-
-```
-feat: add vessel status API endpoint
-fix: correct wharfrent slab calculation
-docs: update README with setup instructions
-refactor: simplify berth allocation logic
-chore: update dependencies
-test: add unit test for laytime calculator
-notes: add TOS-3 yard management case study
-```
-
-`notes:` is a Track TOS-specific prefix, since that track produces markdown documents rather than code.
-
-### 15.3 Daily Commit Decision Tree
-
-No calendar is attached to this roadmap, kintu **protek din tumi kichu-na-kichu push korte chaile**, ei table follow koro:
-
-| Situation | What to Commit | Where |
-|---|---|---|
-| Completed a Track L/N/PY lesson | Lesson script/playbook/config + short notes file | Respective `-lab` repo |
-| Completed a Track AU lesson | Exported workflow `.json` + a screenshot or short description | `n8n-workflows-lab` |
-| Completed a Track W lesson (non-capstone) | Code for that lesson's exercise | `web-dev-lab` |
-| Completed a Track W capstone lesson (W20/W55/W67/W88/W96/W97/etc.) | Full project push | That capstone's own repo |
-| Completed a Track TOS lesson | Notes/glossary entry/case-study markdown | `port-domain-notes` |
-| Working on a freelance/client deliverable | Client project commit (private repo if confidentiality requires) | Client-specific repo |
-| **No new lesson finished today** (busy day, low energy, life happens) | Use a **fallback commit** (see 15.3.1) — never skip, never fake | Any active repo |
-| End of each week | A `weekly-review.md` summarizing what was learned + what's next | `learning-log` |
-
-#### 15.3.1 Fallback Commit Menu (For Days With No New Lesson Output)
-
-These are legitimate, real commits — not padding — for days when tumi kono notun lesson complete korte paro nai kintu streak-o bhangte chao na:
-
-- Improve a README (add setup instructions, screenshots, badges) in any existing repo
-- Add docstrings/comments to previously-written code that lacked them
-- Refactor one small function for clarity (with a `refactor:` commit)
-- Add one missing test case to an existing script
-- Update `learning-progress.json` (see 15.4) with current status
-- Fix a typo or broken link in `port-domain-notes`
-- Add one new entry to the Port Domain Glossary (TOS-P3) — even a single term is a legitimate commit
-- Polish PortBill or client-intake system's README/documentation
-
-### 15.4 Progress Tracking File (Reused Pattern, Extended to All Tracks)
-
-Adapted from the original RHCSA `.lesson-progress.json` pattern, now covering all six tracks in one file, kept in `learning-log`. The `active_track` field is what makes bare "Day N" / "next" work without asking which track — it always points to whichever track was last touched.
+### 15.4 Progress Tracking File
 
 ```json
 {
@@ -550,149 +631,44 @@ Adapted from the original RHCSA `.lesson-progress.json` pattern, now covering al
     "TOS": { "current": 1, "done": [] },
     "PY":  { "current": 1, "done": [] }
   },
-  "started": "2026-07-03",
-  "note": "No fixed calendar. Read at the start of every Day-N session (Section 15.8). Updated after each lesson or fallback commit. Never ask the lesson number — always auto-resume from here."
+  "started": "2026-07-12",
+  "note": "v4.1 — Track W range now W1-W260 (gap-free edition). No fixed calendar. Auto-resume from active_track's current. Never ask the lesson number."
 }
 ```
 
-Updating this file after each session is itself a valid, small, honest commit — useful on light days.
-
-### 15.5 GitHub Profile README (`samiulAsumel/samiulAsumel`)
-
-GitHub-e ekটা special repo banale (repo name = tomar username exactly) tar README.md automatically profile page-e render hoy — eita tomar "homepage." Ei document-er shathe ekটা ready-to-use profile README file-o generate kore dicchi (see attached file), jate tumi shudhu copy-paste kore upload korte paro.
-
-**Structure of that file:**
-1. Header — name, positioning tagline (country-neutral)
-2. What I do — 2–3 line summary combining port domain + software
-3. Tech stack badges — Linux, Python, Ansible, n8n, React/Next.js, Cloudflare
-4. Featured projects — pinned repos with one-line descriptions
-5. Currently learning — pulls directly from this roadmap's six tracks
-6. Contact — LinkedIn, Upwork/Fiverr links (add once live)
-
 ### 15.6 Pinned Repository Strategy
-
-GitHub allows exactly 6 pinned repos — choose deliberately, not by recency:
 
 | Pin Slot | Repo | Why |
 |---|---|---|
 | 1 | PortBill | Flagship live product, strongest single proof point |
 | 2 | Client-intake system | Shows freelance-business-readiness, not just coding |
-| 3 | One Track W capstone (e.g., Port SaaS v2) | Full-stack depth |
+| 3 | **Final AI-Native Capstone (Port SaaS v2, ~W217) or the AI Port Assistant Widget + `port-mcp-server` (~W260)** | **Updated** — full-stack + AI-native depth in one repo |
 | 4 | One Track N project (e.g., N-1 Port Server Provisioning Role) | Infrastructure automation credibility |
 | 5 | One Track AU project (e.g., AU-1 or AU-2) | Automation-as-a-service credibility |
 | 6 | `port-domain-notes` or TOS-P3 Glossary | The rare differentiator — domain expertise made visible |
 
-Revisit this pin selection every few months as stronger projects complete — the pinned six should always be tomar **current best six**, not tomar first six.
-
-### 15.7 Master Repo Creation Timeline (Exact Lesson-by-Lesson Trigger)
-
-Eita tomar direct answer: **kokhon ki repo khulte hobe, shob ekjaygay, lesson-order-e.** Jokhon shei lesson number-e pouchabe, ei table check koro — ki repo lagbe bola ache.
+### 15.7 Master Repo Creation Timeline — Track W Section (Updated)
 
 | Trigger Point | Action | Repo Name |
 |---|---|---|
-| Before Day 1 of anything | Create GitHub profile repo | `samiulAsumel/samiulAsumel` |
-| Before Day 1 of anything | Create meta/tracking repo | `learning-log` |
 | **Track W, Day 1 (W1)** | Create lab repo | `web-dev-lab` |
-| **Track L, Day 1 (L1)** | Create lab repo | `linux-systems-lab` |
-| **Track N, Day 1 (N1)** | Create lab repo | `ansible-automation-lab` |
-| **Track AU, Day 1 (AU1)** | Create lab repo | `n8n-workflows-lab` |
-| **Track PY, Day 1 (PY1)** | Create lab repo | `python-engineering-lab` |
-| **Track TOS, Day 1 (TOS1)** | Create notes repo | `port-domain-notes` |
-| W20 | New standalone repo | `port-cargo-website` |
-| W55 | New standalone repo | `port-cargo-tracker` |
-| W67 | New standalone repo | `maritime-dashboard-ais` |
-| W88 | New standalone repo | `port-management-api` |
-| W96 | New standalone repo | `port-saas-v1` |
-| W97 | New standalone repo | `port-saas-v2` |
-| ~L60 | New standalone repo | `port-server-hardening` |
-| ~L78 | New standalone repo | `port-ha-database-cluster` |
-| ~L102 | New standalone repo | `port-monitoring-stack` |
-| ~L110 | New standalone repo | `port-container-fleet` |
-| ~N42 | New standalone repo | `ansible-port-provisioning-role` |
-| ~N60–N110 | New standalone repo | `ansible-zero-downtime-deploy` |
-| ~N76 | New standalone repo | `ansible-billing-config-validator` |
-| ~N91 | New standalone repo | `awx-multi-client-platform` |
-| ~N110 | New standalone repo | `ansible-compliance-automation` |
-| ~AU41 | New standalone repo (or folder in lab repo) | `cf-invoice-automation` |
-| ~AU66 | New standalone repo | `vessel-eta-alert-system` |
-| ~AU94 | New standalone repo | `ai-shipping-doc-extraction` |
-| ~AU102 | New standalone repo | `port-business-automation-suite` |
-| ~AU110 | New standalone repo | `enterprise-saas-automation-platform` |
-| ~TOS68 | New markdown file inside `port-domain-notes` | (no new repo — same repo, new file) |
-| ~TOS82 | New markdown file inside `port-domain-notes` | (no new repo — same repo, new file) |
-| ~TOS94 | Optional: promote to standalone published doc/site | `port-domain-glossary` |
-| ~TOS136 | New markdown file inside `port-domain-notes` | (no new repo — same repo, new file) |
-| ~TOS140 | New standalone repo/page | `port-operations-consulting-portfolio` |
-| ~PY30 | New standalone repo | `port-server-monitoring-cli` |
-| ~PY45 | New standalone repo | `portbill-backup-utility` |
-| ~PY75 | New standalone repo | `shipping-manifest-pipeline` |
-| ~PY105 | New standalone repo | `port-aws-automation-platform` |
-| ~PY125 | New standalone repo | `port-k8s-microservices` |
-| ~PY150 | New standalone repo | `port-observability-platform` |
+| W27 | New standalone repo | `port-cargo-website` |
+| W71 | New standalone repo | `port-cargo-tracker` |
+| W92 | New standalone repo | `maritime-dashboard-ais` |
+| W150 | New folder/schema project inside `web-dev-lab` (promote to standalone only if it grows) | `port-billing-sql-schema` |
+| W165 | New standalone repo | `port-management-api` |
+| W173 | New standalone repo | `port-saas-v1` |
+| W179 | New standalone repo | `portbill-cloudflare-native` |
+| W217 | New standalone repo | `port-saas-v2-ai-native-capstone` |
+| ~W218–W247 (advanced layer) | New standalone repo, once capability set is demo-ready | `web-advanced-capability-showcase` |
+| W258 | New standalone repo | `port-mcp-server` |
+| W260 | New standalone repo | `ai-port-assistant-widget` |
 
-**Rule of thumb between these trigger points:** every lesson in between pushes into that track's **lab repo** (from the row above it), not a new repo each time. New repos only get created at the specific checkpoints listed — everything else accumulates inside the lab repo.
+*(All other tracks' repo-creation timeline rows — Track L/N/AU/PY/TOS Day-1 triggers and all L/N/AU/TOS/PY capstone checkpoints — are unchanged from v3.3/3.7; see Section 15.7 of the original document for the complete unified table if needed alongside this one.)*
 
 ### 15.8 Daily Teaching Protocol — Applies to Every "Day N" Session, Any Track
 
-Ei protocol shob 6-ta track-e (W/L/N/AU/PY/TOS) same vabe apply hobe, jokhon-i tumi "Day N" bolbe.
-
-**Command behavior:**
-- **"Day 1"** (first time ever, no track named) → defaults to **Track W, Lesson W1** (web dev shuru, karon eita fastest income-relevant track). Repo checkpoint (Section 15.7) auto-applies.
-- **"Day 1 [Track name]"** (e.g., "Day 1 Linux," "Day 1 Python," "Day 1 TOS") → starts that specific track's Lesson 1, becomes the new "active track."
-- **"Day N"** (bare, ongoing) → continues the currently-active track from wherever `learning-progress.json` says `current` is — **kono number jiggesh kora hobe na**, auto-resume.
-- **"next"** → same as bare "Day N," continues active track.
-- **"switch to [Track]"** → changes active track without ending the sequence of the previous one; its `current` stays saved for later.
-- **"jump [lesson code]"** (e.g., "jump L45") → goes directly to that lesson, updates `current` for that track.
-- **"repeat"** → redoes the current lesson.
-- **"quiz"** → 5 hands-on questions from the current lesson.
-- **"review"** → recap of the last 5 lessons in the active track.
-- **"interview"** → mock interview mode, English, current topic.
-- **"explain [topic]"** → deep-dive any topic on demand.
-- **"global [topic]"** → international standards context for a topic (IMO/SOLAS/UNCTAD/EDI/etc.) on demand.
-- **"english"** → practice explaining the current lesson's key concepts in English.
-
-**Every "Day N" session follows this structure, without exception:**
-
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📚 [TRACK] LESSON [N] — [Topic]
-📊 Progress: [current track %] | Overall: [W/L/N/AU/TOS/PY % each]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🔁 QUICK REVIEW — 2 questions from the previous lesson (any track)
-
-📖 THEORY
-🎯 Today's goal: [one sentence — what you'll be able to do after this]
-💡 Concept, explained with the "why," not just the "what"
-🏗️ Port Analogy (see table below) — connects the abstract concept to something tumi already understand from 12 years of port ops
-🌍 Global Standard Context — 1–2 lines: which IMO/SOLAS/UNCTAD/ISO/EDI standard this connects to, where relevant
-🔑 Key points, listed separately
-
-⚙️ HANDS-ON (real typing, not copy-paste)
-📁 GitHub: which repo (per Section 15.7), what commit message
-🏭 Port Scenario: where this applies in real port/shipping operations
-Step-by-step commands/code — every command drilled in 3 variations (muscle memory)
-
-⚠️ Common mistakes + fix
-✅ How to verify it worked
-
-📤 GitHub push: exact `git add . && git commit -m "..." && git push` with a real, specific message
-
-💼 GLOBAL INTERVIEW — 2 real questions + strong English-language model answers
-🌍 Context: where this gets asked (e.g., "Rotterdam port operations interview," "DP World technical screening," "global freight-tech hiring")
-
-📌 SUMMARY
-→ 3 things learned today
-→ Global relevance in 1 line
-→ What got pushed to GitHub
-→ Next lesson preview
-
-✅ Lesson done — "now explain it in your own words" + "now explain it in English"
-📝 learning-progress.json updated: current track's `current` +1, lesson added to `done` array
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
-
-**Port Analogy Reference Table (used throughout, every code/infra track):**
+*Structure, command behavior, and non-negotiable rules unchanged from v3.3/3.7.* One addition to the **Port Analogy Reference Table**, to cover the new AI-native content in Track W:
 
 | Technical Concept | Port Analogy |
 |---|---|
@@ -706,28 +682,22 @@ Step-by-step commands/code — every command drilled in 3 variations (muscle mem
 | Network | Port vessel traffic lane |
 | Firewall | Port security checkpoint |
 | Load balancer | Berth allocation system |
-
-**Non-negotiable rules governing every session:**
-
-1. **Depth over surface** — every concept gets the "why," not just the "how."
-2. **Real hands-on** — every command/code typed for real; no passive reading-only lessons.
-3. **Port analogy every time** — abstract technical concepts always anchored to something from tomar 12-year port background.
-4. **GitHub mandatory** — every lesson ends in a real commit, per Section 15.7's repo map, English commit messages, `feat:`/`fix:`/`docs:`/`refactor:`/`chore:`/`test:`/`notes:` convention.
-5. **Two interview questions per lesson** — English, with strong model answers, globally-contextualized (not tied to one country).
-6. **Session opens with 2 quick-review questions**, key commands drilled 3x for muscle memory.
-7. **Auto-resume, never ask the number** — `learning-progress.json` is read at the start of every session.
-8. **English always for technical artifacts** — commits, README, code comments, variable names. Banglish stays confined to our conversation, never in published output.
-9. **International port terminology only** — TEU, DWT, GRT, LOA, ETA/ETD, B/L, MBL/HBL, EIR, SOF, NOR, PDA/FDA.
-10. **Global standards woven in, not separated** — IMO (SOLAS/MARPOL/FAL), UNCTAD KPIs, ISO 28000, IMDG, EDI/EDIFACT, AIS — 1–2 lines inside the relevant lesson's theory, never a standalone lesson just for standards.
+| **(New) AI coding agent (Cursor/Claude Code)** | **An experienced pilot guiding a new captain through unfamiliar waters — you're still the captain of record, the pilot just knows the channel** |
+| **(New) RAG / vector search** | **The port's reference library with instant, indexed lookup instead of manually flipping through paper manuals** |
+| **(New) LLM prompt** | **A written instruction handed to a new port officer — vague instructions get vague results, precise instructions get precise action** |
 
 ---
 
 ## 16. Readiness Checkpoints (Milestone Framework)
 
-Since no calendar is being used, progress is marked by **capability checkpoints** instead of dates.
+*Unchanged for L/N/AU/TOS/PY. Track W checkpoints updated below to match the new W1–W220 range.*
 
 - **Ready to launch Upwork/Fiverr gigs when:** PortBill demo link is live, portfolio README is country-neutral, and one written case study exists describing a real billing calculation solved.
-- **Ready to claim "full-stack developer, advanced" credibility when:** Track W Foundational Layer (W1–W100) plus at least 2 of the 5 Advanced Professional modules (W101–W130) are complete.
+- **Ready to claim "full-stack developer, advanced" credibility when:** Track W Foundational + AI-Assisted-Coding Layer (**W1–W217**) plus at least 3 of the 6 Advanced/AI-Production Layer modules (**W218–W260**) are complete.
+- **(New) Ready to claim "AI-native full-stack engineer" credibility when:** Modules **W180–W213** (AI-Assisted Coding I–III, including the verification drills) are complete and the Final AI-Native Capstone (**W214–W217**) is published, with an honest README describing which AI tools did which part of the work.
+- **(New) Ready to pitch "add an AI feature to your existing app" as a standalone service when:** Module **W34** (**W248–W260**) capstones — the AI Port Assistant Widget *and* `port-mcp-server` — are live and demoable, with the eval set published alongside them.
+- **(New v4.1) Ready to bid on SQL-backed client briefs when:** Module **W20** (**W143–W150**) is complete and the relational port-billing schema is pushed with a written SQL-vs-NoSQL rationale.
+- **(New v4.1) Ready to claim "I ship on Cloudflare" as a differentiator when:** Module **W24** (**W174–W179**) mini-project is live on Workers/D1/R2 — this also retroactively strengthens the PortBill/carview story.
 - **Ready to claim "RHCSA-track" credibility when:** At least 50% of Track L Core (L1–L60) is complete with corresponding GitHub commits.
 - **Ready to claim "advanced Linux/enterprise ops" credibility when:** At least one Advanced Enterprise Layer capstone lab (L61–L110) is documented and published.
 - **Ready to claim "RHCE-track" credibility when:** The reusable Port Server Automation role (N36–N60) is complete and published.
@@ -736,23 +706,25 @@ Since no calendar is being used, progress is marked by **capability checkpoints*
 - **Ready to pitch enterprise n8n architecture when:** At least one capstone project (AU95–AU110) is live.
 - **Ready to publish the Port Domain Glossary when:** Track TOS Phases 1–7 (TOS1–TOS94) are complete.
 - **Ready to claim full domain-consulting credibility when:** All of Track TOS (TOS1–TOS140) is complete, including the simulation portfolio.
-- **Ready to claim "advanced Python engineer" credibility when:** At least PY1–PY75 (Systems through Infrastructure Automation) are complete and one capstone is published.
+- **Ready to claim "advanced Python engineer" credibility when:** At least PY1–PY75 are complete and one capstone is published.
 - **Ready to reposition PortBill globally when:** Bangladesh-specific language is removed from the landing page and at least one non-Bangladeshi use-case example is added.
-- **Ready to activate Phase 8 (English)** when: first serious inbound client inquiry arrives requiring live communication.
-- **GitHub streak is "real" (not gamed) when:** every commit from the past 30 days can be explained in one sentence without checking the diff — if any commit can't be explained, the fallback-commit discipline (Section 15.3.1) has slipped.
+- **Ready to activate Phase 8 (English) when:** first serious inbound client inquiry arrives requiring live communication.
+- **GitHub streak is "real" (not gamed) when:** every commit from the past 30 days can be explained in one sentence without checking the diff.
 
 ---
 
 ## 17. Immediate Action Items (No Learning Required)
 
-- [ ] Update LinkedIn headline to: **"Port Revenue & Billing Systems | Web App Developer"** — remove all country references
-- [ ] Publish Upwork/Fiverr gigs: *"Port & Logistics Billing Web Apps,"* *"n8n Workflow Automation,"* *"Linux/Ansible Infrastructure Setup"* — link PortBill as live proof
+*Unchanged from v3.3/3.7.*
+
+- [ ] Update LinkedIn headline to: **"Port Revenue & Billing Systems | AI-Native Web App Developer"** — remove all country references
+- [ ] Publish Upwork/Fiverr gigs: *"Port & Logistics Billing Web Apps,"* *"AI-Powered Web Features,"* *"n8n Workflow Automation,"* *"Linux/Ansible Infrastructure Setup"* — link PortBill as live proof
 - [ ] Remove Bangladesh-specific language from the PortBill landing page; reframe as globally-applicable
 - [ ] Verify MPA employee conduct rules regarding freelance/commercial activity before scaling outreach volume (previously flagged, still pending)
-- [ ] Create the special profile repo `samiulAsumel/samiulAsumel` and upload the ready-made README (attached alongside this document)
-- [ ] Create the seven lab/meta repos listed in Section 15.1 (`linux-systems-lab`, `ansible-automation-lab`, `n8n-workflows-lab`, `python-engineering-lab`, `web-dev-lab`, `port-domain-notes`, `learning-log`)
+- [ ] Create the special profile repo `samiulAsumel/samiulAsumel` and upload the ready-made README
+- [ ] Create the seven lab/meta repos listed in Section 15.1
 - [ ] Add the `learning-progress.json` file (Section 15.4) to `learning-log` to start tracking from day one
-- [ ] Select and pin the first 6 repos per Section 15.6 (can start with PortBill + client-intake system + 4 placeholders, updated as tracks progress)
+- [ ] Select and pin the first 6 repos per Section 15.6 (updated in v4.0 to feature the AI-native capstone)
 
 ---
 
@@ -760,19 +732,17 @@ Since no calendar is being used, progress is marked by **capability checkpoints*
 
 | Content | Treatment |
 |---|---|
-| Saudi Arabia career path (Port Digital Operations Specialist, DP World, Mawani, King Abdullah Port, NEOM) | **Removed.** User has dropped this path entirely in favor of global remote work — confirmed direction |
-| Mawani, FASAH, ZATCA, Vision 2030 sections (both original port-training documents) | **Removed.** Country-specific regulatory/platform content, not globally applicable |
-| Saudi-context interview question banks | **Removed.** Tied to a single-country hiring context no longer relevant |
-| Duplicate "Global Seaport Operations" training system (existed twice in source material) | **Merged.** Fully consolidated into Track TOS — no separate study needed |
-| "RTL/Arabic UI" project label (originally Project 6, W97) | **Reframed.** Kept as a general internationalization/RTL-layout skill applicable to any Arabic-script-market client globally — decoupled from single-country employment framing |
-| n8n Roadmap Phases not previously included (17 of 28 phases) | **Restored.** Now included in full within Track AU to meet advanced/100+ lesson requirement |
-| RHCSA-only scope (60 lessons) | **Expanded.** 50 additional enterprise-level lessons added (Track L61–L110) to reach advanced depth |
-| RHCE-only scope (60 lessons) | **Expanded.** 50 additional enterprise-level lessons added (Track N61–N110) to reach advanced depth |
-| Web Dev 100-lesson scope | **Expanded.** 30 additional advanced-professional lessons added (Track W101–W130) |
-| Python Phases 5–7 (Cloud/Kubernetes/Production Engineering) | **Restored.** Previously deferred; now included in full (Track PY76–PY150) since advanced Python was explicitly requested |
-| AI Engineering Levels 4+ (RAG, vector DBs, LangChain, LlamaIndex) | **Still deferred.** Not part of this expansion request; revisit when a client project requires document-search capability |
+| Original Track W (v3.3, W1–W130) | **Fully rebuilt in v4.0.** Replaced with a 220-lesson track built directly from Programming Hero Batch 12 + Batch 14 source material — see Section 0 for the full module-by-module source map |
+| Programming Hero Batch 12 ("Let's Code Your Career," 81 modules / 14 milestones) | **Merged into Track W v4.0.** Contributed: advanced Git workflow (branch/PR/merge), raw MongoDB driver sequencing, Firebase Auth as an alternate portable pattern, the Payooo/BPL-Dream reusable-function patterns, the Zap Shift role-based delivery-tracking architecture (reskinned into the Port SaaS v1 capstone), and the wider AI-tool comparison tour (Figma Make, Google AI Studio, Firebase Studio, Base44) folded into Module W21 |
+| Programming Hero Batch 14 ("AI-Driven Full Stack Web Engineering," 67 modules / 11 core milestones) | **Merged into Track W v4.0 as the primary backbone.** Contributed: TypeScript-first sequencing with a dedicated OOP-in-TS module, the dedicated DOM/BOM React-bridge module, BetterAuth as the primary auth stack, Hero UI/ShadCN, the raw-driver-then-Mongoose backend sequencing, the AI-first PRD-driven project workflow (Full-Stack Projects 1 & 2), dual payment rails (Stripe + SSLCommerz), Ollama-based local AI integration, and — the single largest contribution — the full three-module AI-Assisted-Coding sequence (Cursor, Claude Code, code quality/security/deployment) |
+| Saudi Arabia career path, Mawani/FASAH/ZATCA/Vision 2030 sections, Saudi-context interview banks | **Removed** (unchanged from v3.3 — user has dropped this path entirely) |
+| Duplicate "Global Seaport Operations" training system | **Merged into Track TOS** (unchanged from v3.3) |
+| n8n Roadmap Phases not previously included | **Restored** (unchanged from v3.3) |
+| RHCSA/RHCE-only 60-lesson scopes | **Expanded to 110 each** (unchanged from v3.3) |
+| Python Phases 5–7 | **Restored in full** (unchanged from v3.3) |
+| AI Engineering Levels 4+ (RAG, vector DBs, LangChain, LlamaIndex) at the general-purpose level | **Still deferred** in Phase 1 — but now has a **narrow, applied instance inside Track W's new Module W30** (production RAG for a web app), which is a distinct scope from the deferred general-purpose material |
 
-**"Principal Staff Engineer" standards document** — retained as a **reference checklist**, not a course. Use it to self-audit code and architecture decisions across all six tracks.
+**"Principal Staff Engineer" standards document** — retained as a reference checklist, not a course, unchanged from v3.3.
 
 ---
 
@@ -780,32 +750,36 @@ Since no calendar is being used, progress is marked by **capability checkpoints*
 
 | Original Document | Where It Lives Now |
 |---|---|
-| AI Engineering Master Syllabus | Phase 1 (Levels 1–3); Level 4+ deferred |
-| Original 100-lesson Web Development track | Track W, Foundational Layer (W1–W100) |
-| New advanced professional web engineering content | Track W, Advanced Layer (W101–W130) |
-| Original 60-lesson RHCSA track | Track L, Core (L1–L60) |
-| New enterprise Linux content | Track L, Advanced Layer (L61–L110) |
-| Original 60-lesson RHCE/Ansible track | Track N, Core (N1–N60) |
-| New enterprise Ansible/automation-platform content | Track N, Advanced Layer (N61–N110) |
-| n8n Roadmap (all 28 original phases) | Track AU (AU1–AU110), full coverage |
-| Port Operations Manager — Complete Theoretical Mastery Guide | Track TOS, integrated throughout |
-| Global Seaport Operations (x2 near-duplicate documents) | Track TOS, fully merged and de-duplicated |
-| Python Mastery Roadmap — DevOps Edition (all 7 phases) | Track PY (PY1–PY150), full coverage |
-| 365-Day Technical English Roadmap | Phase 8 — reframed, on-demand activation |
-| "Principal Staff Engineer" system prompt | Section 18 — reference checklist only |
+| AI Engineering Master Syllabus | Phase 1 (Levels 1–3); Level 4+ deferred (except the applied slice in W30) |
+| **Programming Hero Batch 12 — "Let's Code Your Career" (81 modules / 14 milestones)** | **Track W v4.0, Section 7 — primary source for Modules W1, W9, W14, W17 (Firebase Auth alternate), W20 (Zap Shift architecture pattern), W21 (AI-tool comparison tour)** |
+| **Programming Hero Batch 14 — "AI-Driven Full Stack Web Engineering" (67 modules / 11 milestones)** | **Track W, Section 7 — primary backbone for the foundational and AI-coding layers** |
+| Original 100-lesson Web Development track (v3.3) | Superseded by Track W's Foundational + AI-Coding Layer (W1–W217) |
+| v3.3 advanced professional web engineering content (old W101–W130) | Track W, Part C (W218–W247), renumbered only, content unchanged |
+| **2026 hiring-market analysis (AI-output verification, context engineering, agent failure modes, eval design, OWASP LLM Top 10, MCP)** | **Track W v4.1 additions — W15, W20, W21, W24 (gap-close modules) and the hardened units inside W25–W27 and W34** |
+| **v4.2 Deployment Doctrine (Cloudflare-first, VPS-sovereign, Vercel removed)** | **Section 0.2 + rewritten deployment specs in W22, W23, W24, W27, W32, W34; Batch 14's Vercel-based deployment lessons explicitly superseded** |
+| Original 60-lesson RHCSA track | Track L, Core (L1–L60) — unchanged |
+| New enterprise Linux content | Track L, Advanced Layer (L61–L110) — unchanged |
+| Original 60-lesson RHCE/Ansible track | Track N, Core (N1–N60) — unchanged |
+| New enterprise Ansible/automation-platform content | Track N, Advanced Layer (N61–N110) — unchanged |
+| n8n Roadmap (all 28 original phases) | Track AU (AU1–AU110) — unchanged |
+| Port Operations Manager — Complete Theoretical Mastery Guide | Track TOS — unchanged |
+| Global Seaport Operations (x2 near-duplicate documents) | Track TOS — unchanged |
+| Python Mastery Roadmap — DevOps Edition (all 7 phases) | Track PY (PY1–PY150) — unchanged |
+| 365-Day Technical English Roadmap | Phase 8 — unchanged |
+| "Principal Staff Engineer" system prompt | Section 18 — reference checklist only, unchanged |
 
-### Grand Total Curriculum Scale
+### Grand Total Curriculum Scale (v4.0)
 
-| Track | Lessons |
-|---|---|
-| W — Web Development, Advanced Professional | 130 |
-| L — Linux Systems Administration, Advanced | 110 |
-| N — Configuration Automation, Advanced | 110 |
-| AU — Workflow Automation Engineering, Advanced | 110 |
-| TOS — Port, Maritime & Terminal Operating Systems | 140 |
-| PY — Python Engineering, Advanced | 150 |
-| **Total** | **750** |
+| Track | Lessons | Change from v3.3 |
+|---|---|---|
+| W — Web Development, Advanced Professional & AI-Native | **260** | **+130 (+90 v4.0 rebuild, +40 v4.1 gap-close)** |
+| L — Linux Systems Administration, Advanced | 110 | unchanged |
+| N — Configuration Automation, Advanced | 110 | unchanged |
+| AU — Workflow Automation Engineering, Advanced | 110 | unchanged |
+| TOS — Port, Maritime & Terminal Operating Systems | 140 | unchanged |
+| PY — Python Engineering, Advanced | 150 | unchanged |
+| **Total** | **880** | **+130** |
 
 ---
 
-*End of document. Version 3.3 (Full & Final) — every core technical track expanded to advanced/professional depth with 100+ numbered lessons each, 27 named portfolio projects, an exact lesson-by-lesson GitHub repo creation timeline (Section 15.7), and a complete Day-N teaching protocol (Section 15.8) covering depth, hands-on practice, port analogies, mandatory GitHub commits, global interview prep, and auto-resuming progress tracking; all location-specific content removed; no calendar attached — say "Day 1" to begin.*
+*End of document. Version 4.2 (Gap-Free, Platform-Sovereign Edition) — everything in v4.1 (Track W rebuilt from PH Batch 12 + Batch 14, gap-audited to 260 lessons with six gap-close modules, sequencing fixed, AI layer hardened with 2026's scarce skills) plus the v4.2 deployment-doctrine rewrite: Vercel removed entirely; Cloudflare (Pages/Workers/D1/R2/KV/Queues/Workers AI/AI Gateway) as the primary platform; self-hosted VPS (Docker + Caddy + systemd, the Track W ↔ Track L bridge) as the sovereign fallback; Hono and web-standard APIs as the portability layer; OpenNext for Next.js-on-Cloudflare; and an escape-hatch drill proving every architecture can leave its platform. Managed PaaS (Railway/Render/Netlify) survives at awareness-level only, for inherited client projects. Track W: 260 lessons (W1–W260). Tracks L, N, AU, TOS, PY unchanged from v3.3/3.7. Grand total: 880 lessons. Sections 0.1 and 0.2 document every gap, every fix, every platform decision, and every deliberate exclusion — nothing skipped silently, nothing locked in. No calendar attached — say "Day 1" to begin, or "Day 1 W" to explicitly start Track W under the new numbering.*

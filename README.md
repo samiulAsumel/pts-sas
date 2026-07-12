@@ -1,16 +1,16 @@
-# Port & Maritime Tech Specialist — 750-Lesson Global Curriculum Tracker
+# Port & Maritime Tech Specialist — 880-Lesson Global Curriculum Tracker
 
 Personal learning progress tracker for the Port & Maritime Tech Specialist advanced professional
-curriculum — six independent tracks, 750 lessons, 31 named capstone projects.
+curriculum — six independent tracks, 880 lessons, 35 named capstone projects.
 
 ## What this is
 
 A standalone HTML tracker for the full curriculum defined in
-[`global_learning_path_final.md`](global_learning_path_final.md) (v3.3):
+[`global_learning_path_final.md`](global_learning_path_final.md) (v4.2):
 
 | Track | Domain | Lessons | Outcome |
 |---|---|---|---|
-| **W** | Web Development, Advanced Professional | W1–W130 | Enterprise-grade full-stack developer, 6 capstone projects |
+| **W** | Web Development, Advanced Professional & AI-Native | W1–W260 | Enterprise-grade, AI-native full-stack developer, 10 capstone projects |
 | **L** | Linux Systems Administration, Advanced | L1–L110 | RHCSA-track + enterprise sysadmin capability |
 | **N** | Configuration Automation / Ansible, Advanced | N1–N110 | RHCE-track + enterprise automation platform capability |
 | **AU** | Workflow Automation Engineering (n8n), Advanced | AU1–AU110 | Enterprise automation architect capability |
@@ -41,9 +41,9 @@ Markets: Rotterdam · Hamburg · Singapore · Antwerp · DP World (global) · Ge
 
 ## Features
 
-- 750-lesson curriculum across 6 independent tracks, each with its own progress stats
+- 880-lesson curriculum across 6 independent tracks, each with its own progress stats
 - Phase-grouped module headers within every track (e.g. `L8 — Performance & Kernel Tuning`)
-- ★ badges on the 31 named capstone-project lessons, with the project name shown on selection
+- ★ badges on the 35 named capstone-project lessons, with the project name shown on selection
 - Live search by lesson code, track, or topic — composes with track and status filters
 - Track tabs (All / W / L / N / AU / TOS / PY) + status filters (Completed / Not started)
 - Overall + per-track progress bars
@@ -74,7 +74,7 @@ Static site — deployable as-is to:
 
 ## Related
 
-- `global_learning_path_final.md` — the source-of-truth curriculum document (v3.3)
+- `global_learning_path_final.md` — the source-of-truth curriculum document (v4.2)
 - `PROMPT.md` — the Claude Project system prompt implementing the Day-N teaching protocol
-- Claude Project: Port Tech Specialist (six-track, 750-lesson instructor system)
+- Claude Project: Port Tech Specialist (six-track, 880-lesson instructor system)
 - GitHub: [github.com/samiulAsumel](https://github.com/samiulAsumel)
